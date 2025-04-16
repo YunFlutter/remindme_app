@@ -45,4 +45,8 @@ class AppColors {
   // 🧭 Navigation
   // --------------------------
   static const Color navUnselected = Color(0xFFAAAAAA);
+
+  AppColors copyWith() {
+    return AppColors();
+  }
 }
