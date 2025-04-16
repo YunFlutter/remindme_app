@@ -52,13 +52,9 @@ class WidgetTestPage extends StatelessWidget {
                 Wrap(
                   spacing: 10,
                   runSpacing: 10,
-                  children:
-                      BasicEmojiList().emojiButtons.map((items) {
-                        return EmojiButton(
-                          emoji: items["emoji"],
-                          backGroundColor: items["color"],
-                        );
-                      }).toList(),
+                  children: BasicEmojiList.emojiButtons.map((items) {
+                    return EmojiBadge(emoji: items.emoji, backGroundColor: items.color);
+                  }).toList()
                 ),
                 PrimaryButtonScreen(
                   buttonText: '아이콘 피커',

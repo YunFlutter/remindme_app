@@ -5,9 +5,13 @@ part 'icon_select_picker_state.freezed.dart';
 @freezed
 
 class IconSelectPickerState with _$IconSelectPickerState {
+  @override
   final List<Map<String,dynamic>> filterIconList;
+  @override
   final String selectIconName;
+  @override
   final String selectIconData;
+  @override
   final String searchIconKeyWord;
 
   const IconSelectPickerState({

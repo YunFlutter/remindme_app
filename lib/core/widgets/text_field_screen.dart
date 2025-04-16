@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
-import 'package:lucide_icons_flutter/test_icons.dart';
 import 'package:remindme_app/core/themes/app_colors.dart';
-import 'package:remindme_app/core/themes/app_shadows.dart';
-import 'package:remindme_app/core/themes/app_text_styles.dart';
 
 class TextFieldScreen extends StatefulWidget {
   TextFieldScreen({

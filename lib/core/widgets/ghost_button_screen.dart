@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:remindme_app/core/themes/app_colors.dart';
-import 'package:remindme_app/core/themes/app_shadows.dart';
 import 'package:remindme_app/core/themes/app_text_styles.dart';
 
 class GhostButtonScreen extends StatelessWidget {
