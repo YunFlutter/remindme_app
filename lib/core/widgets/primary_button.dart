@@ -3,13 +3,13 @@ import 'package:remindme_app/core/themes/app_colors.dart';
 import 'package:remindme_app/core/themes/app_shadows.dart';
 import 'package:remindme_app/core/themes/app_text_styles.dart';
 
-class PrimaryButtonScreen extends StatelessWidget {
+class PrimaryButton extends StatelessWidget {
   final String buttonText;
   final bool buttonActive;
   final double? borderRadius;
   final void Function()? onTap;
 
-  PrimaryButtonScreen({
+  PrimaryButton({
     super.key,
     required this.buttonText,
     required this.buttonActive,

@@ -3,10 +3,10 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:remindme_app/core/themes/app_colors.dart';
 import 'package:remindme_app/core/themes/basic_emoji_list.dart';
 import 'package:remindme_app/core/widgets/emoji_badge.dart';
-import 'package:remindme_app/core/widgets/ghost_button_screen.dart';
+import 'package:remindme_app/core/widgets/ghost_button.dart';
 import 'package:remindme_app/core/widgets/icon_select_picker/icon_select_picker_screen.dart';
 import 'package:remindme_app/core/widgets/icon_select_picker/icon_select_picker_view_model.dart';
-import 'package:remindme_app/core/widgets/primary_button_screen.dart';
+import 'package:remindme_app/core/widgets/primary_button.dart';
 import 'package:remindme_app/core/widgets/routine_card_model.dart';
 import 'package:remindme_app/core/widgets/routine_card_screen.dart';
 import 'package:remindme_app/core/widgets/text_field_screen.dart';
@@ -44,11 +44,11 @@ class WidgetTestPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                PrimaryButtonScreen(
+                PrimaryButton(
                   buttonText: '시작하기',
                   buttonActive: buttonActive,
                 ),
-                GhostButtonScreen(buttonText: '시작하기'),
+                GhostButton(buttonText: '시작하기'),
                 TextFieldScreen(
                   focusNode: focusNode,
                   textEditingController: textEditingController,
@@ -64,7 +64,7 @@ class WidgetTestPage extends StatelessWidget {
                         );
                       }).toList(),
                 ),
-                PrimaryButtonScreen(
+                PrimaryButton(
                   buttonText: '아이콘 피커',
                   buttonActive: buttonActive,
                   onTap: () {

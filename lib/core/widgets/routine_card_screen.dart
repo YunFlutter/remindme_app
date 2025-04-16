@@ -3,7 +3,7 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:remindme_app/core/themes/app_colors.dart';
 import 'package:remindme_app/core/themes/app_shadows.dart';
 import 'package:remindme_app/core/themes/app_text_styles.dart';
-import 'package:remindme_app/core/widgets/primary_button_screen.dart';
+import 'package:remindme_app/core/widgets/primary_button.dart';
 import 'package:remindme_app/core/widgets/routine_card_model.dart';
 
 class RoutineCardScreen extends StatelessWidget {
@@ -74,7 +74,7 @@ class RoutineCardScreen extends StatelessWidget {
                 ),
                 Flexible(
                   flex: 1,
-                  child: PrimaryButtonScreen(
+                  child: PrimaryButton(
                     buttonText: '시작하기',
                     buttonActive: true,
                     borderRadius: 80,
