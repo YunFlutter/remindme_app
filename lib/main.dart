@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:remindme_app/core/themes/app_colors.dart';
 import 'package:remindme_app/core/themes/basic_emoji_list.dart';
-import 'package:remindme_app/core/widgets/emoji_button.dart';
+import 'package:remindme_app/core/widgets/emoji_badge.dart';
 import 'package:remindme_app/core/widgets/ghost_button_screen.dart';
 import 'package:remindme_app/core/widgets/icon_select_picker/icon_select_picker_screen.dart';
 import 'package:remindme_app/core/widgets/icon_select_picker/icon_select_picker_view_model.dart';
 import 'package:remindme_app/core/widgets/primary_button_screen.dart';
+import 'package:remindme_app/core/widgets/routine_card_model.dart';
+import 'package:remindme_app/core/widgets/routine_card_screen.dart';
 import 'package:remindme_app/core/widgets/text_field_screen.dart';
 
 void main() {
@@ -31,6 +34,7 @@ class WidgetTestPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.baseWhite,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -52,9 +56,13 @@ class WidgetTestPage extends StatelessWidget {
                 Wrap(
                   spacing: 10,
                   runSpacing: 10,
-                  children: BasicEmojiList.emojiButtons.map((items) {
-                    return EmojiBadge(emoji: items.emoji, backGroundColor: items.color);
-                  }).toList()
+                  children:
+                      BasicEmojiList.emojiButtons.map((items) {
+                        return EmojiBadge(
+                          emoji: items.emoji,
+                          backGroundColor: items.color,
+                        );
+                      }).toList(),
                 ),
                 PrimaryButtonScreen(
                   buttonText: '아이콘 피커',
@@ -74,6 +82,15 @@ class WidgetTestPage extends StatelessWidget {
                       },
                     );
                   },
+                ),
+                RoutineCardScreen(
+                  cardModel: RoutineCard(
+                    icons: LucideIcons.alarmClock,
+                    routineTitle: "아침 루틴",
+                    routineTime: '5',
+                    badgeBackGroundColor: AppColors.primaryBlue,
+                    badgeColor: AppColors.baseWhite,
+                  ),
                 ),
               ],
             ),

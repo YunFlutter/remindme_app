@@ -6,12 +6,14 @@ import 'package:remindme_app/core/themes/app_text_styles.dart';
 class PrimaryButtonScreen extends StatelessWidget {
   final String buttonText;
   final bool buttonActive;
-  void Function()? onTap;
+  final double? borderRadius;
+  final void Function()? onTap;
 
   PrimaryButtonScreen({
     super.key,
     required this.buttonText,
     required this.buttonActive,
+    this.borderRadius,
     this.onTap,
   });
 
@@ -20,13 +22,13 @@ class PrimaryButtonScreen extends StatelessWidget {
 
     return Material(
       color: Colors.transparent,
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(borderRadius ?? 16),
       clipBehavior: Clip.hardEdge,
       child: Ink(
         width: double.infinity,
         decoration: BoxDecoration(
           boxShadow: [AppShadows.light],
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(borderRadius?? 16),
           color:
               buttonActive ? AppColors.primaryBlue : AppColors.grayDisabled,
         ),
