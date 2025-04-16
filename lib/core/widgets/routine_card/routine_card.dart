@@ -4,11 +4,11 @@ import 'package:remindme_app/core/themes/app_colors.dart';
 import 'package:remindme_app/core/themes/app_shadows.dart';
 import 'package:remindme_app/core/themes/app_text_styles.dart';
 import 'package:remindme_app/core/widgets/primary_button.dart';
-import 'package:remindme_app/core/widgets/routine_card_model.dart';
+import 'package:remindme_app/core/widgets/routine_card/routine_card_model.dart';
 
-class RoutineCardScreen extends StatelessWidget {
-  final RoutineCard cardModel;
-  const RoutineCardScreen({super.key, required this.cardModel});
+class RoutineCard extends StatelessWidget {
+  final RoutineCardModel cardModel;
+  const RoutineCard({super.key, required this.cardModel});
 
   @override
   Widget build(BuildContext context) {

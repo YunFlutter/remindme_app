@@ -7,8 +7,8 @@ import 'package:remindme_app/core/widgets/ghost_button.dart';
 import 'package:remindme_app/core/widgets/icon_select_picker/icon_select_picker_screen.dart';
 import 'package:remindme_app/core/widgets/icon_select_picker/icon_select_picker_view_model.dart';
 import 'package:remindme_app/core/widgets/primary_button.dart';
-import 'package:remindme_app/core/widgets/routine_card_model.dart';
-import 'package:remindme_app/core/widgets/routine_card_screen.dart';
+import 'package:remindme_app/core/widgets/routine_card/routine_card_model.dart';
+import 'package:remindme_app/core/widgets/routine_card/routine_card.dart';
 import 'package:remindme_app/core/widgets/text_field_screen.dart';
 
 void main() {
@@ -83,8 +83,8 @@ class WidgetTestPage extends StatelessWidget {
                     );
                   },
                 ),
-                RoutineCardScreen(
-                  cardModel: RoutineCard(
+                RoutineCard(
+                  cardModel: RoutineCardModel(
                     icons: LucideIcons.alarmClock,
                     routineTitle: "아침 루틴",
                     routineTime: '5',

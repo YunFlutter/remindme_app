@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
-class RoutineCard {
+class RoutineCardModel {
   final IconData icons;
   final Color badgeColor;
   final Color badgeBackGroundColor;
   final String routineTitle;
   final String routineTime;
 
-  const RoutineCard({
+  const RoutineCardModel({
     required this.icons,
     required this.badgeColor,
     required this.badgeBackGroundColor,
