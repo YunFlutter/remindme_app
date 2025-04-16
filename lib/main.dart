@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:remindme_app/core/themes/app_colors.dart';
 import 'package:remindme_app/core/themes/basic_emoji_list.dart';
+import 'package:remindme_app/core/widgets/custom_navigation_bar.dart';
 import 'package:remindme_app/core/widgets/emoji_badge.dart';
 import 'package:remindme_app/core/widgets/ghost_button.dart';
 import 'package:remindme_app/core/widgets/icon_select_picker/icon_select_picker_screen.dart';
@@ -92,6 +93,7 @@ class WidgetTestPage extends StatelessWidget {
                     badgeColor: AppColors.baseWhite,
                   ),
                 ),
+                CustomNavigationBar(nowPagePath: "/home")
               ],
             ),
           ),
