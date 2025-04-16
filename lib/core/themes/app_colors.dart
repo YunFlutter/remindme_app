@@ -28,6 +28,9 @@ class AppColors {
   static const Color grayDisabled = Color(0xFFE0E0E0);     // 배경, 테두리 등
   static const Color grayDisabledText = Color(0xFFB0B0B0); // 버튼/텍스트 비활성
   static const Color grayPlaceholder = Color(0xFFAAAAAA);  // 입력창 힌트 등
+  static const Color onboardingTitleColor     = Color(0xFF1C1C1E); // gray900
+  static const Color onboardingDescriptionColor = Color(0xFF48484A); // gray700
+  static const Color onboardingSubTextColor   = Color(0xFF636366); // gray600
 
   // --------------------------
   // ⚪ Base

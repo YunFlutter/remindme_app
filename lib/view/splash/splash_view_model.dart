@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:remindme_app/view/splash/splash_state.dart';
 
 class SplashViewModel with ChangeNotifier {
@@ -16,13 +17,16 @@ class SplashViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  void textValueChange({required int firstMilliseconds, required int secondMilliseconds}) async {
+  void textValueChange({required int firstMilliseconds, required int secondMilliseconds, required BuildContext context}) async {
     Future.delayed(Duration(milliseconds: firstMilliseconds), () async{
       final firstChange = await firstTextValueChange();
       notifyListeners();
       Future.delayed(Duration(milliseconds: secondMilliseconds), ()async {
         final secondChange = await secondTextValueChange();
         notifyListeners();
+        Future.delayed(Duration(seconds: 5), () {
+          context.go("/onboarding");
+        });
       });
     });
   }
