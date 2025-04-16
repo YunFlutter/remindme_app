@@ -6,6 +6,10 @@ abstract class Routes {
   //온보딩 페이지
   static const String onboarding = '/onboarding';
 
+  //로그인, 회원가입 페이지
+  static const String login = '/login';
+  static const String signUp = '/sign-up';
+
   // 홈페이지
   static const String home = '/home';
 
