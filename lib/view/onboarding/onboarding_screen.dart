@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:remindme_app/core/themes/app_colors.dart';
 import 'package:remindme_app/core/themes/app_text_styles.dart';
+import 'package:remindme_app/core/widgets/primary_button.dart';
 import 'package:remindme_app/view/onboarding/onboarding_view_model.dart';
 
 class OnboardingScreen extends StatelessWidget {
@@ -47,6 +48,17 @@ class OnboardingScreen extends StatelessWidget {
                     icon: LucideIconWidget(icon: LucideIcons.chevronsRight),
                   ),
                 ),
+
+              if (viewModel.state.pageInt == 2)
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  width: MediaQuery.of(context).size.width / 2,
+                  padding: EdgeInsets.only(bottom: 70),
+                  child: PrimaryButton(buttonText: '시작하기', buttonActive: true),
+                ),
+              ),
+
               Align(alignment: Alignment.bottomCenter, child: indicator()),
             ],
           ),
@@ -90,7 +102,8 @@ class OnboardingScreen extends StatelessWidget {
       spacing: 30,
       children: [
         Image.asset('assets/image/routine_note.png', width: MediaQuery.of(context).size.width / 3,),
-        Text('나만의 루틴 으로,\n하루를 시작해 보세요', style: AppTextStyles.bodyS(), textAlign: TextAlign.center,)
+        Text('나만의 루틴 으로,\n하루를 시작해 보세요', style: AppTextStyles.bodyS(), textAlign: TextAlign.center,),
+
       ],
     );
   }
@@ -102,7 +115,9 @@ class OnboardingScreen extends StatelessWidget {
       spacing: 30,
       children: [
         Image.asset('assets/image/routine_alert.png', width: MediaQuery.of(context).size.width / 3,),
-        Text('반복 되는 하루 속에서,\n나를 위한 시간을 만들어 보세요', style: AppTextStyles.bodyS(), textAlign: TextAlign.center,)
+        Text('반복 되는 하루 속에서,\n나를 위한 시간을 만들어 보세요', style: AppTextStyles.bodyS(), textAlign: TextAlign.center,),
+
+
       ],
     );
   }
