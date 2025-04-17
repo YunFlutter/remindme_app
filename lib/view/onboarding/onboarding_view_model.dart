@@ -2,20 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:remindme_app/view/onboarding/onboarding_state.dart';
 
 class OnboardingViewModel with ChangeNotifier {
-   OnboardingState _state;
+  OnboardingState _state;
 
-  OnboardingViewModel({
-    required OnboardingState state,
-  }) : _state = state;
+  OnboardingViewModel({required OnboardingState state}) : _state = state;
 
   OnboardingState get state => _state;
 
-  void firstValueChange() async{
-    Future.delayed(Duration(seconds: 2), () {
-      _state = state.copyWith(firstOpacity: 1.0);
-      notifyListeners();
-    });
+  PageController pageController = PageController();
+
+  void setPageInt(int newPage) {
+    _state = state.copyWith(pageInt: newPage);
+    notifyListeners();
   }
 
+  void pageIntPlus() {
+    pageController.nextPage(
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
 
+  void pageIntMinus() {
+    pageController.previousPage(
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
 }

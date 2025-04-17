@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:remindme_app/core/themes/app_colors.dart';
 import 'package:remindme_app/core/themes/app_text_styles.dart';
-import 'package:remindme_app/view/onboarding/onboarding_state.dart';
 import 'package:remindme_app/view/onboarding/onboarding_view_model.dart';
 
 class OnboardingScreen extends StatelessWidget {
@@ -15,117 +15,123 @@ class OnboardingScreen extends StatelessWidget {
       builder: (context, child) {
         return Scaffold(
           backgroundColor: AppColors.baseWhite,
-          body: SizedBox(
-            width: double.infinity,
-            height: double.infinity,
-            child: GestureDetector(
-              onHorizontalDragUpdate: (detail) {},
-              child: AnimatedCrossFade(
-                firstChild: firstOnboarding(context: context),
-                secondChild: secondOnboarding(),
-                crossFadeState:
-                    viewModel.state.pageInt == 0
-                        ? CrossFadeState.showFirst
-                        : CrossFadeState.showSecond,
-                duration: Duration(seconds: 5),
-
+          body: Stack(
+            children: [
+              Positioned.fill(
+                child: PageView.builder(
+                  controller: viewModel.pageController,
+                  onPageChanged: viewModel.setPageInt,
+                  itemCount: 3,
+                  itemBuilder: (_,index) {
+                    return buildPage(context: context, index : index);
+                  },
+                ),
               ),
-            ),
+              if (viewModel.state.pageInt != 0)
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: IconButton(
+                    onPressed: () {
+                      viewModel.pageIntMinus();
+                    },
+                    icon: LucideIconWidget(icon: LucideIcons.chevronsLeft),
+                  ),
+                ),
+              if (viewModel.state.pageInt != 2)
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: IconButton(
+                    onPressed: () {
+                      viewModel.pageIntPlus();
+                    },
+                    icon: LucideIconWidget(icon: LucideIcons.chevronsRight),
+                  ),
+                ),
+              Align(alignment: Alignment.bottomCenter, child: indicator()),
+            ],
           ),
         );
       },
     );
   }
 
-  Widget firstOnboarding({required BuildContext context}) {
-    return AnimatedOpacity(
-      opacity: viewModel.state.firstOpacity,
-      duration: const Duration(seconds: 5),
-      child: Column(
-        spacing: 30,
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Align(
-            alignment: Alignment.center,
-            child: Column(
-              spacing: 24,
-              children: [
-                Image.asset('assets/image/emtion_note.png', width: MediaQuery.of(context).size.width /3,),
-                Text(
-                  '감정을 기록하고,\n나를 이해해보세요',
-                  textAlign: TextAlign.center,
-                  style: AppTextStyles.headingL(
-                    color: AppColors.onboardingTitleColor,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          indicatorBtn(),
-          SizedBox(
-            height: 0,
-          )
-        ],
-      ),
-    );
+  Widget buildPage({required BuildContext context, required int index}) {
+    switch (index) {
+      case 0:
+        return onboardingFirst(valueKey: const ValueKey(0), context: context);
+      case 1:
+        return onboardingSecond(valueKey: const ValueKey(1), context: context);
+      case 2:
+        return onboardingThird(valueKey: const ValueKey(2), context: context);
+      default:
+        return Container(
+          color: AppColors.grayPlaceholder,
+          key: const ValueKey(-1),
+        );
+    }
   }
 
-  Widget secondOnboarding() {
-    return AnimatedOpacity(
-      opacity: viewModel.state.secondOpacity,
-      duration: const Duration(seconds: 3),
-      child: Column(
-        children: [
-          Column(
-            children: [
-              Image.asset('assets/image/routine_alert.png'),
-              Text(
-                '나만의 루틴으로\n하루를 시작해 보세요',
-                textAlign: TextAlign.center,
-                style: AppTextStyles.headingL(
-                  color: AppColors.onboardingTitleColor,
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget indicatorBtn() {
-    return Row(
-      spacing: 15,
+  Widget onboardingFirst({required ValueKey valueKey, required BuildContext context}) {
+    return Column(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
+      spacing: 30,
       children: [
-        Container(
-          width: 10,
-          height: 10,
-          decoration: BoxDecoration(
-            color: AppColors.onboardingDescriptionColor,
-            shape: BoxShape.circle
-          ),
+        Image.asset('assets/image/emtion_note.png', width: MediaQuery.of(context).size.width / 3,),
+        Text('감정을 기록 하고,\n나를 이해해 보세요', style: AppTextStyles.bodyS(), textAlign: TextAlign.center,)
+      ],
+    );
+  }
+
+  Widget onboardingSecond({required ValueKey valueKey, required BuildContext context}) {
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.center,
+      spacing: 30,
+      children: [
+        Image.asset('assets/image/routine_note.png', width: MediaQuery.of(context).size.width / 3,),
+        Text('나만의 루틴 으로,\n하루를 시작해 보세요', style: AppTextStyles.bodyS(), textAlign: TextAlign.center,)
+      ],
+    );
+  }
+
+  Widget onboardingThird({required ValueKey valueKey, required BuildContext context}) {
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.center,
+      spacing: 30,
+      children: [
+        Image.asset('assets/image/routine_alert.png', width: MediaQuery.of(context).size.width / 3,),
+        Text('반복 되는 하루 속에서,\n나를 위한 시간을 만들어 보세요', style: AppTextStyles.bodyS(), textAlign: TextAlign.center,)
+      ],
+    );
+  }
+
+  Widget indicator() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(3, (index) {
+            final isSelected = index == viewModel.state.pageInt;
+            return AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeOut,
+              margin: const EdgeInsets.symmetric(horizontal: 6.0),
+              width: isSelected ? 16.0 : 8.0,
+              height: 8.0,
+              decoration: BoxDecoration(
+                color:
+                    isSelected
+                        ? const Color(0xFF4A80F0) // 선택된 색
+                        : const Color(0xFFDADADA), // 비선택 색
+                borderRadius: BorderRadius.circular(4.0),
+              ),
+            );
+          }),
         ),
-        Container(
-          width: 10,
-          height: 10,
-          decoration: BoxDecoration(
-              color: AppColors.onboardingDescriptionColor,
-              shape: BoxShape.circle
-          ),
-        ),
-        Container(
-          width: 10,
-          height: 10,
-          decoration: BoxDecoration(
-              color: AppColors.onboardingDescriptionColor,
-              shape: BoxShape.circle
-          ),
-        )
+        SizedBox(height: 20),
       ],
     );
   }

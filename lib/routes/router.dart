@@ -27,7 +27,7 @@ final GoRouter router = GoRouter(
       path: Routes.onboarding,
       pageBuilder: (context, state) {
         return CustomTransitionPage(
-          child: OnboardingScreen(viewModel: OnboardingViewModel(state: OnboardingState())..firstValueChange(),),
+          child: OnboardingScreen(viewModel: OnboardingViewModel(state: OnboardingState()),),
           transitionsBuilder: PageTransitions.slideFadeFromRight,
           transitionDuration: const Duration(milliseconds: 1500)
         );
