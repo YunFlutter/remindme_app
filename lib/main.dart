@@ -11,6 +11,7 @@ class RemindMe extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      title: 'ReMindMe',
       theme: ThemeData(fontFamily: 'Pretendard'),
       debugShowCheckedModeBanner: false,
       routerConfig: router,

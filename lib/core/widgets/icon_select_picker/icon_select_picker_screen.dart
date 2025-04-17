@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:remindme_app/core/constants/lucide_icon_data_with_keywords.dart';
 import 'package:remindme_app/core/widgets/icon_select_picker/icon_select_picker_view_model.dart';
-import 'package:remindme_app/core/widgets/text_field_screen.dart';
+import 'package:remindme_app/core/widgets/custom_text_field.dart';
 
 class IconSelectPickerScreen extends StatefulWidget {
   final IconSelectPickerViewModel viewModel;
@@ -59,7 +59,7 @@ class _IconSelectPickerScreenState extends State<IconSelectPickerScreen> {
             spacing: 20,
             children: [
               SizedBox(height: 0),
-              TextFieldScreen(
+              CustomTextField(
                 focusNode: _focusNode,
                 textEditingController: _controller,
               ),
@@ -86,12 +86,12 @@ class _IconSelectPickerScreenState extends State<IconSelectPickerScreen> {
                       runSpacing: 16,
                       spacing: 16,
                       children:
-                      widget.viewModel.state.filterIconList.map((items) {
-                        return LucideIconWidget(
-                          icon: items["icon"],
-                          size: 32,
-                        );
-                      }).toList(),
+                          widget.viewModel.state.filterIconList.map((items) {
+                            return LucideIconWidget(
+                              icon: items["icon"],
+                              size: 32,
+                            );
+                          }).toList(),
                     ),
                   ),
                 ),

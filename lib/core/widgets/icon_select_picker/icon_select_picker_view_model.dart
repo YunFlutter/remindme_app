@@ -8,10 +8,8 @@ class IconSelectPickerViewModel with ChangeNotifier {
   IconSelectPickerState get state => _state;
 
   void searchIconKeyWord({required String keyword}) {
-    _state = _state.copyWith(searchIconKeyWord: keyword);
-    notifyListeners();
-
     _state = _state.copyWith(
+      searchIconKeyWord: keyword,
       filterIconList:
           lucideIconData
               .where((items) => items["keywords"].contains(keyword))

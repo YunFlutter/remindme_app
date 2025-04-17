@@ -7,6 +7,7 @@ class RoutineCardModel {
   final Color badgeBackGroundColor;
   final String routineTitle;
   final String routineTime;
+  final VoidCallback? onTap;
 
   const RoutineCardModel({
     required this.icons,
@@ -14,5 +15,6 @@ class RoutineCardModel {
     required this.badgeBackGroundColor,
     required this.routineTitle,
     required this.routineTime,
+    this.onTap,
   });
 }

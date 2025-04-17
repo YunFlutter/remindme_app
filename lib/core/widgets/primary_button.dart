@@ -19,7 +19,6 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Material(
       color: Colors.transparent,
       borderRadius: BorderRadius.circular(borderRadius ?? 16),
@@ -28,12 +27,11 @@ class PrimaryButton extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
           boxShadow: [AppShadows.light],
-          borderRadius: BorderRadius.circular(borderRadius?? 16),
-          color:
-              buttonActive ? AppColors.primaryBlue : AppColors.grayDisabled,
+          borderRadius: BorderRadius.circular(borderRadius ?? 16),
+          color: buttonActive ? AppColors.primaryBlue : AppColors.grayDisabled,
         ),
         child: InkWell(
-          onTap: onTap ?? () {},
+          onTap: buttonActive ? (onTap ?? () {}) : null,
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 16),
             child: Text(

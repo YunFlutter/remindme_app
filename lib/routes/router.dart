@@ -13,23 +13,25 @@ final GoRouter router = GoRouter(
   routes: [
     GoRoute(
       path: Routes.splash,
-      builder:
-          (context, state) => SplashScreen(
-            viewModel:
-                SplashViewModel()..textValueChange(
-                  firstMilliseconds: 1500,
-                  secondMilliseconds: 3000,
-                  context: context,
-                ),
-          ),
+      builder: (context, state) {
+        final viewModel = SplashViewModel();
+        viewModel.textValueChange(
+          firstMilliseconds: 1500,
+          secondMilliseconds: 3000,
+          context: context,
+        );
+        return SplashScreen(viewModel: viewModel);
+      },
     ),
     GoRoute(
       path: Routes.onboarding,
       pageBuilder: (context, state) {
         return CustomTransitionPage(
-          child: OnboardingScreen(viewModel: OnboardingViewModel(state: OnboardingState()),),
+          child: OnboardingScreen(
+            viewModel: OnboardingViewModel(state: OnboardingState()),
+          ),
           transitionsBuilder: PageTransitions.slideFadeFromRight,
-          transitionDuration: const Duration(milliseconds: 1500)
+          transitionDuration: const Duration(milliseconds: 1500),
         );
       },
     ),

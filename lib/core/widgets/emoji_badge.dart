@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class EmojiBadge extends StatelessWidget {
   final String emoji;
   final Color backGroundColor;
-  void Function()? onTap;
-  EmojiBadge({
+  final void Function()? onTap;
+  const EmojiBadge({
     super.key,
     required this.emoji,
     required this.backGroundColor,

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:remindme_app/core/themes/app_colors.dart';
 
-class TextFieldScreen extends StatefulWidget {
-  TextFieldScreen({
+class CustomTextField extends StatefulWidget {
+  CustomTextField({
     super.key,
     required this.focusNode,
     required this.textEditingController,
@@ -15,10 +15,10 @@ class TextFieldScreen extends StatefulWidget {
   bool suffixIconDisplay;
 
   @override
-  State<TextFieldScreen> createState() => _TextFieldScreenState();
+  State<CustomTextField> createState() => _CustomTextFieldState();
 }
 
-class _TextFieldScreenState extends State<TextFieldScreen> {
+class _CustomTextFieldState extends State<CustomTextField> {
   bool obscureText = false;
 
   @override
@@ -72,8 +72,6 @@ class _TextFieldScreenState extends State<TextFieldScreen> {
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(color: AppColors.grayLine),
         ),
-
-
       ),
     );
   }

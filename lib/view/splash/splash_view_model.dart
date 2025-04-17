@@ -17,12 +17,16 @@ class SplashViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  void textValueChange({required int firstMilliseconds, required int secondMilliseconds, required BuildContext context}) async {
-    Future.delayed(Duration(milliseconds: firstMilliseconds), () async{
-      final firstChange = await firstTextValueChange();
+  void textValueChange({
+    required int firstMilliseconds,
+    required int secondMilliseconds,
+    required BuildContext context,
+  }) async {
+    Future.delayed(Duration(milliseconds: firstMilliseconds), () async {
+      await firstTextValueChange();
       notifyListeners();
-      Future.delayed(Duration(milliseconds: secondMilliseconds), ()async {
-        final secondChange = await secondTextValueChange();
+      Future.delayed(Duration(milliseconds: secondMilliseconds), () async {
+        await secondTextValueChange();
         notifyListeners();
         Future.delayed(Duration(seconds: 5), () {
           context.go("/onboarding");

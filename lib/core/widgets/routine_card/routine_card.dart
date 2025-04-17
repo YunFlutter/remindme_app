@@ -24,7 +24,7 @@ class RoutineCard extends StatelessWidget {
           boxShadow: [AppShadows.light],
         ),
         child: InkWell(
-          onTap: () {},
+          onTap: cardModel.onTap,
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Row(
