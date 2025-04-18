@@ -8,10 +8,12 @@ class CustomTextField extends StatefulWidget {
     required this.focusNode,
     required this.textEditingController,
     this.suffixIconDisplay = false,
+    void Function(String text)? onSubmitEvent,
   });
 
   final FocusNode focusNode;
   final TextEditingController textEditingController;
+  void Function(String text)? onSubmitEvent;
   bool suffixIconDisplay;
 
   @override
@@ -27,6 +29,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       obscureText: widget.suffixIconDisplay == false ? false : obscureText,
       focusNode: widget.focusNode,
       controller: widget.textEditingController,
+      onSubmitted: widget.onSubmitEvent ?? (text){},
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         suffixIcon:

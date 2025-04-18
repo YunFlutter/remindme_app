@@ -5,6 +5,8 @@ import 'package:remindme_app/routes/routes.dart';
 import 'package:remindme_app/view/onboarding/onboarding_screen.dart';
 import 'package:remindme_app/view/onboarding/onboarding_state.dart';
 import 'package:remindme_app/view/onboarding/onboarding_view_model.dart';
+import 'package:remindme_app/view/signUp/sign_up_screen.dart';
+import 'package:remindme_app/view/signUp/sign_up_view_model.dart';
 import 'package:remindme_app/view/splash/splash_screen.dart';
 import 'package:remindme_app/view/splash/splash_view_model.dart';
 
@@ -30,10 +32,17 @@ final GoRouter router = GoRouter(
           child: OnboardingScreen(
             viewModel: OnboardingViewModel(state: OnboardingState()),
           ),
-          transitionsBuilder: PageTransitions.slideFadeFromRight,
+          transitionsBuilder: PageTransitions.fade,
           transitionDuration: const Duration(milliseconds: 1500),
         );
       },
     ),
+    GoRoute(path: Routes.signUp,pageBuilder: (context, state) {
+      return CustomTransitionPage(
+        child: SignUpScreen(viewModel: SignUpViewModel()..initPage()),
+        transitionsBuilder: PageTransitions.fade,
+        transitionDuration: const Duration(milliseconds: 1500),
+      );
+    },)
   ],
 );
