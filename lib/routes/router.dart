@@ -7,6 +7,7 @@ import 'package:remindme_app/data/repository_impl/user_repository_impl.dart';
 import 'package:remindme_app/routes/page_transitions.dart';
 import 'package:remindme_app/routes/routes.dart';
 import 'package:remindme_app/view/home/home_screen.dart';
+import 'package:remindme_app/view/home/home_view_model.dart';
 import 'package:remindme_app/view/onboarding/onboarding_screen.dart';
 import 'package:remindme_app/view/onboarding/onboarding_state.dart';
 import 'package:remindme_app/view/onboarding/onboarding_view_model.dart';
@@ -65,7 +66,9 @@ final GoRouter router = GoRouter(
           body: Column(
             children: [
               Expanded(child: child),
-              CustomNavigationBar(nowPagePath: GoRouterState.of(context).fullPath.toString())
+              CustomNavigationBar(
+                nowPagePath: GoRouterState.of(context).fullPath.toString(),
+              ),
             ],
           ),
         );
@@ -75,13 +78,19 @@ final GoRouter router = GoRouter(
           path: Routes.home,
           pageBuilder: (context, state) {
             return CustomTransitionPage(
-              child: HomeScreen(),
+              child: HomeScreen(
+                viewModel: HomeViewModel(
+                  userRepository: UserRepositoryImpl(
+                    userDataSource: UserDataSourceImpl(),
+                  ),
+                ),
+              ),
               transitionsBuilder: PageTransitions.fade,
               transitionDuration: const Duration(milliseconds: 1500),
             );
           },
         ),
-      ]
-    )
+      ],
+    ),
   ],
 );

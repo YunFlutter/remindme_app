@@ -12,7 +12,7 @@ class CustomNavigationBar extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 40),
       width: double.infinity,
-      height: 72,
+      height: 72 + MediaQuery.of(context).padding.bottom,
       decoration: BoxDecoration(
         border: Border(top: BorderSide(color: AppColors.grayLine)),
       ),

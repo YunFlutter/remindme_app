@@ -11,7 +11,7 @@ class HomeState with _$HomeState {
   final List<RoutineModel> routineList;
 
   const HomeState({
-    required this.userName,
-    required this.routineList,
+     this.userName = '',
+     this.routineList = const [],
   });
 }
