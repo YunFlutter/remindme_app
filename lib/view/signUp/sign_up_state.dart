@@ -6,11 +6,18 @@ part 'sign_up_state.freezed.dart';
 
 @freezed
 class SignUpState with _$SignUpState {
-  TextEditingController textEditingController;
-  FocusNode focusNode;
+  final TextEditingController textEditingController;
+  final FocusNode focusNode;
+  final bool pageOpacity;
+  final bool isTitleVisible;
+  final bool isFieldVisible;
 
   SignUpState({
     required this.textEditingController,
     required this.focusNode,
+    this.pageOpacity = false,
+    this.isFieldVisible = false,
+    this.isTitleVisible = false
   });
+
 }

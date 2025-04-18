@@ -57,6 +57,9 @@ class OnboardingScreen extends StatelessWidget {
                     width: MediaQuery.of(context).size.width / 2,
                     padding: EdgeInsets.only(bottom: 70),
                     child: PrimaryButton(
+                      onTap: (){
+                        context.go("/sign-up");
+                      },
                       buttonText: '시작하기',
                       buttonActive: true,
                     ),
@@ -65,7 +68,7 @@ class OnboardingScreen extends StatelessWidget {
 
               Align(alignment: Alignment.bottomCenter, child: indicator()),
 
-              if (viewModel.state.pageInt != 3)
+              if (viewModel.state.pageInt != 2)
                 Align(
                   alignment: Alignment.topRight,
                   child: Container(
