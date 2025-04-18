@@ -38,6 +38,9 @@ dependencies:
   freezed_annotation: ^3.0.0
   go_router: ^14.8.1
   dart_format: ^0.0.4
+  path_provider: ^2.1.1
+  hive_ce_flutter: ^2.2.0
+  hive_ce: ^2.10.1
 
 dev_dependencies:
   flutter_test:
@@ -51,6 +54,8 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   build_runner: ^2.4.15
   freezed: ^3.0.6
+  hive_ce_generator: ^1.8.2
+  json_serializable: ^6.9.5
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

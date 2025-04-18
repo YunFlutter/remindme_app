@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:remindme_app/domain/repository_interface/user_repository.dart';
 import 'package:remindme_app/view/signUp/sign_up_state.dart';
 
 class SignUpViewModel with ChangeNotifier {
+  final UserRepository _userRepository;
+  SignUpViewModel({required UserRepository userRepository})
+    : _userRepository = userRepository;
+
   SignUpState _state = SignUpState(
     textEditingController: TextEditingController(),
     focusNode: FocusNode(),
@@ -29,9 +35,21 @@ class SignUpViewModel with ChangeNotifier {
 
     _state.focusNode.addListener(() {});
     _state.textEditingController.addListener(() {
-      print(_state.textEditingController.text);
       notifyListeners();
     });
+  }
+
+  void saveName({required String text, required BuildContext context}) async {
+    final Map<String, dynamic> userNameMap =
+        await _userRepository.getUserInfo();
+    final String? userName = userNameMap["username"];
+
+    if (userName == null) {
+      final userModel = await _userRepository.saveUserName(name: text);
+      context.go("/home");
+    }else{
+      print("이미 등록된 이름이 존재함");
+    }
   }
 
   void unFocus() {

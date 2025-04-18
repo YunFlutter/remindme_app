@@ -87,7 +87,12 @@ class SignUpScreen extends StatelessWidget {
                             AppColors.primaryBlue,
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          viewModel.saveName(
+                            text: viewModel.state.textEditingController.text,
+                            context: context,
+                          );
+                        },
                         icon: LucideIconWidget(
                           icon: LucideIcons.chevronRight,
                           color: AppColors.baseWhite,
