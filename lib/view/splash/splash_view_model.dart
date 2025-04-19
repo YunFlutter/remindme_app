@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:remindme_app/data/data_source/user/user_data_source.dart';
-import 'package:remindme_app/data/data_source/user/user_data_source_impl.dart';
-import 'package:remindme_app/data/repository_impl/user_repository_impl.dart';
-import 'package:remindme_app/domain/repository_interface/user_repository.dart';
+import 'package:remindme_app/core/hive/hive_box.dart';
 import 'package:remindme_app/view/splash/splash_state.dart';
 
 class SplashViewModel with ChangeNotifier {
@@ -32,16 +29,13 @@ class SplashViewModel with ChangeNotifier {
       Future.delayed(Duration(milliseconds: secondMilliseconds), () async {
         await secondTextValueChange();
         notifyListeners();
-        Future.delayed(Duration(seconds: 5), () async {
-          final Map<String, dynamic> result =
-              await UserRepositoryImpl(
-                userDataSource: UserDataSourceImpl(),
-              ).getUserInfo();
-
-          if (result["error"] != null) {
-            context.go("/onboarding");
-          }else{
+        Future.delayed(Duration(seconds: 5), () {
+          final box = HiveBox();
+          final user = box.userBox.get('currentUser');
+          if (user != null) {
             context.go("/home");
+          } else {
+            context.go("/onboarding");
           }
         });
       });

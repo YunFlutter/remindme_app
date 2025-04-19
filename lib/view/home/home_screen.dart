@@ -36,33 +36,33 @@ class HomeScreen extends StatelessWidget {
                         SizedBox(height: 34),
                         viewModel.state.routineList.isEmpty
                             ? Expanded(
-                              child: Center(
-                                child: Text(
-                                  "아직 루틴이 없어요!\n루틴을 추가 해보세요!",
-                                  textAlign: TextAlign.center,
-                                  style: AppTextStyles.bodyM(),
+                          child: Center(
+                            child: Text(
+                              "아직 루틴이 없어요!\n루틴을 추가 해보세요!",
+                              textAlign: TextAlign.center,
+                              style: AppTextStyles.bodyM(),
+                            ),
+                          ),
+                        )
+                            : Expanded(
+                          child: Column(
+                            children:
+                            viewModel.state.routineList
+                                .map(
+                                  (items) => RoutineCard(
+                                cardModel: RoutineCardModel(
+                                  icons: items.routineIcon,
+                                  badgeColor: items.routineColor,
+                                  badgeBackGroundColor:
+                                  items.routineColor,
+                                  routineTitle: items.title,
+                                  routineTime: items.time,
                                 ),
                               ),
                             )
-                            : Expanded(
-                              child: Column(
-                                children:
-                                    viewModel.state.routineList
-                                        .map(
-                                          (items) => RoutineCard(
-                                            cardModel: RoutineCardModel(
-                                              icons: items.routineIcon,
-                                              badgeColor: items.routineColor,
-                                              badgeBackGroundColor:
-                                                  items.routineColor,
-                                              routineTitle: items.title,
-                                              routineTime: items.time,
-                                            ),
-                                          ),
-                                        )
-                                        .toList(),
-                              ),
-                            ),
+                                .toList(),
+                          ),
+                        ),
                         Container(
                           padding: EdgeInsets.all(16),
                           decoration: BoxDecoration(
@@ -76,7 +76,7 @@ class HomeScreen extends StatelessWidget {
                             children: [
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     '오늘의 감정',
@@ -96,8 +96,8 @@ class HomeScreen extends StatelessWidget {
                                 children: [
                                   Container(
                                     decoration: BoxDecoration(
-                                      color: AppColors.primaryBlue,
-                                      shape: BoxShape.circle
+                                        color: AppColors.primaryBlue,
+                                        shape: BoxShape.circle
                                     ),
                                     padding: EdgeInsets.all(10),
                                     child: LucideIconWidget(

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive_ce/hive.dart';
+import 'package:remindme_app/core/hive/hive_box.dart';
 import 'package:remindme_app/core/themes/app_colors.dart';
 import 'package:remindme_app/core/widgets/custom_navigation_bar.dart';
-import 'package:remindme_app/data/data_source/user/user_data_source_impl.dart';
-import 'package:remindme_app/data/repository_impl/user_repository_impl.dart';
+import 'package:remindme_app/data/data_model/user/user_data_model.dart';
+import 'package:remindme_app/data/repository_impl/user/user_repository_impl.dart';
 import 'package:remindme_app/routes/page_transitions.dart';
 import 'package:remindme_app/routes/routes.dart';
 import 'package:remindme_app/view/home/home_screen.dart';
@@ -50,7 +52,7 @@ final GoRouter router = GoRouter(
           child: SignUpScreen(
             viewModel: SignUpViewModel(
               userRepository: UserRepositoryImpl(
-                userDataSource: UserDataSourceImpl(),
+                box: Hive.box<UserDataModel>('userBox'),
               ),
             )..initPage(),
           ),
@@ -80,9 +82,7 @@ final GoRouter router = GoRouter(
             return CustomTransitionPage(
               child: HomeScreen(
                 viewModel: HomeViewModel(
-                  userRepository: UserRepositoryImpl(
-                    userDataSource: UserDataSourceImpl(),
-                  ),
+                  userRepository: UserRepositoryImpl(box: HiveBox().userBox),
                 ),
               ),
               transitionsBuilder: PageTransitions.fade,

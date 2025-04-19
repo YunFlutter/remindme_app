@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
-import 'package:remindme_app/domain/repository_interface/user_repository.dart';
+import 'package:remindme_app/core/constants/result/result.dart';
+import 'package:remindme_app/domain/domain_model/user/user_model.dart';
+import 'package:remindme_app/domain/repository/user/user_repository.dart';
 import 'package:remindme_app/view/signUp/sign_up_state.dart';
 
 class SignUpViewModel with ChangeNotifier {
   final UserRepository _userRepository;
+
   SignUpViewModel({required UserRepository userRepository})
     : _userRepository = userRepository;
 
@@ -40,15 +44,14 @@ class SignUpViewModel with ChangeNotifier {
   }
 
   void saveName({required String text, required BuildContext context}) async {
-    final Map<String, dynamic> userNameMap =
-        await _userRepository.getUserInfo();
-    final String? userName = userNameMap["username"];
-
-    if (userName == null) {
-      final userModel = await _userRepository.saveUserName(name: text);
-      context.go("/home");
-    }else{
-      print("이미 등록된 이름이 존재함");
+    final Result<void, String> userSave = await _userRepository.saveUser(
+      UserModel(nickname: text),
+    );
+    switch (userSave) {
+      case Success<void, String>():
+        context.go('/home');
+      case Error<void, String>():
+        Fluttertoast.showToast(msg: "유저 등록 실패");
     }
   }
 
