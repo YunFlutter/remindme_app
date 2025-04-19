@@ -39,6 +39,9 @@ dependencies:
   go_router: ^14.8.1
   dart_format: ^0.0.4
   hive_ce: ^2.10.1
+  fluttertoast: ^8.2.12
+  hive_ce_generator: ^1.8.2
+  hive_ce_flutter: ^2.2.0
 
 dev_dependencies:
   flutter_test:

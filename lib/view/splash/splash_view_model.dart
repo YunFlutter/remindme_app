@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:remindme_app/core/hive/hive_box.dart';
 import 'package:remindme_app/view/splash/splash_state.dart';
 
 class SplashViewModel with ChangeNotifier {
@@ -29,7 +30,13 @@ class SplashViewModel with ChangeNotifier {
         await secondTextValueChange();
         notifyListeners();
         Future.delayed(Duration(seconds: 5), () {
-          context.go("/onboarding");
+          final box = HiveBox();
+          final user = box.userBox.get('currentUser');
+          if (user != null) {
+            context.go("/home");
+          } else {
+            context.go("/onboarding");
+          }
         });
       });
     });

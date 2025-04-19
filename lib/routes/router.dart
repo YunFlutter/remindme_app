@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive_ce/hive.dart';
+import 'package:remindme_app/core/hive/hive_box.dart';
+import 'package:remindme_app/core/themes/app_colors.dart';
+import 'package:remindme_app/core/widgets/custom_navigation_bar.dart';
+import 'package:remindme_app/data/data_model/user/user_data_model.dart';
+import 'package:remindme_app/data/repository_impl/user/user_repository_impl.dart';
 import 'package:remindme_app/routes/page_transitions.dart';
 import 'package:remindme_app/routes/routes.dart';
+import 'package:remindme_app/view/home/home_screen.dart';
+import 'package:remindme_app/view/home/home_view_model.dart';
 import 'package:remindme_app/view/onboarding/onboarding_screen.dart';
 import 'package:remindme_app/view/onboarding/onboarding_state.dart';
 import 'package:remindme_app/view/onboarding/onboarding_view_model.dart';
@@ -37,12 +45,52 @@ final GoRouter router = GoRouter(
         );
       },
     ),
-    GoRoute(path: Routes.signUp,pageBuilder: (context, state) {
-      return CustomTransitionPage(
-        child: SignUpScreen(viewModel: SignUpViewModel()..initPage()),
-        transitionsBuilder: PageTransitions.fade,
-        transitionDuration: const Duration(milliseconds: 1500),
-      );
-    },)
+    GoRoute(
+      path: Routes.signUp,
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          child: SignUpScreen(
+            viewModel: SignUpViewModel(
+              userRepository: UserRepositoryImpl(
+                box: Hive.box<UserDataModel>('userBox'),
+              ),
+            )..initPage(),
+          ),
+          transitionsBuilder: PageTransitions.fade,
+          transitionDuration: const Duration(milliseconds: 1500),
+        );
+      },
+    ),
+    ShellRoute(
+      builder: (context, state, child) {
+        return Scaffold(
+          backgroundColor: AppColors.baseWhite,
+          body: Column(
+            children: [
+              Expanded(child: child),
+              CustomNavigationBar(
+                nowPagePath: GoRouterState.of(context).fullPath.toString(),
+              ),
+            ],
+          ),
+        );
+      },
+      routes: [
+        GoRoute(
+          path: Routes.home,
+          pageBuilder: (context, state) {
+            return CustomTransitionPage(
+              child: HomeScreen(
+                viewModel: HomeViewModel(
+                  userRepository: UserRepositoryImpl(box: HiveBox().userBox),
+                ),
+              ),
+              transitionsBuilder: PageTransitions.fade,
+              transitionDuration: const Duration(milliseconds: 1500),
+            );
+          },
+        ),
+      ],
+    ),
   ],
 );
