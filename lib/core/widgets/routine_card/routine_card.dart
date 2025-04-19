@@ -64,7 +64,7 @@ class RoutineCard extends StatelessWidget {
                             size: 16,
                           ),
                           Text(
-                            "${cardModel.routineTime}분",
+                            "${cardModel.routineTime} 시작",
                             style: AppTextStyles.bodyS(),
                           ),
                         ],

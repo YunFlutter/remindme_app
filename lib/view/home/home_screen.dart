@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
+import 'package:remindme_app/core/service/icon_mapper.dart';
 import 'package:remindme_app/core/themes/app_colors.dart';
 import 'package:remindme_app/core/themes/app_text_styles.dart';
 import 'package:remindme_app/core/widgets/routine_card/routine_card.dart';
@@ -46,12 +48,13 @@ class HomeScreen extends StatelessWidget {
                         )
                             : Expanded(
                           child: Column(
+                            spacing: 20,
                             children:
                             viewModel.state.routineList
                                 .map(
                                   (items) => RoutineCard(
                                 cardModel: RoutineCardModel(
-                                  icons: items.routineIcon,
+                                  icons: iconData(items.routineIconName),
                                   badgeColor: items.routineColor,
                                   badgeBackGroundColor:
                                   items.routineColor,
@@ -133,7 +136,9 @@ class HomeScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(100),
                       ),
                       elevation: 2,
-                      onPressed: () {},
+                      onPressed: () {
+                        context.push("/routine-add");
+                      },
                       child: LucideIconWidget(
                         icon: LucideIcons.plus,
                         color: AppColors.baseWhite,

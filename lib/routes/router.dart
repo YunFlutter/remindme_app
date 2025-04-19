@@ -5,6 +5,7 @@ import 'package:remindme_app/core/hive/hive_box.dart';
 import 'package:remindme_app/core/themes/app_colors.dart';
 import 'package:remindme_app/core/widgets/custom_navigation_bar.dart';
 import 'package:remindme_app/data/data_model/user/user_data_model.dart';
+import 'package:remindme_app/data/repository_impl/routine/routine_repository_impl.dart';
 import 'package:remindme_app/data/repository_impl/user/user_repository_impl.dart';
 import 'package:remindme_app/routes/page_transitions.dart';
 import 'package:remindme_app/routes/routes.dart';
@@ -13,6 +14,8 @@ import 'package:remindme_app/view/home/home_view_model.dart';
 import 'package:remindme_app/view/onboarding/onboarding_screen.dart';
 import 'package:remindme_app/view/onboarding/onboarding_state.dart';
 import 'package:remindme_app/view/onboarding/onboarding_view_model.dart';
+import 'package:remindme_app/view/routine/routine_add/routine_add_screen.dart';
+import 'package:remindme_app/view/routine/routine_add/routine_add_view_model.dart';
 import 'package:remindme_app/view/signUp/sign_up_screen.dart';
 import 'package:remindme_app/view/signUp/sign_up_view_model.dart';
 import 'package:remindme_app/view/splash/splash_screen.dart';
@@ -61,6 +64,22 @@ final GoRouter router = GoRouter(
         );
       },
     ),
+    GoRoute(
+      path: Routes.routineAdd,
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          child: RoutineAddScreen(
+            viewModel: RoutineAddViewModel(
+              routineRepository: RoutineRepositoryImpl(
+                routineBox: HiveBox().routineBox,
+              ),
+            ),
+          ),
+          transitionsBuilder: PageTransitions.fade,
+          transitionDuration: const Duration(milliseconds: 1500),
+        );
+      },
+    ),
     ShellRoute(
       builder: (context, state, child) {
         return Scaffold(
@@ -83,6 +102,7 @@ final GoRouter router = GoRouter(
               child: HomeScreen(
                 viewModel: HomeViewModel(
                   userRepository: UserRepositoryImpl(box: HiveBox().userBox),
+                  routineRepository: RoutineRepositoryImpl(routineBox: HiveBox().routineBox)
                 ),
               ),
               transitionsBuilder: PageTransitions.fade,
