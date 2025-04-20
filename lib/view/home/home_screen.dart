@@ -151,7 +151,6 @@ class HomeScreen extends StatelessWidget {
                     child: LucideIconWidget(
                       icon: LucideIcons.plus,
                       color: AppColors.baseWhite,
-
                     ),
                   ),
                 ),

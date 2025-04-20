@@ -19,6 +19,7 @@ class RoutineAddViewModel with ChangeNotifier {
 
   void updateTitle(String value) {
     _state = _state.copyWith(title: value);
+    _state.titleTextEditingController.text = value;
     notifyListeners();
   }
 
@@ -116,6 +117,13 @@ class RoutineAddViewModel with ChangeNotifier {
         state.routineColor.trim().isEmpty ||
         state.steps.isEmpty) {
       Fluttertoast.showToast(msg: "모든 항목을 입력해주세요.");
+      return;
+    }
+
+    final timeRegex = RegExp(r'^([01]\d|2[0-3]):[0-5]\d$');
+
+    if (!timeRegex.hasMatch(state.time)) {
+      Fluttertoast.showToast(msg: '시간 형식이 잘못되었습니다 (예: 19:00)');
       return;
     }
 

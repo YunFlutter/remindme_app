@@ -106,7 +106,7 @@ final GoRouter router = GoRouter(
                 ),
               ),
               transitionsBuilder: PageTransitions.fade,
-              transitionDuration: const Duration(milliseconds: 1500),
+              transitionDuration: const Duration(milliseconds: 500),
             );
           },
         ),

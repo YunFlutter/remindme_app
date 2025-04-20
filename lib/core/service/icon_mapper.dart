@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:remindme_app/core/constants/lucide_icon_data_with_keywords.dart';
-
 
 IconData iconData(String name) {
   switch (name) {
@@ -13,4 +13,21 @@ IconData iconData(String name) {
     default:
       return Icons.help;
   }
+}
+
+IconData getLucideIconData(String iconName) {
+  const iconMap = {
+    'sun': LucideIcons.sun,
+    'coffee': LucideIcons.coffee,
+    'alarm': LucideIcons.alarmClock,
+    'book': LucideIcons.book,
+    'check-circle': LucideIcons.circleCheck,
+    'brush': LucideIcons.brush,
+    'dumbbell': LucideIcons.dumbbell,
+    'moon': LucideIcons.moon,
+    'utensils': LucideIcons.utensils,
+    'notebook': LucideIcons.notebook,
+  };
+
+  return iconMap[iconName] ?? LucideIcons.circleHelp; // fallback 아이콘
 }
