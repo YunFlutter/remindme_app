@@ -21,11 +21,14 @@ class RoutineCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.baseWhite,
           borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: AppColors.grayLine
+          ),
           boxShadow: [AppShadows.light],
         ),
         child: InkWell(
           onTap: cardModel.onTap,
-          child: Padding(
+          child: Container(
             padding: const EdgeInsets.all(16),
             child: Row(
               spacing: 20,

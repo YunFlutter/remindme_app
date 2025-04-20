@@ -21,11 +21,11 @@ class HomeScreen extends StatelessWidget {
         child: ListenableBuilder(
           listenable: viewModel,
           builder: (context, child) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Stack(
-                children: [
-                  Positioned.fill(
+            return Stack(
+              children: [
+                Positioned.fill(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -35,7 +35,9 @@ class HomeScreen extends StatelessWidget {
                           style: AppTextStyles.headingL(),
                         ),
                         Text('오늘도 차근차근 시작해볼까요? 🙌'),
-                        SizedBox(height: 34),
+                        SizedBox(
+                          height: 20,
+                        ),
                         viewModel.state.routineList.isEmpty
                             ? Expanded(
                           child: Center(
@@ -47,23 +49,31 @@ class HomeScreen extends StatelessWidget {
                           ),
                         )
                             : Expanded(
-                          child: Column(
-                            spacing: 20,
-                            children:
-                            viewModel.state.routineList
-                                .map(
-                                  (items) => RoutineCard(
-                                cardModel: RoutineCardModel(
-                                  icons: iconData(items.routineIconName),
-                                  badgeColor: items.routineColor,
-                                  badgeBackGroundColor:
-                                  items.routineColor,
-                                  routineTitle: items.title,
-                                  routineTime: items.time,
-                                ),
+                          child: SingleChildScrollView(
+                            child: Padding(
+                              padding: const EdgeInsets.all(0),
+                              child: Column(
+                                spacing: 20,
+                                children:
+                                viewModel.state.routineList
+                                    .map(
+                                      (items) => RoutineCard(
+                                    cardModel: RoutineCardModel(
+                                      onTap: (){
+                                        print(items);
+                                      },
+                                      icons: iconData(items.routineIconName),
+                                      badgeColor: items.routineColor,
+                                      badgeBackGroundColor:
+                                      items.routineColor,
+                                      routineTitle: items.title,
+                                      routineTime: items.time,
+                                    ),
+                                  ),
+                                )
+                                    .toList(),
                               ),
-                            )
-                                .toList(),
+                            ),
                           ),
                         ),
                         Container(
@@ -122,32 +132,30 @@ class HomeScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SizedBox(
-                          height: 80,
-                        )
+
                       ],
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: FloatingActionButton(
-                      backgroundColor: AppColors.primaryBlue,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                      elevation: 2,
-                      onPressed: () {
-                        context.push("/routine-add");
-                      },
-                      child: LucideIconWidget(
-                        icon: LucideIcons.plus,
-                        color: AppColors.baseWhite,
+                ),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: FloatingActionButton(
+                    backgroundColor: AppColors.primaryBlue,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    elevation: 2,
+                    onPressed: () {
+                      context.push("/routine-add");
+                    },
+                    child: LucideIconWidget(
+                      icon: LucideIcons.plus,
+                      color: AppColors.baseWhite,
 
-                      ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             );
           },
         ),
