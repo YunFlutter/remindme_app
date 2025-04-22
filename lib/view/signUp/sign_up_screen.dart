@@ -83,7 +83,7 @@ class SignUpScreen extends StatelessWidget {
                       child: IconButton(
                         padding: EdgeInsets.all(15),
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
+                          backgroundColor: WidgetStateProperty.all(
                             AppColors.primaryBlue,
                           ),
                         ),

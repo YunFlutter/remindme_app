@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:lucide_icons_flutter/lucide_icons.dart';
 part 'icon_select_picker_state.freezed.dart';
 
 @freezed

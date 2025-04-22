@@ -6,19 +6,33 @@ part 'routine_add_state.freezed.dart';
 
 @freezed
 class RoutineAddState with _$RoutineAddState {
+  @override
   final String title;
+  @override
   final String time;
+  @override
   final String routineIconName;
+  @override
   final String badgeColor;
+  @override
   final String routineColor;
+  @override
   final bool isSubmitting;
+  @override
   final List<RoutineStepModel> steps;
+  @override
   final bool isSuccess;
+  @override
   final bool isAnimatedVisible;
+  @override
   final List<String> badgeColors;
+  @override
   final List<String> routineBackgroundColors;
+  @override
   final List<String> routineIconNames;
+  @override
   TextEditingController titleTextEditingController = TextEditingController();
+  @override
   FocusNode titleFocusNode = FocusNode();
 
   RoutineAddState({

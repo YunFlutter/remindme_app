@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:remindme_app/core/constants/adjust_color_brightness.dart';
 
 class RoutineCardModel {

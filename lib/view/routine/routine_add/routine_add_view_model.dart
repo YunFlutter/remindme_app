@@ -146,7 +146,7 @@ class RoutineAddViewModel with ChangeNotifier {
         context.pop();
       case Error(:final error):
         print(error);
-        Fluttertoast.showToast(msg: "$error");
+        Fluttertoast.showToast(msg: error);
     }
   }
 }

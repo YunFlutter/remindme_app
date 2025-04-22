@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
-import 'package:remindme_app/core/constants/lucide_icon_data_with_keywords.dart';
 
 IconData iconData(String name) {
   switch (name) {

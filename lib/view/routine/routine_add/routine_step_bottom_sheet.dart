@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:remindme_app/core/service/icon_mapper.dart';
-import 'package:remindme_app/core/themes/app_colors.dart';
 import 'package:remindme_app/core/themes/app_text_styles.dart';
 import 'package:remindme_app/core/widgets/custom_text_field.dart';
 import 'package:remindme_app/core/widgets/ghost_button.dart';

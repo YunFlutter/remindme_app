@@ -6,7 +6,9 @@ part 'home_state.freezed.dart';
 
 @freezed
 class HomeState with _$HomeState {
+  @override
   final String userName;
+  @override
   final List<RoutineModel> routineList;
 
   const HomeState({

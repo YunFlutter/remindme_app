@@ -20,7 +20,7 @@ class HomeViewModel with ChangeNotifier {
   }
 
   HomeState _state = HomeState();
-  HiveBox _box = HiveBox();
+  final HiveBox _box = HiveBox();
 
   HomeState get state => _state;
 

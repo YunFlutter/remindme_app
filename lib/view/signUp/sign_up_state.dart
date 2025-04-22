@@ -6,10 +6,15 @@ part 'sign_up_state.freezed.dart';
 
 @freezed
 class SignUpState with _$SignUpState {
+  @override
   final TextEditingController textEditingController;
+  @override
   final FocusNode focusNode;
+  @override
   final bool pageOpacity;
+  @override
   final bool isTitleVisible;
+  @override
   final bool isFieldVisible;
 
   SignUpState({

@@ -9,7 +9,7 @@ class PrimaryButton extends StatelessWidget {
   final double? borderRadius;
   final void Function()? onTap;
 
-  PrimaryButton({
+  const PrimaryButton({
     super.key,
     required this.buttonText,
     required this.buttonActive,

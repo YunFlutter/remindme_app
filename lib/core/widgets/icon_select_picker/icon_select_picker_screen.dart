@@ -34,7 +34,6 @@ class _IconSelectPickerScreenState extends State<IconSelectPickerScreen> {
     // 새 타이머 시작 (800ms 후 실행)
     _debounce = Timer(const Duration(milliseconds: 300), () {
       final text = _controller.text;
-      print("text : $text");
       widget.viewModel.searchIconKeyWord(keyword: text);
     });
   }
