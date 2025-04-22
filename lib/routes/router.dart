@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_ce/hive.dart';
 import 'package:remindme_app/core/hive/hive_box.dart';
+import 'package:remindme_app/core/service/di_setup.dart';
 import 'package:remindme_app/core/themes/app_colors.dart';
 import 'package:remindme_app/core/widgets/custom_navigation_bar.dart';
 import 'package:remindme_app/data/data_model/user/user_data_model.dart';
@@ -53,11 +54,7 @@ final GoRouter router = GoRouter(
       pageBuilder: (context, state) {
         return CustomTransitionPage(
           child: SignUpScreen(
-            viewModel: SignUpViewModel(
-              userRepository: UserRepositoryImpl(
-                box: Hive.box<UserDataModel>('userBox'),
-              ),
-            )..initPage(),
+            viewModel: getIt()
           ),
           transitionsBuilder: PageTransitions.fade,
           transitionDuration: const Duration(milliseconds: 1500),
@@ -69,18 +66,14 @@ final GoRouter router = GoRouter(
       pageBuilder: (context, state) {
         return CustomTransitionPage(
           child: RoutineAddScreen(
-            viewModel: RoutineAddViewModel(
-              routineRepository: RoutineRepositoryImpl(
-                routineBox: HiveBox().routineBox,
-              ),
-            ),
+            viewModel: getIt()
           ),
           transitionsBuilder: PageTransitions.fade,
           transitionDuration: const Duration(milliseconds: 1500),
         );
       },
     ),
-    ShellRoute(
+    StatefulShellRoute.indexedStack(
       builder: (context, state, child) {
         return Scaffold(
           backgroundColor: AppColors.baseWhite,
@@ -94,21 +87,22 @@ final GoRouter router = GoRouter(
           ),
         );
       },
-      routes: [
-        GoRoute(
-          path: Routes.home,
-          pageBuilder: (context, state) {
-            return CustomTransitionPage(
-              child: HomeScreen(
-                viewModel: HomeViewModel(
-                  userRepository: UserRepositoryImpl(box: HiveBox().userBox),
-                  routineRepository: RoutineRepositoryImpl(routineBox: HiveBox().routineBox)
-                ),
-              ),
-              transitionsBuilder: PageTransitions.fade,
-              transitionDuration: const Duration(milliseconds: 500),
-            );
-          },
+      branches: [
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Routes.home,
+              pageBuilder: (context, state) {
+                return CustomTransitionPage(
+                  child: HomeScreen(
+                    viewModel: getIt()
+                  ),
+                  transitionsBuilder: PageTransitions.fade,
+                  transitionDuration: const Duration(milliseconds: 500),
+                );
+              },
+            ),
+          ],
         ),
       ],
     ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
-import 'package:remindme_app/core/constants/result/result.dart';
+import 'package:remindme_app/core/result/result.dart';
 import 'package:remindme_app/domain/domain_model/user/user_model.dart';
 import 'package:remindme_app/domain/repository/user/user_repository.dart';
 import 'package:remindme_app/view/signUp/sign_up_state.dart';
@@ -10,7 +10,9 @@ class SignUpViewModel with ChangeNotifier {
   final UserRepository _userRepository;
 
   SignUpViewModel({required UserRepository userRepository})
-    : _userRepository = userRepository;
+    : _userRepository = userRepository {
+    initPage();
+  }
 
   SignUpState _state = SignUpState(
     textEditingController: TextEditingController(),

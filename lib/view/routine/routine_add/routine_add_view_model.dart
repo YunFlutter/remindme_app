@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
-import 'package:remindme_app/core/constants/result/result.dart';
+import 'package:remindme_app/core/result/result.dart';
 import 'package:remindme_app/domain/domain_model/routine/routine_model.dart';
 import 'package:remindme_app/domain/domain_model/routine/routine_step_model.dart';
 import 'package:remindme_app/domain/repository/routine/routine_repository.dart';

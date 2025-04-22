@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:remindme_app/core/constants/result/result.dart';
+import 'package:remindme_app/core/result/result.dart';
 import 'package:remindme_app/core/hive/hive_box.dart';
 import 'package:remindme_app/domain/repository/routine/routine_repository.dart';
 import 'package:remindme_app/domain/repository/user/user_repository.dart';
 import 'package:remindme_app/view/home/home_state.dart';
 
 class HomeViewModel with ChangeNotifier {
-  late UserRepository _userRepository;
-  late RoutineRepository _routineRepository;
+  RoutineRepository _routineRepository;
 
-  HomeViewModel({
-    required UserRepository userRepository,
-    required RoutineRepository routineRepository,
-  }) {
-    _userRepository = userRepository;
-    _routineRepository = routineRepository;
+  // HomeViewModel({
+  //   required RoutineRepository routineRepository,
+  // }) {
+  //   _routineRepository = routineRepository;
+  //   initPage();
+  // }
+
+  HomeViewModel({required RoutineRepository routineRepository})
+    : _routineRepository = routineRepository {
     initPage();
   }
 

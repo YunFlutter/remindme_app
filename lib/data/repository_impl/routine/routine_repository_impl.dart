@@ -1,5 +1,5 @@
 import 'package:hive_ce/hive.dart';
-import 'package:remindme_app/core/constants/result/result.dart';
+import 'package:remindme_app/core/result/result.dart';
 import 'package:remindme_app/data/data_model/routine/routine_data_model.dart';
 import 'package:remindme_app/data/mapper/routine/routine_mapper.dart';
 import 'package:remindme_app/domain/domain_model/routine/routine_model.dart';

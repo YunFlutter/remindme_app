@@ -1,4 +1,4 @@
-import 'package:remindme_app/core/constants/result/result.dart';
+import 'package:remindme_app/core/result/result.dart';
 import 'package:remindme_app/domain/domain_model/routine/routine_model.dart';
 
 abstract interface class RoutineRepository {

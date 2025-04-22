@@ -42,6 +42,7 @@ dependencies:
   fluttertoast: ^8.2.12
   hive_ce_generator: ^1.8.2
   hive_ce_flutter: ^2.2.0
+  get_it: ^8.0.3
 
 dev_dependencies:
   flutter_test:
