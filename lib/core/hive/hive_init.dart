@@ -8,7 +8,6 @@ Future<void> initHive() async {
   await Hive.initFlutter();
 
   Hive.registerAdapter(UserDataModelAdapter());
-  Hive.registerAdapter(RoutineStepDataModelAdapter());
   Hive.registerAdapter(RoutineDataModelAdapter());
 
   await Hive.openBox<UserDataModel>('userBox');

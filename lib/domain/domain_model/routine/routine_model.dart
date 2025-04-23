@@ -1,8 +1,6 @@
-import 'package:remindme_app/domain/domain_model/routine/routine_step_model.dart';
-
 class RoutineModel {
   final String title;
-  final List<RoutineStepModel> steps;
+  final List<Map<String, dynamic>> steps;
   final String badgeColor;
   final String routineColor;
   final String time;
@@ -27,7 +25,7 @@ class RoutineModel {
 
   RoutineModel copyWith({
     String? title,
-    List<RoutineStepModel>? steps,
+    List<Map<String, dynamic>>? steps,
     String? badgeColor,
     String? routineColor,
     String? time,

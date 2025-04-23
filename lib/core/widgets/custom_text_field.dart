@@ -5,21 +5,20 @@ import 'package:remindme_app/core/themes/app_colors.dart';
 class CustomTextField extends StatefulWidget {
   CustomTextField({
     super.key,
-    FocusNode? focusNode,
-    TextEditingController? textEditingController,
+    this.focusNode,
+    this.textEditingController,
     this.suffixIconDisplay = false,
-    void Function(String text)? onSubmitEvent,
-    void Function(String text)? onChangeEvent,
+    this.onSubmitEvent,
+    this.onChangeEvent,
     this.keyBoardType = TextInputType.text,
   });
 
-  FocusNode? focusNode;
-  TextEditingController? textEditingController;
-  void Function(String text)? onSubmitEvent;
-  void Function(String text)? onChangeEvent;
+  final FocusNode? focusNode;
+  final TextEditingController? textEditingController;
+  final void Function(String text)? onSubmitEvent;
+  final void Function(String text)? onChangeEvent;
   final TextInputType keyBoardType;
-
-  bool suffixIconDisplay;
+  final bool suffixIconDisplay;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();

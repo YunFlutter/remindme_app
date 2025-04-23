@@ -13,7 +13,7 @@ class RoutineRepositoryImpl implements RoutineRepository {
   @override
   Future<Result<void, String>> addRoutine(RoutineModel model) async {
     try {
-      final data = RoutineMapper.toDataModel(model);
+      final data = routineToDataModel(model);
       await routineBox.add(data);
       return Result.success(null);
     } catch (e) {
@@ -24,17 +24,17 @@ class RoutineRepositoryImpl implements RoutineRepository {
   @override
   Future<Result<void, String>> deleteRoutine(int index) async {
     try {
-      await routineBox.delete(index);
+      await routineBox.deleteAt(index);
       return Result.success(null);
     } catch (e) {
-      return Result.error('루틴 삭제 중 오류 : $e');
+      return Result.error('루틴 삭제 중 오류: $e');
     }
   }
 
   @override
   Future<Result<List<RoutineModel>, String>> getAllRoutines() async {
     try {
-      final all = routineBox.values.map(RoutineMapper.toDomainModel).toList();
+      final all = routineBox.values.map(dataModelToRoutine).toList();
       return Result.success(all);
     } catch (e) {
       return Result.error('루틴 불러오기 실패: $e');
@@ -43,11 +43,11 @@ class RoutineRepositoryImpl implements RoutineRepository {
 
   @override
   Future<Result<void, String>> updateRoutine(
-    int index,
-    RoutineModel model,
-  ) async {
+      int index,
+      RoutineModel model,
+      ) async {
     try {
-      final updated = RoutineMapper.toDataModel(model);
+      final updated = routineToDataModel(model);
       await routineBox.putAt(index, updated);
       return const Result.success(null);
     } catch (e) {

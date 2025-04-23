@@ -1,50 +1,35 @@
+
+
 import 'package:hive_ce/hive.dart';
-import 'routine_step_data_model.dart';
 
 part 'routine_data_model.g.dart';
 
 @HiveType(typeId: 1)
-class RoutineDataModel extends HiveObject {
+class RoutineDataModel {
   @HiveField(0)
-  String title;
+  final String title;
 
   @HiveField(1)
-  List<RoutineStepDataModel> steps;
+  final String time;
 
   @HiveField(2)
-  String badgeColor;
+  final String routineIconName;
 
   @HiveField(3)
-  String routineColor;
+  final String badgeColor;
 
   @HiveField(4)
-  String time;
+  final String routineColor;
 
   @HiveField(5)
-  String routineIconName;
-
-  @HiveField(6)
-  bool isCompletedToday;
-
-  @HiveField(7)
-  bool isFavorite;
-
-  @HiveField(8)
-  List<String> tags;
-
-  @HiveField(9)
-  DateTime? lastCompletedDate;
+  final List<Map<String, dynamic>> steps;
 
   RoutineDataModel({
     required this.title,
-    required this.steps,
-    required this.badgeColor,
-    required this.routineColor,
     required this.time,
     required this.routineIconName,
-    this.isCompletedToday = false,
-    this.isFavorite = false,
-    this.tags = const [],
-    this.lastCompletedDate,
+    required this.badgeColor,
+    required this.routineColor,
+    required this.steps,
   });
 }

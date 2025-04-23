@@ -8,6 +8,7 @@ import 'package:remindme_app/core/widgets/custom_navigation_bar.dart';
 import 'package:remindme_app/data/data_model/user/user_data_model.dart';
 import 'package:remindme_app/data/repository_impl/routine/routine_repository_impl.dart';
 import 'package:remindme_app/data/repository_impl/user/user_repository_impl.dart';
+import 'package:remindme_app/domain/domain_model/routine/routine_model.dart';
 import 'package:remindme_app/routes/page_transitions.dart';
 import 'package:remindme_app/routes/routes.dart';
 import 'package:remindme_app/view/home/home_screen.dart';
@@ -17,6 +18,7 @@ import 'package:remindme_app/view/onboarding/onboarding_state.dart';
 import 'package:remindme_app/view/onboarding/onboarding_view_model.dart';
 import 'package:remindme_app/view/routine/routine_add/routine_add_screen.dart';
 import 'package:remindme_app/view/routine/routine_add/routine_add_view_model.dart';
+import 'package:remindme_app/view/routine/routine_detail/routine_detail_screen_root.dart';
 import 'package:remindme_app/view/signUp/sign_up_screen.dart';
 import 'package:remindme_app/view/signUp/sign_up_view_model.dart';
 import 'package:remindme_app/view/splash/splash_screen.dart';
@@ -73,7 +75,20 @@ final GoRouter router = GoRouter(
         );
       },
     ),
-    StatefulShellRoute.indexedStack(
+    GoRoute(
+      path: Routes.routineDetail,
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          child: RoutineDetailScreenRoot(
+              routineModel: state.extra as RoutineModel,
+            viewModel: getIt(),
+          ),
+          transitionsBuilder: PageTransitions.fade,
+          transitionDuration: const Duration(milliseconds: 1500),
+        );
+      },
+    ),
+    ShellRoute(
       builder: (context, state, child) {
         return Scaffold(
           backgroundColor: AppColors.baseWhite,
@@ -87,23 +102,19 @@ final GoRouter router = GoRouter(
           ),
         );
       },
-      branches: [
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: Routes.home,
-              pageBuilder: (context, state) {
-                return CustomTransitionPage(
-                  child: HomeScreen(
-                    viewModel: getIt()
-                  ),
-                  transitionsBuilder: PageTransitions.fade,
-                  transitionDuration: const Duration(milliseconds: 500),
-                );
-              },
-            ),
-          ],
-        ),
+     routes : [
+       GoRoute(
+         path: Routes.home,
+         pageBuilder: (context, state) {
+           return CustomTransitionPage(
+             child: HomeScreen(
+                 viewModel: getIt()
+             ),
+             transitionsBuilder: PageTransitions.fade,
+             transitionDuration: const Duration(milliseconds: 500),
+           );
+         },
+       ),
       ],
     ),
   ],

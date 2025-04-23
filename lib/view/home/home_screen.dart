@@ -6,6 +6,7 @@ import 'package:remindme_app/core/themes/app_colors.dart';
 import 'package:remindme_app/core/themes/app_text_styles.dart';
 import 'package:remindme_app/core/widgets/routine_card/routine_card.dart';
 import 'package:remindme_app/core/widgets/routine_card/routine_card_model.dart';
+import 'package:remindme_app/routes/routes.dart';
 import 'package:remindme_app/view/home/home_view_model.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -35,47 +36,46 @@ class HomeScreen extends StatelessWidget {
                           style: AppTextStyles.headingL(),
                         ),
                         Text('오늘도 차근차근 시작해볼까요? 🙌'),
-                        SizedBox(
-                          height: 20,
-                        ),
+                        SizedBox(height: 20),
                         viewModel.state.routineList.isEmpty
                             ? Expanded(
-                          child: Center(
-                            child: Text(
-                              "아직 루틴이 없어요!\n루틴을 추가 해보세요!",
-                              textAlign: TextAlign.center,
-                              style: AppTextStyles.bodyM(),
-                            ),
-                          ),
-                        )
+                              child: Center(
+                                child: Text(
+                                  "아직 루틴이 없어요!\n루틴을 추가 해보세요!",
+                                  textAlign: TextAlign.center,
+                                  style: AppTextStyles.bodyM(),
+                                ),
+                              ),
+                            )
                             : Expanded(
-                          child: SingleChildScrollView(
-                            child: Padding(
-                              padding: const EdgeInsets.all(0),
-                              child: Column(
-                                spacing: 20,
+                              child: ListView(
                                 children:
-                                viewModel.state.routineList
-                                    .map(
-                                      (items) => RoutineCard(
-                                    cardModel: RoutineCardModel(
-                                      onTap: (){
-                                        print(items);
-                                      },
-                                      icons: iconData(items.routineIconName),
-                                      badgeColor: items.routineColor,
-                                      badgeBackGroundColor:
-                                      items.routineColor,
-                                      routineTitle: items.title,
-                                      routineTime: items.time,
-                                    ),
-                                  ),
-                                )
-                                    .toList(),
+                                    viewModel.state.routineList
+                                        .map(
+                                          (items) => Padding(
+                                            padding: const EdgeInsets.only(
+                                              bottom: 20,
+                                            ),
+                                            child: RoutineCard(
+                                              cardModel: RoutineCardModel(
+                                                onTap: () {
+                                                  context.push(Routes.routineDetail, extra: items);
+                                                },
+                                                icons: iconData(
+                                                  items.routineIconName,
+                                                ),
+                                                badgeColor: items.routineColor,
+                                                badgeBackGroundColor:
+                                                    items.routineColor,
+                                                routineTitle: items.title,
+                                                routineTime: items.time,
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                        .toList(),
                               ),
                             ),
-                          ),
-                        ),
                         Container(
                           padding: EdgeInsets.all(16),
                           decoration: BoxDecoration(
@@ -89,7 +89,7 @@ class HomeScreen extends StatelessWidget {
                             children: [
                               Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     '오늘의 감정',
@@ -109,8 +109,8 @@ class HomeScreen extends StatelessWidget {
                                 children: [
                                   Container(
                                     decoration: BoxDecoration(
-                                        color: AppColors.primaryBlue,
-                                        shape: BoxShape.circle
+                                      color: AppColors.primaryBlue,
+                                      shape: BoxShape.circle,
                                     ),
                                     padding: EdgeInsets.all(10),
                                     child: LucideIconWidget(
@@ -121,18 +121,26 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Text("오늘 하루는 어떠셨나요?", style: AppTextStyles.bodyM(),),
-                                      Text("오늘의 감정을 기록해보세요", style: AppTextStyles.bodyS(color: AppColors.grayText),)
+                                      Text(
+                                        "오늘 하루는 어떠셨나요?",
+                                        style: AppTextStyles.bodyM(),
+                                      ),
+                                      Text(
+                                        "오늘의 감정을 기록해보세요",
+                                        style: AppTextStyles.bodyS(
+                                          color: AppColors.grayText,
+                                        ),
+                                      ),
                                     ],
-                                  )
+                                  ),
                                 ],
                               ),
                             ],
                           ),
                         ),
-
                       ],
                     ),
                   ),

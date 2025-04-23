@@ -1,13 +1,23 @@
 class RoutineStepModel {
-  final String iconName;
+  final String icon;
   final String title;
-  final int order;
-  final int durationMinutes;
+  final String time;
 
   const RoutineStepModel({
-    required this.iconName,
+    required this.icon,
     required this.title,
-    required this.order,
-    required this.durationMinutes,
+    required this.time,
   });
+
+  RoutineStepModel copyWith({
+    String? icon,
+    String? title,
+    String? time,
+  }) {
+    return RoutineStepModel(
+      icon: icon ?? this.icon,
+      title: title ?? this.title,
+      time: time ?? this.time,
+    );
+  }
 }
