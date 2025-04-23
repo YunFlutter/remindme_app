@@ -243,12 +243,12 @@ class RoutineAddScreen extends StatelessWidget {
                                   children: [
                                     // Icon(iconData(step.iconName), size: 24),
                                     LucideIconWidget(
-                                      icon: getLucideIconData(step.icon),
+                                      icon: getLucideIconData(step["icon"]),
                                       size: 24,
                                     ),
                                     const SizedBox(width: 12),
-                                    Expanded(child: Text(step.title)),
-                                    Text('${step.time}분'),
+                                    Expanded(child: Text(step["title"])),
+                                    Text('${step['time']}분'),
                                     IconButton(
                                       onPressed:
                                           () => viewModel.removeStep(index),

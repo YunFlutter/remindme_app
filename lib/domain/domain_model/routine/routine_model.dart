@@ -48,4 +48,9 @@ class RoutineModel {
       lastCompletedDate: lastCompletedDate ?? this.lastCompletedDate,
     );
   }
+
+  @override
+  String toString() {
+    return 'RoutineModel{title: $title, steps: $steps, badgeColor: $badgeColor, routineColor: $routineColor, time: $time, routineIconName: $routineIconName, isCompletedToday: $isCompletedToday, isFavorite: $isFavorite, tags: $tags, lastCompletedDate: $lastCompletedDate}';
+  }
 }

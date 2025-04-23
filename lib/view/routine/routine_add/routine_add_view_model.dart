@@ -56,11 +56,11 @@ class RoutineAddViewModel with ChangeNotifier {
     final currentSteps = _state.steps;
     final newOrder = currentSteps.length;
 
-    final newStep = RoutineStepModel(
-      title: title,
-      icon: iconName,
-      time: durationMinutes.toString(),
-    );
+    final newStep = {
+      'title': title,
+      'icon': iconName,
+      'time': durationMinutes.toString(),
+    };
 
     _state = _state.copyWith(steps: [...currentSteps, newStep]);
     notifyListeners();
@@ -69,23 +69,8 @@ class RoutineAddViewModel with ChangeNotifier {
   void removeStep(int index) {
     final updatedSteps = List<RoutineStepModel>.from(_state.steps)
       ..removeAt(index);
-
-    // 순서 재정렬
-    final reordered =
-        updatedSteps.asMap().entries.map((e) {
-          final i = e.key;
-          final step = e.value;
-          return RoutineStepModel(
-            title: step.title,
-            icon: step.icon,
-            time: step.time.toString(),
-          );
-        }).toList();
-
-    _state = _state.copyWith(steps: reordered);
     notifyListeners();
   }
-
 
   Future<void> saveRoutine({required BuildContext context}) async {
     if (state.title.trim().isEmpty ||
@@ -110,7 +95,7 @@ class RoutineAddViewModel with ChangeNotifier {
 
     final routine = RoutineModel(
       title: state.title,
-      steps: [],
+      steps: state.steps,
       badgeColor: state.badgeColor,
       routineColor: state.routineColor,
       time: state.time,

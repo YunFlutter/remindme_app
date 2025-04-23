@@ -19,7 +19,7 @@ class RoutineAddState with _$RoutineAddState {
   @override
   final bool isSubmitting;
   @override
-  final List<RoutineStepModel> steps;
+  final List<Map<String,dynamic>> steps;
   @override
   final bool isSuccess;
   @override
@@ -44,7 +44,7 @@ class RoutineAddState with _$RoutineAddState {
     this.isAnimatedVisible = true,
     this.isSubmitting = false,
     this.isSuccess = false,
-    this.steps = const <RoutineStepModel>[],
+    this.steps = const [],
     this.routineIconNames = const [
       'sun', // 기상, 아침 루틴
       'coffee', // 여유 시간, 휴식 루틴
