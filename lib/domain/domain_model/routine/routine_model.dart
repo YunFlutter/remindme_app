@@ -24,4 +24,30 @@ class RoutineModel {
     this.tags = const [],
     this.lastCompletedDate,
   });
+
+  RoutineModel copyWith({
+    String? title,
+    List<RoutineStepModel>? steps,
+    String? badgeColor,
+    String? routineColor,
+    String? time,
+    String? routineIconName,
+    bool? isCompletedToday,
+    bool? isFavorite,
+    List<String>? tags,
+    DateTime? lastCompletedDate,
+  }) {
+    return RoutineModel(
+      title: title ?? this.title,
+      steps: steps ?? this.steps,
+      badgeColor: badgeColor ?? this.badgeColor,
+      routineColor: routineColor ?? this.routineColor,
+      time: time ?? this.time,
+      routineIconName: routineIconName ?? this.routineIconName,
+      isCompletedToday: isCompletedToday ?? this.isCompletedToday,
+      isFavorite: isFavorite ?? this.isFavorite,
+      tags: tags ?? this.tags,
+      lastCompletedDate: lastCompletedDate ?? this.lastCompletedDate,
+    );
+  }
 }
