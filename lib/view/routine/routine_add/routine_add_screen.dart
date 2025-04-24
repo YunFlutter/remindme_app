@@ -46,7 +46,7 @@ class RoutineAddScreen extends StatelessWidget {
                       ),
                     ),
                     builder:
-                        (context) => RoutineStepBottomSheet(viewModel: viewModel),
+                        (context) => RoutineStepBottomSheet(viewModel: viewModel,),
                   ),
                   icon: LucideIconWidget(
                     icon: LucideIcons.calendarPlus,
@@ -76,10 +76,9 @@ class RoutineAddScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Text('시작 시간', style: AppTextStyles.caption()),
+                        Text('시작 시간(ex:17:00)', style: AppTextStyles.caption()),
                         CustomTextField(
                           onChangeEvent: viewModel.updateTime,
-
                         ),
                       ],
                     ),

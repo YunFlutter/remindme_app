@@ -94,6 +94,7 @@ class RoutineAddViewModel with ChangeNotifier {
     notifyListeners();
 
     final routine = RoutineModel(
+      id: -1, // 또는 생략 (자동 부여용)
       title: state.title,
       steps: state.steps,
       badgeColor: state.badgeColor,
@@ -103,7 +104,6 @@ class RoutineAddViewModel with ChangeNotifier {
     );
 
     final result = await _routineRepository.addRoutine(routine);
-
     switch (result) {
       case Success():
         context.pop();

@@ -20,3 +20,15 @@ Color adjustColorBrightness(Color color) {
         .toColor();
   }
 }
+
+
+Color getContrastingTextColor(Color backgroundColor) {
+  // 밝기 계산 (standard formula)
+  double brightness = (backgroundColor.red * 299 +
+      backgroundColor.green * 587 +
+      backgroundColor.blue * 114) /
+      1000;
+
+  // 밝기가 128보다 크면 어두운 색 (검정), 아니면 밝은 색 (흰색)
+  return brightness > 128 ? Colors.black : Colors.white;
+}

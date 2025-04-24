@@ -9,6 +9,7 @@ RoutineDataModel routineToDataModel(RoutineModel model) {
     badgeColor: model.badgeColor,
     routineColor: model.routineColor,
     steps: model.steps,
+    id: model.id.toString(), // id 추가
   );
 }
 
@@ -20,5 +21,6 @@ RoutineModel dataModelToRoutine(RoutineDataModel model) {
     badgeColor: model.badgeColor,
     routineColor: model.routineColor,
     steps: model.steps,
+    id: int.parse(model.id), // id 추가
   );
 }

@@ -58,13 +58,14 @@ class HomeScreen extends StatelessWidget {
                                             ),
                                             child: RoutineCard(
                                               cardModel: RoutineCardModel(
+                                                index: viewModel.state.routineList.indexOf(items),
                                                 onTap: () {
                                                   context.push(Routes.routineDetail, extra: items);
                                                 },
                                                 icons: iconData(
                                                   items.routineIconName,
                                                 ),
-                                                badgeColor: items.routineColor,
+                                                badgeColor: items.badgeColor,
                                                 badgeBackGroundColor:
                                                     items.routineColor,
                                                 routineTitle: items.title,

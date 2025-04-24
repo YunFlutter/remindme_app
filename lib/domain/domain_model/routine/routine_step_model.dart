@@ -20,4 +20,18 @@ class RoutineStepModel {
       time: time ?? this.time,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {"icon": this.icon, "title": this.title, "time": this.time,};
+  }
+
+  factory RoutineStepModel.fromJson(Map<String, dynamic> json) {
+    return RoutineStepModel(
+      icon: json["icon"], title: json["title"], time: json["time"],);
+  }
+
+
+
+
+
 }

@@ -17,7 +17,7 @@ void diSetUp() {
     UserRepositoryImpl(userBox: HiveBox().userBox),
   );
   getIt.registerSingleton<RoutineRepository>(
-    RoutineRepositoryImpl(routineBox: HiveBox().routineBox),
+    RoutineRepositoryImpl(box: HiveBox().routineBox),
   );
 
   getIt.registerFactory<SignUpViewModel>(

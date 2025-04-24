@@ -7,9 +7,9 @@ import 'package:remindme_app/core/themes/app_text_styles.dart';
 import 'package:remindme_app/core/widgets/primary_button.dart';
 import 'package:remindme_app/core/widgets/routine_card/routine_card_model.dart';
 
-class RoutineCard extends StatelessWidget {
+class RoutineCardNotButton extends StatelessWidget {
   final RoutineCardModel cardModel;
-  const RoutineCard({super.key, required this.cardModel});
+  const RoutineCardNotButton({super.key, required this.cardModel});
 
   @override
   Widget build(BuildContext context) {
@@ -74,16 +74,6 @@ class RoutineCard extends StatelessWidget {
                         ],
                       ),
                     ],
-                  ),
-                ),
-                Flexible(
-                  flex: 1,
-                  child: PrimaryButton(
-                    buttonText: '시작하기',
-                    buttonActive: true,
-                    buttonColor: cardModel.badgeColor,
-                    textColor: getContrastingTextColor(cardModel.badgeColor),
-                    borderRadius: 80,
                   ),
                 ),
               ],

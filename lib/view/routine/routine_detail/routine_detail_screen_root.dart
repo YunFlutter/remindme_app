@@ -20,6 +20,7 @@ class RoutineDetailScreenRoot extends StatelessWidget {
         return RoutineDetailScreen(
           state: viewModel.state,
           routineModel: routineModel,
+          onAction: viewModel.onAction,
         );
       },
     );

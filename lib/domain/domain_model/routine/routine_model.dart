@@ -1,4 +1,5 @@
 class RoutineModel {
+  final int id;
   final String title;
   final List<Map<String, dynamic>> steps;
   final String badgeColor;
@@ -11,6 +12,7 @@ class RoutineModel {
   final DateTime? lastCompletedDate;
 
   const RoutineModel({
+    required this.id,
     required this.title,
     required this.steps,
     required this.badgeColor,
@@ -34,8 +36,10 @@ class RoutineModel {
     bool? isFavorite,
     List<String>? tags,
     DateTime? lastCompletedDate,
+    int? id,
   }) {
     return RoutineModel(
+      id: id ?? -1,
       title: title ?? this.title,
       steps: steps ?? this.steps,
       badgeColor: badgeColor ?? this.badgeColor,
@@ -51,6 +55,6 @@ class RoutineModel {
 
   @override
   String toString() {
-    return 'RoutineModel{title: $title, steps: $steps, badgeColor: $badgeColor, routineColor: $routineColor, time: $time, routineIconName: $routineIconName, isCompletedToday: $isCompletedToday, isFavorite: $isFavorite, tags: $tags, lastCompletedDate: $lastCompletedDate}';
+    return 'RoutineModel{id: $id title: $title, steps: $steps, badgeColor: $badgeColor, routineColor: $routineColor, time: $time, routineIconName: $routineIconName, isCompletedToday: $isCompletedToday, isFavorite: $isFavorite, tags: $tags, lastCompletedDate: $lastCompletedDate}';
   }
 }
