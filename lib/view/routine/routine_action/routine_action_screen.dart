@@ -11,6 +11,7 @@ import 'package:remind_me_app/view/routine/routine_action/routine_action_state.d
 import 'package:remind_me_app/view/routine/routine_action/routine_action_event.dart';
 import 'package:remind_me_app/domain/domain_model/routine/routine_model.dart'; // 모델 import
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:remind_me_app/view/routine/routine_action/show_routine_complete_dialog.dart';
 
 class RoutineActionScreen extends StatelessWidget {
   final RoutineActionState state;
@@ -138,13 +139,15 @@ class RoutineActionScreen extends StatelessWidget {
                     buttonActive: state.isStarted,
                     onTap: () {
                       onAction(const RoutineActionEvent.nextStep());
+
                     },
                   ),
-                if (state.isStarted && state.currentStepIndex == steps.length - 1)
+                if (state.currentStepIndex == steps.length -1)
                   PrimaryButton(
                     buttonText: '루틴 종료',
-                    buttonActive: state.isStarted,
+                    buttonActive: state.currentStepIndex == steps.length -1,
                     onTap: () {
+                      showRoutineCompleteDialog(context,routineId: model.id.toString());
                     },
                   ),
                 const SizedBox(height: 20),

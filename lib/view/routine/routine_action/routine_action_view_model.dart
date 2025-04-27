@@ -45,9 +45,10 @@ class RoutineActionViewModel with ChangeNotifier {
 
   Future<void> _handleNextStep() async {
     final currentPage = pageController.page?.round() ?? 0;
-
+    _state = _state.copyWith(currentStepIndex: currentPage);
+    notifyListeners();
     if (currentPage < steps.length - 1) {
-      final nextPage = currentPage + 1;
+      final nextPage = state.currentStepIndex + 1;
 
       await pageController.animateToPage(
         nextPage,
@@ -63,12 +64,10 @@ class RoutineActionViewModel with ChangeNotifier {
       );
       notifyListeners();
     }
+
   }
 
-  void onPageChanged(int index) {
-    _state = _state.copyWith(currentStepIndex: index);
-    notifyListeners();
-  }
+
 
   void _handlePreviousStep() {
     if (_state.currentStepIndex > 0) {

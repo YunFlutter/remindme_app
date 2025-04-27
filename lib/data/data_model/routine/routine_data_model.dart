@@ -1,3 +1,5 @@
+
+
 import 'package:hive_ce/hive.dart';
 
 part 'routine_data_model.g.dart';
@@ -25,6 +27,12 @@ class RoutineDataModel {
   @HiveField(6)
   final String id;
 
+  @HiveField(7)
+  final bool isCompletedToday; // ⭐ 오늘 완료 여부
+
+  @HiveField(8)
+  final DateTime? lastCompletedDate; // ⭐ 마지막 완료한 날짜
+
   RoutineDataModel({
     required this.title,
     required this.time,
@@ -33,6 +41,8 @@ class RoutineDataModel {
     required this.routineColor,
     required this.steps,
     required this.id,
+    this.isCompletedToday = false,
+    this.lastCompletedDate,
   });
 
   RoutineDataModel copyWith({
@@ -43,6 +53,8 @@ class RoutineDataModel {
     String? routineColor,
     List<Map<String, dynamic>>? steps,
     String? id,
+    bool? isCompletedToday,
+    DateTime? lastCompletedDate,
   }) {
     return RoutineDataModel(
       title: title ?? this.title,
@@ -52,6 +64,8 @@ class RoutineDataModel {
       routineColor: routineColor ?? this.routineColor,
       steps: steps ?? this.steps,
       id: id ?? this.id,
+      isCompletedToday: isCompletedToday ?? this.isCompletedToday,
+      lastCompletedDate: lastCompletedDate ?? this.lastCompletedDate,
     );
   }
 }

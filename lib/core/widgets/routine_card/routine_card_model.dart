@@ -9,6 +9,7 @@ class RoutineCardModel {
   final Color badgeBackGroundColor;
   final String routineTitle;
   final String routineTime;
+  final bool isCompletedToday; // ⭐ 완료 여부 추가
   final VoidCallback? onTap;
 
   RoutineCardModel({
@@ -18,7 +19,8 @@ class RoutineCardModel {
     required String badgeBackGroundColor,
     required this.routineTitle,
     required this.routineTime,
+    required this.isCompletedToday, // ⭐ 필수 추가
     this.onTap,
-  }) : badgeColor = hexToColor(badgeColor),
-       badgeBackGroundColor = hexToColor(badgeBackGroundColor);
+  })  : badgeColor = hexToColor(badgeColor),
+        badgeBackGroundColor = hexToColor(badgeBackGroundColor);
 }

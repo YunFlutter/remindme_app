@@ -108,6 +108,7 @@ class _RoutineDetailScreenState extends State<RoutineDetailScreen> {
             // 루틴 아이콘과 제목
             RoutineCardNotButton(
               cardModel: RoutineCardModel(
+                isCompletedToday: widget.routineModel.isCompletedToday,
                 index: widget.routineModel.id,
                 icons: getLucideIconData(widget.routineModel.routineIconName),
                 badgeColor: widget.routineModel.badgeColor,

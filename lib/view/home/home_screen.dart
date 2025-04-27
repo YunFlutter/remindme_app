@@ -75,6 +75,7 @@ class HomeScreen extends StatelessWidget {
                                                     items.routineColor,
                                                 routineTitle: items.title,
                                                 routineTime: items.time,
+                                                isCompletedToday: items.isCompletedToday,
                                               ),
                                             ),
                                           ),
