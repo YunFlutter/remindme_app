@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:remind_me_app/core/themes/app_colors.dart';
 
@@ -11,6 +12,7 @@ class CustomTextField extends StatefulWidget {
     this.onSubmitEvent,
     this.onChangeEvent,
     this.keyBoardType = TextInputType.text,
+    this.inputFormatters
   });
 
   final FocusNode? focusNode;
@@ -18,6 +20,7 @@ class CustomTextField extends StatefulWidget {
   final void Function(String text)? onSubmitEvent;
   final void Function(String text)? onChangeEvent;
   final TextInputType keyBoardType;
+  final List<TextInputFormatter>? inputFormatters;
   final bool suffixIconDisplay;
 
   @override
@@ -34,6 +37,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       obscureText: widget.suffixIconDisplay == false ? false : obscureText,
       focusNode: widget.focusNode,
       keyboardType: widget.keyBoardType,
+      inputFormatters: widget.inputFormatters,
       controller: widget.textEditingController,
       onSubmitted: widget.onSubmitEvent ?? (text) {},
       decoration: InputDecoration(

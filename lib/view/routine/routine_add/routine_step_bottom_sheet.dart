@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:remind_me_app/core/service/icon_mapper.dart';
@@ -68,6 +69,9 @@ class _RoutineStepBottomSheetState extends State<RoutineStepBottomSheet> {
               Text('소요 시간 (분)', style: AppTextStyles.caption()),
               CustomTextField(
                 focusNode: FocusNode(),
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
                 textEditingController: _durationController,
                 keyBoardType: TextInputType.number,
               ),
