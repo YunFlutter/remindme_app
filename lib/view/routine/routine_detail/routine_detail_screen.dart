@@ -108,7 +108,6 @@ class _RoutineDetailScreenState extends State<RoutineDetailScreen> {
             // 루틴 아이콘과 제목
             RoutineCardNotButton(
               cardModel: RoutineCardModel(
-
                 index: widget.routineModel.id,
                 icons: getLucideIconData(widget.routineModel.routineIconName),
                 badgeColor: widget.routineModel.badgeColor,
@@ -184,6 +183,7 @@ class _RoutineDetailScreenState extends State<RoutineDetailScreen> {
                 context.go('/routine-active', extra: widget.state.model);
               },
             ),
+            const SizedBox(height: 20),
             const SizedBox(height: 20),
           ],
         ),

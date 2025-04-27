@@ -69,9 +69,7 @@ class HomeScreen extends StatelessWidget {
                                                     extra: items,
                                                   );
                                                 },
-                                                icons: iconData(
-                                                  items.routineIconName,
-                                                ),
+                                                icons: getLucideIconData( items.routineIconName),
                                                 badgeColor: items.badgeColor,
                                                 badgeBackGroundColor:
                                                     items.routineColor,
