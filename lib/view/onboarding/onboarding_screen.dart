@@ -39,7 +39,7 @@ class OnboardingScreen extends StatelessWidget {
                     icon: LucideIconWidget(icon: LucideIcons.chevronsLeft),
                   ),
                 ),
-              if (viewModel.state.pageInt != 2)
+              if (viewModel.state.pageInt == 0)
                 Align(
                   alignment: Alignment.centerRight,
                   child: IconButton(
@@ -50,7 +50,7 @@ class OnboardingScreen extends StatelessWidget {
                   ),
                 ),
 
-              if (viewModel.state.pageInt == 2)
+              if (viewModel.state.pageInt == 1)
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
@@ -68,7 +68,7 @@ class OnboardingScreen extends StatelessWidget {
 
               Align(alignment: Alignment.bottomCenter, child: indicator()),
 
-              if (viewModel.state.pageInt != 2)
+              if (viewModel.state.pageInt != 1)
                 Align(
                   alignment: Alignment.topRight,
                   child: Container(
@@ -97,10 +97,8 @@ class OnboardingScreen extends StatelessWidget {
   Widget buildPage({required BuildContext context, required int index}) {
     switch (index) {
       case 0:
-        return onboardingFirst(valueKey: const ValueKey(0), context: context);
-      case 1:
         return onboardingSecond(valueKey: const ValueKey(1), context: context);
-      case 2:
+      case 1:
         return onboardingThird(valueKey: const ValueKey(2), context: context);
       default:
         return Container(
@@ -182,7 +180,7 @@ class OnboardingScreen extends StatelessWidget {
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: List.generate(3, (index) {
+          children: List.generate(2, (index) {
             final isSelected = index == viewModel.state.pageInt;
             return AnimatedContainer(
               duration: const Duration(milliseconds: 300),
