@@ -50,8 +50,19 @@ class RoutineDetailViewModel with ChangeNotifier {
         notifyListeners();
         break;
       case addRoutineStep():
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        final result = await _routineRepository.addStepToRoutine(
+          routineId: action.routineId,
+          newStep: action.newStep,
+        );
+        switch (result) {
+          case Success<RoutineModel, String>():
+            final RoutineModel newModel = result.data;
+            _state = state.copyWith(model: newModel, stepList: newModel.steps);
+            notifyListeners();
+
+          case Error<RoutineModel, String>():
+            print(Error<RoutineModel, String>);
+        }
     }
   }
 }

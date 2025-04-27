@@ -7,9 +7,11 @@ import 'package:remind_me_app/core/service/hex_to_color.dart';
 import 'package:remind_me_app/core/service/icon_mapper.dart';
 import 'package:remind_me_app/core/themes/app_colors.dart';
 import 'package:remind_me_app/core/themes/app_text_styles.dart';
+import 'package:remind_me_app/core/widgets/primary_button.dart';
 import 'package:remind_me_app/core/widgets/routine_card/routine_card_model.dart';
 import 'package:remind_me_app/core/widgets/routine_card/routine_card_not_button.dart';
 import 'package:remind_me_app/domain/domain_model/routine/routine_model.dart';
+import 'package:remind_me_app/domain/domain_model/routine/routine_step_model.dart';
 import 'package:remind_me_app/view/routine/routine_add/routine_step_bottom_sheet.dart';
 import 'package:remind_me_app/view/routine/routine_detail/routine_detail_action.dart';
 import 'package:remind_me_app/view/routine/routine_detail/routine_detail_state.dart';
@@ -69,7 +71,16 @@ class _RoutineDetailScreenState extends State<RoutineDetailScreen> {
                   ),
                   builder:
                       (context) => RoutineStepBottomSheet(viewModel: getIt()),
-                ),
+                ).then((value) {
+                  if (value != null) {
+                    widget.onAction(
+                      RoutineDetailAction.addRoutineStep(
+                        routineId: widget.routineModel.id,
+                        newStep: value,
+                      ),
+                    );
+                  }
+                }),
             icon: LucideIconWidget(
               icon: LucideIcons.calendarPlus,
               color: AppColors.primaryBlue,
@@ -163,6 +174,15 @@ class _RoutineDetailScreenState extends State<RoutineDetailScreen> {
                 },
               ),
             ),
+            const SizedBox(height: 20),
+            PrimaryButton(
+              buttonText: '루틴 시작하기',
+              buttonActive: true,
+              onTap: () {
+                print(widget.routineModel.steps);
+              },
+            ),
+            const SizedBox(height: 20),
           ],
         ),
       ),

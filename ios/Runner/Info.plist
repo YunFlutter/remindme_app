@@ -45,5 +45,7 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSLocalNetworkUsageDescription</key>
+    <string>이 앱은 네트워크를 통해 디버깅과 통신을 위해 로컬 네트워크에 접근합니다.</string>
 </dict>
 </plist>

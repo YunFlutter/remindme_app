@@ -5,6 +5,7 @@ import 'package:remind_me_app/core/service/icon_mapper.dart';
 import 'package:remind_me_app/core/themes/app_text_styles.dart';
 import 'package:remind_me_app/core/widgets/custom_text_field.dart';
 import 'package:remind_me_app/core/widgets/ghost_button.dart';
+import 'package:remind_me_app/domain/domain_model/routine/routine_step_model.dart';
 import 'package:remind_me_app/view/routine/routine_add/routine_add_view_model.dart';
 import 'package:remind_me_app/view/routine/routine_detail/routine_detail_view_model.dart';
 
@@ -125,7 +126,7 @@ class _RoutineStepBottomSheetState extends State<RoutineStepBottomSheet> {
                     iconName: _selectedIcon,
                     durationMinutes: duration,
                   );
-                  Navigator.of(context).pop();
+                  Navigator.of(context).pop(RoutineStepModel(icon: _selectedIcon, title: title, time: duration.toString()));
                 } else {
                   Fluttertoast.showToast(msg: "앗! 스텝 제목(이름)이 입력이 안되어 었어요");
                 }
