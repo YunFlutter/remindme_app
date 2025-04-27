@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:remindme_app/core/themes/app_colors.dart';
-import 'package:remindme_app/core/themes/app_shadows.dart';
-import 'package:remindme_app/core/themes/app_text_styles.dart';
+import 'package:remind_me_app/core/themes/app_colors.dart';
+import 'package:remind_me_app/core/themes/app_shadows.dart';
+import 'package:remind_me_app/core/themes/app_text_styles.dart';
 
 class PrimaryButton extends StatelessWidget {
   final String buttonText;
@@ -34,7 +34,10 @@ class PrimaryButton extends StatelessWidget {
         decoration: BoxDecoration(
           boxShadow: [AppShadows.light],
           borderRadius: BorderRadius.circular(borderRadius ?? 16),
-          color: buttonActive ? buttonColor ?? AppColors.primaryBlue : AppColors.grayDisabled,
+          color:
+              buttonActive
+                  ? buttonColor ?? AppColors.primaryBlue
+                  : AppColors.grayDisabled,
         ),
         child: InkWell(
           onTap: buttonActive ? (onTap ?? () {}) : null,
@@ -42,7 +45,9 @@ class PrimaryButton extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 16),
             child: Text(
               buttonText,
-              style: AppTextStyles.buttonText(color: textColor ?? AppColors.baseWhite),
+              style: AppTextStyles.buttonText(
+                color: textColor ?? AppColors.baseWhite,
+              ),
               textAlign: TextAlign.center,
             ),
           ),

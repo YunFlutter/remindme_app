@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
-import 'package:remindme_app/core/constants/adjust_color_brightness.dart';
-import 'package:remindme_app/core/themes/app_colors.dart';
-import 'package:remindme_app/core/themes/app_shadows.dart';
-import 'package:remindme_app/core/themes/app_text_styles.dart';
-import 'package:remindme_app/core/widgets/primary_button.dart';
-import 'package:remindme_app/core/widgets/routine_card/routine_card_model.dart';
+import 'package:remind_me_app/core/constants/adjust_color_brightness.dart';
+import 'package:remind_me_app/core/themes/app_colors.dart';
+import 'package:remind_me_app/core/themes/app_shadows.dart';
+import 'package:remind_me_app/core/themes/app_text_styles.dart';
+import 'package:remind_me_app/core/widgets/primary_button.dart';
+import 'package:remind_me_app/core/widgets/routine_card/routine_card_model.dart';
 
 class RoutineCardNotButton extends StatelessWidget {
   final RoutineCardModel cardModel;
@@ -22,9 +22,7 @@ class RoutineCardNotButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: cardModel.badgeBackGroundColor,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: AppColors.grayLine
-          ),
+          border: Border.all(color: AppColors.grayLine),
           boxShadow: [AppShadows.light],
         ),
         child: InkWell(

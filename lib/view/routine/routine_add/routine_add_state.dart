@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:remindme_app/domain/domain_model/routine/routine_step_model.dart';
+import 'package:remind_me_app/domain/domain_model/routine/routine_step_model.dart';
 
 part 'routine_add_state.freezed.dart';
 
@@ -19,7 +19,7 @@ class RoutineAddState with _$RoutineAddState {
   @override
   final bool isSubmitting;
   @override
-  final List<Map<String,dynamic>> steps;
+  final List<Map<String, dynamic>> steps;
   @override
   final bool isSuccess;
   @override

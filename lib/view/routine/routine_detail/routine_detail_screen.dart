@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart'; // 아이콘용
-import 'package:remindme_app/core/constants/adjust_color_brightness.dart';
-import 'package:remindme_app/core/service/di_setup.dart';
-import 'package:remindme_app/core/service/hex_to_color.dart';
-import 'package:remindme_app/core/service/icon_mapper.dart';
-import 'package:remindme_app/core/themes/app_colors.dart';
-import 'package:remindme_app/core/themes/app_text_styles.dart';
-import 'package:remindme_app/core/widgets/routine_card/routine_card_model.dart';
-import 'package:remindme_app/core/widgets/routine_card/routine_card_not_button.dart';
-import 'package:remindme_app/domain/domain_model/routine/routine_model.dart';
-import 'package:remindme_app/view/routine/routine_add/routine_step_bottom_sheet.dart';
-import 'package:remindme_app/view/routine/routine_detail/routine_detail_action.dart';
-import 'package:remindme_app/view/routine/routine_detail/routine_detail_state.dart';
+import 'package:remind_me_app/core/constants/adjust_color_brightness.dart';
+import 'package:remind_me_app/core/service/di_setup.dart';
+import 'package:remind_me_app/core/service/hex_to_color.dart';
+import 'package:remind_me_app/core/service/icon_mapper.dart';
+import 'package:remind_me_app/core/themes/app_colors.dart';
+import 'package:remind_me_app/core/themes/app_text_styles.dart';
+import 'package:remind_me_app/core/widgets/routine_card/routine_card_model.dart';
+import 'package:remind_me_app/core/widgets/routine_card/routine_card_not_button.dart';
+import 'package:remind_me_app/domain/domain_model/routine/routine_model.dart';
+import 'package:remind_me_app/view/routine/routine_add/routine_step_bottom_sheet.dart';
+import 'package:remind_me_app/view/routine/routine_detail/routine_detail_action.dart';
+import 'package:remind_me_app/view/routine/routine_detail/routine_detail_state.dart';
 
 class RoutineDetailScreen extends StatefulWidget {
   final RoutineDetailState state;
@@ -59,17 +59,17 @@ class _RoutineDetailScreenState extends State<RoutineDetailScreen> {
           IconButton(
             onPressed:
                 () => showModalBottomSheet(
-              context: context,
-              backgroundColor: AppColors.baseWhite,
-              isScrollControlled: true,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(24),
+                  context: context,
+                  backgroundColor: AppColors.baseWhite,
+                  isScrollControlled: true,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(24),
+                    ),
+                  ),
+                  builder:
+                      (context) => RoutineStepBottomSheet(viewModel: getIt()),
                 ),
-              ),
-              builder:
-                  (context) => RoutineStepBottomSheet(viewModel: getIt()),
-            ),
             icon: LucideIconWidget(
               icon: LucideIcons.calendarPlus,
               color: AppColors.primaryBlue,

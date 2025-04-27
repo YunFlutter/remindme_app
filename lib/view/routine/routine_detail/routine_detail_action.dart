@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:remindme_app/domain/domain_model/routine/routine_model.dart';
-import 'package:remindme_app/domain/domain_model/routine/routine_step_model.dart';
+import 'package:remind_me_app/domain/domain_model/routine/routine_model.dart';
+import 'package:remind_me_app/domain/domain_model/routine/routine_step_model.dart';
 part 'routine_detail_action.freezed.dart';
 
 @freezed

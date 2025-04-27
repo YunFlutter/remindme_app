@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
-import 'package:remindme_app/core/themes/app_colors.dart';
+import 'package:remind_me_app/core/themes/app_colors.dart';
 
 class CustomTextField extends StatefulWidget {
   CustomTextField({

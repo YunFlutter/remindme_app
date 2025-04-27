@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
-import 'package:remindme_app/core/constants/lucide_icon_data_with_keywords.dart';
-import 'package:remindme_app/core/widgets/icon_select_picker/icon_select_picker_view_model.dart';
-import 'package:remindme_app/core/widgets/custom_text_field.dart';
+import 'package:remind_me_app/core/constants/lucide_icon_data_with_keywords.dart';
+import 'package:remind_me_app/core/widgets/icon_select_picker/icon_select_picker_view_model.dart';
+import 'package:remind_me_app/core/widgets/custom_text_field.dart';
 
 class IconSelectPickerScreen extends StatefulWidget {
   final IconSelectPickerViewModel viewModel;

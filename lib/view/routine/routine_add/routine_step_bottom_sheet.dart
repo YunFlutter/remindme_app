@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
-import 'package:remindme_app/core/service/icon_mapper.dart';
-import 'package:remindme_app/core/themes/app_text_styles.dart';
-import 'package:remindme_app/core/widgets/custom_text_field.dart';
-import 'package:remindme_app/core/widgets/ghost_button.dart';
-import 'package:remindme_app/view/routine/routine_add/routine_add_view_model.dart';
-import 'package:remindme_app/view/routine/routine_detail/routine_detail_view_model.dart';
+import 'package:remind_me_app/core/service/icon_mapper.dart';
+import 'package:remind_me_app/core/themes/app_text_styles.dart';
+import 'package:remind_me_app/core/widgets/custom_text_field.dart';
+import 'package:remind_me_app/core/widgets/ghost_button.dart';
+import 'package:remind_me_app/view/routine/routine_add/routine_add_view_model.dart';
+import 'package:remind_me_app/view/routine/routine_detail/routine_detail_view_model.dart';
 
 class RoutineStepBottomSheet extends StatefulWidget {
   final RoutineAddViewModel viewModel;
-  const RoutineStepBottomSheet({super.key, required this.viewModel,  });
+  const RoutineStepBottomSheet({super.key, required this.viewModel});
 
   @override
   State<RoutineStepBottomSheet> createState() => _RoutineStepBottomSheetState();
@@ -126,7 +126,7 @@ class _RoutineStepBottomSheetState extends State<RoutineStepBottomSheet> {
                     durationMinutes: duration,
                   );
                   Navigator.of(context).pop();
-                }else{
+                } else {
                   Fluttertoast.showToast(msg: "앗! 스텝 제목(이름)이 입력이 안되어 었어요");
                 }
               },

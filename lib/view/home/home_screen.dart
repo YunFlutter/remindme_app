@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
-import 'package:remindme_app/core/service/icon_mapper.dart';
-import 'package:remindme_app/core/themes/app_colors.dart';
-import 'package:remindme_app/core/themes/app_text_styles.dart';
-import 'package:remindme_app/core/widgets/routine_card/routine_card.dart';
-import 'package:remindme_app/core/widgets/routine_card/routine_card_model.dart';
-import 'package:remindme_app/routes/routes.dart';
-import 'package:remindme_app/view/home/home_view_model.dart';
+import 'package:remind_me_app/core/service/icon_mapper.dart';
+import 'package:remind_me_app/core/themes/app_colors.dart';
+import 'package:remind_me_app/core/themes/app_text_styles.dart';
+import 'package:remind_me_app/core/widgets/routine_card/routine_card.dart';
+import 'package:remind_me_app/core/widgets/routine_card/routine_card_model.dart';
+import 'package:remind_me_app/routes/routes.dart';
+import 'package:remind_me_app/view/home/home_view_model.dart';
 
 class HomeScreen extends StatelessWidget {
   final HomeViewModel viewModel;
@@ -58,9 +58,15 @@ class HomeScreen extends StatelessWidget {
                                             ),
                                             child: RoutineCard(
                                               cardModel: RoutineCardModel(
-                                                index: viewModel.state.routineList.indexOf(items),
+                                                index: viewModel
+                                                    .state
+                                                    .routineList
+                                                    .indexOf(items),
                                                 onTap: () {
-                                                  context.push(Routes.routineDetail, extra: items);
+                                                  context.push(
+                                                    Routes.routineDetail,
+                                                    extra: items,
+                                                  );
                                                 },
                                                 icons: iconData(
                                                   items.routineIconName,

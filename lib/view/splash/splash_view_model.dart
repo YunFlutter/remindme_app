@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:remindme_app/core/hive/hive_box.dart';
-import 'package:remindme_app/view/splash/splash_state.dart';
+import 'package:remind_me_app/core/hive/hive_box.dart';
+import 'package:remind_me_app/view/splash/splash_state.dart';
 
 class SplashViewModel with ChangeNotifier {
   SplashState _state = SplashState();

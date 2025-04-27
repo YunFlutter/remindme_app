@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
-import 'package:remindme_app/core/themes/app_colors.dart';
-import 'package:remindme_app/core/themes/app_text_styles.dart';
-import 'package:remindme_app/core/widgets/custom_text_field.dart';
-import 'package:remindme_app/view/signUp/sign_up_view_model.dart';
+import 'package:remind_me_app/core/themes/app_colors.dart';
+import 'package:remind_me_app/core/themes/app_text_styles.dart';
+import 'package:remind_me_app/core/widgets/custom_text_field.dart';
+import 'package:remind_me_app/view/signUp/sign_up_view_model.dart';
 
 class SignUpScreen extends StatelessWidget {
   final SignUpViewModel viewModel;
@@ -30,9 +30,9 @@ class SignUpScreen extends StatelessWidget {
                     AnimatedSlide(
                       duration: const Duration(milliseconds: 600),
                       offset:
-                      viewModel.state.isTitleVisible
-                          ? Offset.zero
-                          : const Offset(0, 0.2),
+                          viewModel.state.isTitleVisible
+                              ? Offset.zero
+                              : const Offset(0, 0.2),
                       child: Padding(
                         padding: EdgeInsets.only(
                           top: MediaQuery.of(context).padding.top * 2,
@@ -48,9 +48,9 @@ class SignUpScreen extends StatelessWidget {
                     AnimatedSlide(
                       duration: const Duration(milliseconds: 600),
                       offset:
-                      viewModel.state.isFieldVisible
-                          ? Offset.zero
-                          : const Offset(0, 0.2),
+                          viewModel.state.isFieldVisible
+                              ? Offset.zero
+                              : const Offset(0, 0.2),
                       child: Column(
                         spacing: 15,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -60,7 +60,7 @@ class SignUpScreen extends StatelessWidget {
                           CustomTextField(
                             focusNode: viewModel.state.focusNode,
                             textEditingController:
-                            viewModel.state.textEditingController,
+                                viewModel.state.textEditingController,
                             onSubmitEvent: (text) {
                               print("완성 $text");
                             },
@@ -75,9 +75,9 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     child: AnimatedOpacity(
                       opacity:
-                      viewModel.state.textEditingController.text.isNotEmpty
-                          ? 1.0
-                          : 0.0,
+                          viewModel.state.textEditingController.text.isNotEmpty
+                              ? 1.0
+                              : 0.0,
                       duration: Duration(milliseconds: 500),
                       curve: Curves.linear,
                       child: IconButton(

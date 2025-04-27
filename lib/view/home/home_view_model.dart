@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:remindme_app/core/result/result.dart';
-import 'package:remindme_app/core/hive/hive_box.dart';
-import 'package:remindme_app/domain/repository/routine/routine_repository.dart';
-import 'package:remindme_app/domain/repository/user/user_repository.dart';
-import 'package:remindme_app/view/home/home_state.dart';
+import 'package:remind_me_app/core/result/result.dart';
+import 'package:remind_me_app/core/hive/hive_box.dart';
+import 'package:remind_me_app/domain/repository/routine/routine_repository.dart';
+import 'package:remind_me_app/domain/repository/user/user_repository.dart';
+import 'package:remind_me_app/view/home/home_state.dart';
 
 class HomeViewModel with ChangeNotifier {
   RoutineRepository _routineRepository;

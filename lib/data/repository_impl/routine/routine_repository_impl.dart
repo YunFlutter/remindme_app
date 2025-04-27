@@ -1,10 +1,10 @@
 import 'package:hive_ce/hive.dart';
-import 'package:remindme_app/core/result/result.dart';
-import 'package:remindme_app/data/data_model/routine/routine_data_model.dart';
-import 'package:remindme_app/data/mapper/routine/routine_mapper.dart';
-import 'package:remindme_app/domain/domain_model/routine/routine_model.dart';
-import 'package:remindme_app/domain/domain_model/routine/routine_step_model.dart';
-import 'package:remindme_app/domain/repository/routine/routine_repository.dart';
+import 'package:remind_me_app/core/result/result.dart';
+import 'package:remind_me_app/data/data_model/routine/routine_data_model.dart';
+import 'package:remind_me_app/data/mapper/routine/routine_mapper.dart';
+import 'package:remind_me_app/domain/domain_model/routine/routine_model.dart';
+import 'package:remind_me_app/domain/domain_model/routine/routine_step_model.dart';
+import 'package:remind_me_app/domain/repository/routine/routine_repository.dart';
 
 class RoutineRepositoryImpl implements RoutineRepository {
   final Box<RoutineDataModel> _box;

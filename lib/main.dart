@@ -1,11 +1,9 @@
-
 import 'package:flutter/material.dart';
-import 'package:remindme_app/core/hive/hive_init.dart';
-import 'package:remindme_app/core/service/di_setup.dart';
-import 'package:remindme_app/routes/router.dart';
+import 'package:remind_me_app/core/hive/hive_init.dart';
+import 'package:remind_me_app/core/service/di_setup.dart';
+import 'package:remind_me_app/routes/router.dart';
 
-
-void main() async{
+void main() async {
   await initHive();
   diSetUp();
   runApp(RemindMe());

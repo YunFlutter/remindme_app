@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
-import 'package:remindme_app/core/themes/app_colors.dart';
-import 'package:remindme_app/core/themes/app_text_styles.dart';
-import 'package:remindme_app/core/widgets/primary_button.dart';
-import 'package:remindme_app/view/onboarding/onboarding_view_model.dart';
+import 'package:remind_me_app/core/themes/app_colors.dart';
+import 'package:remind_me_app/core/themes/app_text_styles.dart';
+import 'package:remind_me_app/core/widgets/primary_button.dart';
+import 'package:remind_me_app/view/onboarding/onboarding_view_model.dart';
 
 class OnboardingScreen extends StatelessWidget {
   final OnboardingViewModel viewModel;
@@ -57,7 +57,7 @@ class OnboardingScreen extends StatelessWidget {
                     width: MediaQuery.of(context).size.width / 2,
                     padding: EdgeInsets.only(bottom: 70),
                     child: PrimaryButton(
-                      onTap: (){
+                      onTap: () {
                         context.go("/sign-up");
                       },
                       buttonText: '시작하기',

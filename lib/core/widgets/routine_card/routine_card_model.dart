@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:remindme_app/core/constants/adjust_color_brightness.dart';
-import 'package:remindme_app/core/service/hex_to_color.dart';
+import 'package:remind_me_app/core/constants/adjust_color_brightness.dart';
+import 'package:remind_me_app/core/service/hex_to_color.dart';
 
 class RoutineCardModel {
   final int index;
@@ -19,8 +19,6 @@ class RoutineCardModel {
     required this.routineTitle,
     required this.routineTime,
     this.onTap,
-  })  : badgeColor = hexToColor(badgeColor),
-        badgeBackGroundColor = hexToColor(badgeBackGroundColor);
-
-
+  }) : badgeColor = hexToColor(badgeColor),
+       badgeBackGroundColor = hexToColor(badgeBackGroundColor);
 }

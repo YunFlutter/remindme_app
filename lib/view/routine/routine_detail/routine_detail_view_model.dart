@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:remindme_app/core/result/result.dart';
-import 'package:remindme_app/domain/domain_model/routine/routine_model.dart';
-import 'package:remindme_app/domain/repository/routine/routine_repository.dart';
-import 'package:remindme_app/view/routine/routine_detail/routine_detail_action.dart';
-import 'package:remindme_app/view/routine/routine_detail/routine_detail_state.dart';
+import 'package:remind_me_app/core/result/result.dart';
+import 'package:remind_me_app/domain/domain_model/routine/routine_model.dart';
+import 'package:remind_me_app/domain/repository/routine/routine_repository.dart';
+import 'package:remind_me_app/view/routine/routine_detail/routine_detail_action.dart';
+import 'package:remind_me_app/view/routine/routine_detail/routine_detail_state.dart';
 
 class RoutineDetailViewModel with ChangeNotifier {
   final RoutineRepository _routineRepository;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:remindme_app/domain/domain_model/routine/routine_model.dart';
-import 'package:remindme_app/view/routine/routine_detail/routine_detail_screen.dart';
-import 'package:remindme_app/view/routine/routine_detail/routine_detail_view_model.dart';
+import 'package:remind_me_app/domain/domain_model/routine/routine_model.dart';
+import 'package:remind_me_app/view/routine/routine_detail/routine_detail_screen.dart';
+import 'package:remind_me_app/view/routine/routine_detail/routine_detail_view_model.dart';
 
 class RoutineDetailScreenRoot extends StatelessWidget {
   final RoutineDetailViewModel viewModel;
