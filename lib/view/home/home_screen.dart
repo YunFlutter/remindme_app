@@ -83,71 +83,71 @@ class HomeScreen extends StatelessWidget {
                                         .toList(),
                               ),
                             ),
-                        Container(
-                          padding: EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                            color: AppColors.primaryBlue.withOpacity(0.2),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Column(
-                            spacing: 10,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    '오늘의 감정',
-                                    style: AppTextStyles.headingL(),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: LucideIconWidget(
-                                      icon: LucideIcons.squarePen,
-                                      color: AppColors.primaryBlue,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                spacing: 10,
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: AppColors.primaryBlue,
-                                      shape: BoxShape.circle,
-                                    ),
-                                    padding: EdgeInsets.all(10),
-                                    child: LucideIconWidget(
-                                      icon: LucideIcons.smile,
-                                      color: AppColors.baseWhite,
-                                      size: 18,
-                                    ),
-                                  ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "오늘 하루는 어떠셨나요?",
-                                        style: AppTextStyles.bodyM(),
-                                      ),
-                                      Text(
-                                        "오늘의 감정을 기록해보세요",
-                                        style: AppTextStyles.bodyS(
-                                          color: AppColors.grayText,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
+                        // Container(
+                        //   padding: EdgeInsets.all(16),
+                        //   decoration: BoxDecoration(
+                        //     color: AppColors.primaryBlue.withOpacity(0.2),
+                        //     borderRadius: BorderRadius.circular(15),
+                        //   ),
+                        //   child: Column(
+                        //     spacing: 10,
+                        //     mainAxisAlignment: MainAxisAlignment.start,
+                        //     crossAxisAlignment: CrossAxisAlignment.stretch,
+                        //     children: [
+                        //       Row(
+                        //         mainAxisAlignment:
+                        //             MainAxisAlignment.spaceBetween,
+                        //         children: [
+                        //           Text(
+                        //             '오늘의 감정',
+                        //             style: AppTextStyles.headingL(),
+                        //           ),
+                        //           IconButton(
+                        //             onPressed: () {},
+                        //             icon: LucideIconWidget(
+                        //               icon: LucideIcons.squarePen,
+                        //               color: AppColors.primaryBlue,
+                        //             ),
+                        //           ),
+                        //         ],
+                        //       ),
+                        //       Row(
+                        //         spacing: 10,
+                        //         children: [
+                        //           Container(
+                        //             decoration: BoxDecoration(
+                        //               color: AppColors.primaryBlue,
+                        //               shape: BoxShape.circle,
+                        //             ),
+                        //             padding: EdgeInsets.all(10),
+                        //             child: LucideIconWidget(
+                        //               icon: LucideIcons.smile,
+                        //               color: AppColors.baseWhite,
+                        //               size: 18,
+                        //             ),
+                        //           ),
+                        //           Column(
+                        //             mainAxisAlignment: MainAxisAlignment.start,
+                        //             crossAxisAlignment:
+                        //                 CrossAxisAlignment.start,
+                        //             children: [
+                        //               Text(
+                        //                 "오늘 하루는 어떠셨나요?",
+                        //                 style: AppTextStyles.bodyM(),
+                        //               ),
+                        //               Text(
+                        //                 "오늘의 감정을 기록해보세요",
+                        //                 style: AppTextStyles.bodyS(
+                        //                   color: AppColors.grayText,
+                        //                 ),
+                        //               ),
+                        //             ],
+                        //           ),
+                        //         ],
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),

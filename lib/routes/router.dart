@@ -105,9 +105,9 @@ final GoRouter router = GoRouter(
           body: Column(
             children: [
               Expanded(child: child),
-              CustomNavigationBar(
-                nowPagePath: GoRouterState.of(context).fullPath.toString(),
-              ),
+              // CustomNavigationBar(
+              //   nowPagePath: GoRouterState.of(context).fullPath.toString(),
+              // ),
             ],
           ),
         );

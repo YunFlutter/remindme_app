@@ -79,28 +79,30 @@ class RoutineActionScreen extends StatelessWidget {
                       style: AppTextStyles.headingXl(),
                     ),
                     const SizedBox(height: 10),
-                    CircularCountDownTimer(
-                      duration: duration,
-                      textFormat: CountdownTextFormat.MM_SS,
-                      isReverse: true,
-                      autoStart: false,
-                      initialDuration: 0,
-                      controller: timerController,
-                      width: MediaQuery.of(context).size.width / 1.5,
-                      height: MediaQuery.of(context).size.width / 1.5,
-                      ringColor: hexToColor(model.badgeColor),
-                      fillColor: adjustColorBrightness(hexToColor(model.routineColor)),
-                      backgroundColor: Colors.white,
-                      strokeWidth: 12.0,
-                      strokeCap: StrokeCap.round,
-                      textStyle: const TextStyle(
-                        fontSize: 48.0,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
+                    Expanded(
+                      child: CircularCountDownTimer(
+                        duration: duration,
+                        textFormat: CountdownTextFormat.MM_SS,
+                        isReverse: true,
+                        autoStart: false,
+                        initialDuration: 0,
+                        controller: timerController,
+                        width: MediaQuery.of(context).size.width / 1.5,
+                        height: MediaQuery.of(context).size.height / 1.5,
+                        ringColor: hexToColor(model.badgeColor),
+                        fillColor: adjustColorBrightness(hexToColor(model.routineColor)),
+                        backgroundColor: Colors.white,
+                        strokeWidth: 12.0,
+                        strokeCap: StrokeCap.round,
+                        textStyle: const TextStyle(
+                          fontSize: 48.0,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        onComplete: () {
+                          onAction(const RoutineActionEvent.nextStep());
+                        },
                       ),
-                      onComplete: () {
-                        onAction(const RoutineActionEvent.nextStep());
-                      },
                     ),
                   ],
                 );
