@@ -51,10 +51,8 @@ class RoutineActionScreen extends StatelessWidget {
           Expanded(
             child: PageView.builder(
               controller: pageController,
+
               itemCount: steps.length,
-              onPageChanged: (index) {
-                onAction(RoutineActionEvent.nextStep());
-              },
               itemBuilder: (context, index) {
                 final step = steps[index];
                 final title = step['title'] ?? '제목 없음';
@@ -140,6 +138,13 @@ class RoutineActionScreen extends StatelessWidget {
                     buttonActive: state.isStarted,
                     onTap: () {
                       onAction(const RoutineActionEvent.nextStep());
+                    },
+                  ),
+                if (state.isStarted && state.currentStepIndex == steps.length - 1)
+                  PrimaryButton(
+                    buttonText: '루틴 종료',
+                    buttonActive: state.isStarted,
+                    onTap: () {
                     },
                   ),
                 const SizedBox(height: 20),

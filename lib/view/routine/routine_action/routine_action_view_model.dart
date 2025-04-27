@@ -39,25 +39,34 @@ class RoutineActionViewModel with ChangeNotifier {
       case PreviousStep():
         _handlePreviousStep();
         break;
-      case ShowRoutineCompleteDialog():
-      // ViewModel 내부에서는 이펙트만 저장, 처리 안함
-        break;
     }
     notifyListeners();
   }
 
-  void _handleNextStep() {
-    if (_state.currentStepIndex < steps.length - 1) {
-      _state = _state.copyWith(currentStepIndex: pageController.initialPage + 1, isStarted: false, isPaused: false);
-      pageController.animateToPage(
-        _state.currentStepIndex,
+  Future<void> _handleNextStep() async {
+    final currentPage = pageController.page?.round() ?? 0;
+
+    if (currentPage < steps.length - 1) {
+      final nextPage = currentPage + 1;
+
+      await pageController.animateToPage(
+        nextPage,
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
-    } else {
-      _state = _state.copyWith(isStarted: false, currentStepIndex: 0);
-      _effect = const ShowRoutineCompleteDialog(); // 루틴 완료 효과
+
+      // 이동한 다음에 바로 상태 업데이트
+      _state = _state.copyWith(
+        currentStepIndex: nextPage,
+        isStarted: false,
+        isPaused: false,
+      );
+      notifyListeners();
     }
+  }
+
+  void onPageChanged(int index) {
+    _state = _state.copyWith(currentStepIndex: index);
     notifyListeners();
   }
 

@@ -21,8 +21,4 @@ sealed class RoutineActionEvent with _$RoutineActionEvent {
   /// 이전 스텝으로 이동
   const factory RoutineActionEvent.previousStep() = PreviousStep;
 
-  // --- 단발성 효과 (Effect) ---
-
-  /// 루틴 완료 팝업 띄우기
-  const factory RoutineActionEvent.showRoutineCompleteDialog() = ShowRoutineCompleteDialog;
 }
