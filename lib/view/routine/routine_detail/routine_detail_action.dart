@@ -17,4 +17,8 @@ sealed class RoutineDetailAction with _$RoutineDetailAction {
     required int routineId,
     required RoutineStepModel newStep,
   }) = addRoutineStep;
+  factory RoutineDetailAction.updateRoutineStep({
+    required int stepIndex,
+    required RoutineStepModel updatedStep,
+  }) = updateRoutineStep;
 }

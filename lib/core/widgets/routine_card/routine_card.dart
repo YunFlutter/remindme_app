@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:remind_me_app/core/constants/adjust_color_brightness.dart';
 import 'package:remind_me_app/core/themes/app_colors.dart';
@@ -74,16 +75,20 @@ class RoutineCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                Flexible(
-                  flex: 1,
-                  child: PrimaryButton(
-                    buttonText: '시작하기',
-                    buttonActive: true,
-                    buttonColor: cardModel.badgeColor,
-                    textColor: getContrastingTextColor(cardModel.badgeColor),
-                    borderRadius: 80,
-                  ),
-                ),
+                // Flexible(
+                //   flex: 1,
+                //   child: PrimaryButton(
+                //     buttonText: '시작하기',
+                //     buttonActive: true,
+                //     buttonColor: cardModel.badgeColor,
+                //     textColor: getContrastingTextColor(cardModel.badgeColor),
+                //     borderRadius: 80,
+                //     onTap: (){
+                //       // context.push('/routine-active', extra: cardModel);
+                //       print(cardModel);
+                //     },
+                //   ),
+                // ),
               ],
             ),
           ),

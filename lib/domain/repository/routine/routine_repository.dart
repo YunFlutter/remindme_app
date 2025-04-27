@@ -16,4 +16,9 @@ abstract interface class RoutineRepository {
     required int routineId,
     required RoutineStepModel newStep,
   });
+  Future<Result<RoutineModel, String>> updateStepInRoutine({
+    required int routineId,
+    required int stepIndex,
+    required RoutineStepModel updatedStep,
+  });
 }

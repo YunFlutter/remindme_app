@@ -157,4 +157,36 @@ class RoutineRepositoryImpl implements RoutineRepository {
       return Result.error('스탭 추가 중 오류 발생: $e');
     }
   }
+
+  @override
+  Future<Result<RoutineModel, String>> updateStepInRoutine({
+    required int routineId,
+    required int stepIndex,
+    required RoutineStepModel updatedStep,
+  }) async {
+    try {
+      final dataModel = _box.get(routineId);
+      if (dataModel == null) {
+        return Result.error('루틴을 찾을 수 없습니다. (id: $routineId)');
+      }
+
+      final currentSteps = List<Map<String, dynamic>>.from(dataModel.steps);
+
+      if (stepIndex < 0 || stepIndex >= currentSteps.length) {
+        return Result.error('수정할 스탭 인덱스가 유효하지 않습니다.');
+      }
+
+      // 스탭 수정
+      currentSteps[stepIndex] = updatedStep.toJson();
+
+      // 수정된 루틴 저장
+      final updatedModel = dataModel.copyWith(steps: currentSteps);
+      await _box.put(routineId, updatedModel);
+
+      // 도메인 모델로 변환 후 반환
+      return Result.success(dataModelToRoutine(updatedModel));
+    } catch (e) {
+      return Result.error('루틴 스탭 수정 실패: $e');
+    }
+  }
 }

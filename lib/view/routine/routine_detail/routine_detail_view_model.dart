@@ -63,6 +63,24 @@ class RoutineDetailViewModel with ChangeNotifier {
           case Error<RoutineModel, String>():
             print(Error<RoutineModel, String>);
         }
+      case updateRoutineStep():
+        final result = await _routineRepository.updateStepInRoutine(
+          routineId: state.model.id,
+          stepIndex: action.stepIndex,
+          updatedStep: action.updatedStep,
+        );
+        switch (result) {
+          case Success<RoutineModel, String>():
+            _state = state.copyWith(
+              model: result.data,
+              stepList: result.data.steps,
+            );
+            notifyListeners();
+          case Error<RoutineModel, String>():
+            print(Error<RoutineModel, String>);
+            break;
+        }
+        break;
     }
   }
 }

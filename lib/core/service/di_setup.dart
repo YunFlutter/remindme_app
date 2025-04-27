@@ -6,6 +6,7 @@ import 'package:remind_me_app/data/repository_impl/user/user_repository_impl.dar
 import 'package:remind_me_app/domain/repository/routine/routine_repository.dart';
 import 'package:remind_me_app/domain/repository/user/user_repository.dart';
 import 'package:remind_me_app/view/home/home_view_model.dart';
+import 'package:remind_me_app/view/routine/routine_action/routine_action_view_model.dart';
 import 'package:remind_me_app/view/routine/routine_add/routine_add_view_model.dart';
 import 'package:remind_me_app/view/routine/routine_detail/routine_detail_view_model.dart';
 import 'package:remind_me_app/view/signUp/sign_up_view_model.dart';
@@ -35,4 +36,6 @@ void diSetUp() {
   getIt.registerFactory<RoutineDetailViewModel>(
     () => RoutineDetailViewModel(routineRepository: getIt()),
   );
+
+
 }

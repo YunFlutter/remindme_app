@@ -16,6 +16,8 @@ import 'package:remind_me_app/view/home/home_view_model.dart';
 import 'package:remind_me_app/view/onboarding/onboarding_screen.dart';
 import 'package:remind_me_app/view/onboarding/onboarding_state.dart';
 import 'package:remind_me_app/view/onboarding/onboarding_view_model.dart';
+import 'package:remind_me_app/view/routine/routine_action/routine_action_screen_root.dart';
+import 'package:remind_me_app/view/routine/routine_action/routine_action_view_model.dart';
 import 'package:remind_me_app/view/routine/routine_add/routine_add_screen.dart';
 import 'package:remind_me_app/view/routine/routine_add/routine_add_view_model.dart';
 import 'package:remind_me_app/view/routine/routine_detail/routine_detail_screen_root.dart';
@@ -32,7 +34,7 @@ final GoRouter router = GoRouter(
       builder: (context, state) {
         final viewModel = SplashViewModel();
         viewModel.textValueChange(
-          firstMilliseconds: 1500,
+          firstMilliseconds: 300,
           secondMilliseconds: 3000,
           context: context,
         );
@@ -47,7 +49,7 @@ final GoRouter router = GoRouter(
             viewModel: OnboardingViewModel(state: OnboardingState()),
           ),
           transitionsBuilder: PageTransitions.fade,
-          transitionDuration: const Duration(milliseconds: 1500),
+          transitionDuration: const Duration(milliseconds: 300),
         );
       },
     ),
@@ -57,7 +59,7 @@ final GoRouter router = GoRouter(
         return CustomTransitionPage(
           child: SignUpScreen(viewModel: getIt()),
           transitionsBuilder: PageTransitions.fade,
-          transitionDuration: const Duration(milliseconds: 1500),
+          transitionDuration: const Duration(milliseconds: 300),
         );
       },
     ),
@@ -67,7 +69,7 @@ final GoRouter router = GoRouter(
         return CustomTransitionPage(
           child: RoutineAddScreen(viewModel: getIt()),
           transitionsBuilder: PageTransitions.fade,
-          transitionDuration: const Duration(milliseconds: 1500),
+          transitionDuration: const Duration(milliseconds: 300),
         );
       },
     ),
@@ -79,8 +81,20 @@ final GoRouter router = GoRouter(
             routineModel: state.extra as RoutineModel,
             viewModel: getIt(),
           ),
-          transitionsBuilder: PageTransitions.fade,
-          transitionDuration: const Duration(milliseconds: 1500),
+          transitionsBuilder: PageTransitions.slideFadeFromRight,
+          transitionDuration: const Duration(milliseconds: 300),
+        );
+      },
+    ),
+    GoRoute(
+      path: Routes.routineActive,
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          child: RoutineActionScreenRoot(
+            viewModel: RoutineActionViewModel(model: state.extra as RoutineModel),
+          ),
+          transitionsBuilder: PageTransitions.slideFadeFromRight,
+          transitionDuration: const Duration(milliseconds: 300),
         );
       },
     ),

@@ -58,6 +58,7 @@ class HomeScreen extends StatelessWidget {
                                             ),
                                             child: RoutineCard(
                                               cardModel: RoutineCardModel(
+
                                                 index: viewModel
                                                     .state
                                                     .routineList

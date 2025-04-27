@@ -19,7 +19,7 @@ abstract class Routes {
   static const String routineDetail = '/routine-detail';
   static const String routineEdit = '/routine-edit';
   static const String routineAdd = '/routine-add';
-  static const String routineActive = 'routine-active';
+  static const String routineActive = '/routine-active';
 
   //감정 일기 관련 페이지
   static const String emotion = '/emotion'; //감정 달력 페이지

@@ -12,6 +12,7 @@ import 'package:remind_me_app/core/widgets/routine_card/routine_card_model.dart'
 import 'package:remind_me_app/core/widgets/routine_card/routine_card_not_button.dart';
 import 'package:remind_me_app/domain/domain_model/routine/routine_model.dart';
 import 'package:remind_me_app/domain/domain_model/routine/routine_step_model.dart';
+import 'package:remind_me_app/view/routine/routine_action/routine_action_view_model.dart';
 import 'package:remind_me_app/view/routine/routine_add/routine_step_bottom_sheet.dart';
 import 'package:remind_me_app/view/routine/routine_detail/routine_detail_action.dart';
 import 'package:remind_me_app/view/routine/routine_detail/routine_detail_state.dart';
@@ -107,6 +108,7 @@ class _RoutineDetailScreenState extends State<RoutineDetailScreen> {
             // 루틴 아이콘과 제목
             RoutineCardNotButton(
               cardModel: RoutineCardModel(
+
                 index: widget.routineModel.id,
                 icons: getLucideIconData(widget.routineModel.routineIconName),
                 badgeColor: widget.routineModel.badgeColor,
@@ -179,7 +181,7 @@ class _RoutineDetailScreenState extends State<RoutineDetailScreen> {
               buttonText: '루틴 시작하기',
               buttonActive: true,
               onTap: () {
-                print(widget.routineModel.steps);
+                context.go('/routine-active', extra: widget.state.model);
               },
             ),
             const SizedBox(height: 20),
