@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:remindme_app/core/themes/app_colors.dart';
-import 'package:remindme_app/core/themes/app_text_styles.dart';
+import 'package:remind_me_app/core/themes/app_colors.dart';
+import 'package:remind_me_app/core/themes/app_text_styles.dart';
 
 class GhostButton extends StatelessWidget {
   final String buttonText;

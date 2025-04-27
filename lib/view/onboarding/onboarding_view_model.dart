@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:remindme_app/view/onboarding/onboarding_state.dart';
+import 'package:remind_me_app/view/onboarding/onboarding_state.dart';
 
 class OnboardingViewModel with ChangeNotifier {
   OnboardingState _state;

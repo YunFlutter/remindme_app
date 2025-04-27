@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:remindme_app/core/themes/app_colors.dart';
-import 'package:remindme_app/core/themes/app_text_styles.dart';
-import 'package:remindme_app/view/splash/splash_view_model.dart';
+import 'package:remind_me_app/core/themes/app_colors.dart';
+import 'package:remind_me_app/core/themes/app_text_styles.dart';
+import 'package:remind_me_app/view/splash/splash_view_model.dart';
 
 class SplashScreen extends StatelessWidget {
   final SplashViewModel viewModel;
@@ -23,7 +23,11 @@ class SplashScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset("assets/image/emtion_note.png", width: MediaQuery.of(context).size.width /3, fit: BoxFit.contain,),
+                  Image.asset(
+                    "assets/image/emtion_note.png",
+                    width: MediaQuery.of(context).size.width / 3,
+                    fit: BoxFit.contain,
+                  ),
                   AnimatedOpacity(
                     duration: Duration(milliseconds: 1500),
                     opacity: viewModel.state.firstTextVisible ? 1.0 : 0.0,

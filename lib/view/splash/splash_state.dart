@@ -3,7 +3,9 @@ part 'splash_state.freezed.dart';
 
 @freezed
 class SplashState with _$SplashState {
+  @override
   final bool firstTextVisible;
+  @override
   final bool secondTextVisible;
 
   const SplashState({
