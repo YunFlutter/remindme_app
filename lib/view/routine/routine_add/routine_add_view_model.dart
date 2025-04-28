@@ -7,6 +7,7 @@ import 'package:remind_me_app/domain/domain_model/routine/routine_model.dart';
 import 'package:remind_me_app/domain/domain_model/routine/routine_step_model.dart';
 import 'package:remind_me_app/domain/repository/routine/routine_repository.dart';
 import 'package:remind_me_app/view/routine/routine_add/routine_add_state.dart';
+import 'package:remind_me_app/view/routine/routine_detail/routine_detail_action.dart';
 
 class RoutineAddViewModel with ChangeNotifier {
   final RoutineRepository _routineRepository;
@@ -49,6 +50,10 @@ class RoutineAddViewModel with ChangeNotifier {
     notifyListeners();
   }
 
+  void audioStop() async {
+    await _audioPlayer.stop();
+  }
+
   void updateSoundPath(String path) async {
     // 1. 상태 업데이트
     _state = _state.copyWith(soundFilePath: path);
@@ -86,9 +91,13 @@ class RoutineAddViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  void removeStep(int index) {
-    final updatedSteps = List<RoutineStepModel>.from(_state.steps)
-      ..removeAt(index);
+  void removeStep(Map<String, dynamic> items) {
+    // final updatedSteps = List<RoutineStepModel>.from(_state.steps)
+    //   ..removeAt(index);
+    final List<Map<String, dynamic>> saveData = _state.steps;
+    final List<Map<String, dynamic>> removeData =
+        saveData.where((e) => e != items).toList();
+    _state = _state.copyWith(steps: removeData);
     notifyListeners();
   }
 
@@ -121,10 +130,11 @@ class RoutineAddViewModel with ChangeNotifier {
       routineColor: state.routineColor,
       time: state.time,
       routineIconName: state.routineIconName,
-      audioPath: state.soundFilePath
+      audioPath: state.soundFilePath,
     );
 
     final result = await _routineRepository.addRoutine(routine);
+    await _audioPlayer.stop();
     switch (result) {
       case Success():
         context.pop();

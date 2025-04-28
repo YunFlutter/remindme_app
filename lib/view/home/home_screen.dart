@@ -157,18 +157,22 @@ class HomeScreen extends StatelessWidget {
                 ),
                 Align(
                   alignment: Alignment.bottomRight,
-                  child: FloatingActionButton(
-                    backgroundColor: AppColors.primaryBlue,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                    elevation: 2,
-                    onPressed: () {
-                      context.push("/routine-add");
-                    },
-                    child: LucideIconWidget(
-                      icon: LucideIcons.plus,
-                      color: AppColors.baseWhite,
+                  child: Container(
+                    margin: EdgeInsets.only(bottom: 15, right: 15),
+                    child: FloatingActionButton(
+
+                      backgroundColor: AppColors.primaryBlue,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      elevation: 2,
+                      onPressed: () {
+                        context.push("/routine-add");
+                      },
+                      child: LucideIconWidget(
+                        icon: LucideIcons.plus,
+                        color: AppColors.baseWhite,
+                      ),
                     ),
                   ),
                 ),

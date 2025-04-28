@@ -5,12 +5,25 @@ import 'package:remind_me_app/core/service/icon_mapper.dart';
 import 'package:remind_me_app/core/themes/app_colors.dart';
 import 'package:remind_me_app/core/themes/app_text_styles.dart';
 import 'package:remind_me_app/core/widgets/custom_text_field.dart';
+import 'package:remind_me_app/core/widgets/ghost_button.dart';
 import 'package:remind_me_app/view/routine/routine_add/routine_add_view_model.dart';
 import 'package:remind_me_app/view/routine/routine_add/routine_step_bottom_sheet.dart';
 
-class RoutineAddScreen extends StatelessWidget {
+class RoutineAddScreen extends StatefulWidget {
   final RoutineAddViewModel viewModel;
   const RoutineAddScreen({super.key, required this.viewModel});
+
+  @override
+  State<RoutineAddScreen> createState() => _RoutineAddScreenState();
+}
+
+class _RoutineAddScreenState extends State<RoutineAddScreen> {
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    widget.viewModel.audioStop();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +33,7 @@ class RoutineAddScreen extends StatelessWidget {
         return false;
       },
       child: ListenableBuilder(
-        listenable: viewModel,
+        listenable: widget.viewModel,
         builder: (context, _) {
           return Scaffold(
             backgroundColor: AppColors.baseWhite,
@@ -31,33 +44,14 @@ class RoutineAddScreen extends StatelessWidget {
               centerTitle: true,
               actions: [
                 IconButton(
-                  onPressed: () => viewModel.saveRoutine(context: context),
+                  onPressed:
+                      () => widget.viewModel.saveRoutine(context: context),
                   icon: LucideIconWidget(
                     icon: LucideIcons.save,
                     color:
-                        viewModel.state.steps.isNotEmpty
+                        widget.viewModel.state.steps.isNotEmpty
                             ? AppColors.primaryBlue
                             : AppColors.grayDisabled,
-                  ),
-                ),
-                IconButton(
-                  onPressed:
-                      () => showModalBottomSheet(
-                        context: context,
-                        backgroundColor: AppColors.baseWhite,
-                        isScrollControlled: true,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(24),
-                          ),
-                        ),
-                        builder:
-                            (context) =>
-                                RoutineStepBottomSheet(viewModel: viewModel),
-                      ),
-                  icon: LucideIconWidget(
-                    icon: LucideIcons.calendarPlus,
-                    color: AppColors.primaryBlue,
                   ),
                 ),
               ],
@@ -74,7 +68,9 @@ class RoutineAddScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Text('루틴 제목', style: AppTextStyles.caption()),
-                        CustomTextField(onChangeEvent: viewModel.updateTitle),
+                        CustomTextField(
+                          onChangeEvent: widget.viewModel.updateTitle,
+                        ),
                       ],
                     ),
                     Column(
@@ -83,7 +79,9 @@ class RoutineAddScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Text('시작 시간(ex:17:00)', style: AppTextStyles.caption()),
-                        CustomTextField(onChangeEvent: viewModel.updateTime),
+                        CustomTextField(
+                          onChangeEvent: widget.viewModel.updateTime,
+                        ),
                       ],
                     ),
 
@@ -92,17 +90,20 @@ class RoutineAddScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Text('알림 사운드 선택(선택 사항)', style: AppTextStyles.caption()),
+                        Text(
+                          '알림 사운드 선택(선택 사항 입니다)',
+                          style: AppTextStyles.caption(),
+                        ),
                         Wrap(
                           runSpacing: 10,
                           children:
-                              viewModel.state.soundFiles.map((items) {
+                              widget.viewModel.state.soundFiles.map((items) {
                                 final isSelected =
-                                    viewModel.state.soundFilePath ==
+                                    widget.viewModel.state.soundFilePath ==
                                     items["path"];
                                 return GestureDetector(
                                   onTap:
-                                      () => viewModel.updateSoundPath(
+                                      () => widget.viewModel.updateSoundPath(
                                         items["path"],
                                       ),
                                   child: AnimatedContainer(
@@ -121,7 +122,7 @@ class RoutineAddScreen extends StatelessWidget {
                                             isSelected
                                                 ? Colors.blue
                                                 : Colors.grey.shade300,
-                                        width: isSelected ? 2 : 1,
+                                        width: 1,
                                       ),
                                       borderRadius: BorderRadius.circular(12),
                                     ),
@@ -150,12 +151,17 @@ class RoutineAddScreen extends StatelessWidget {
                         Wrap(
                           runSpacing: 10,
                           children:
-                              viewModel.state.routineIconNames.map((icon) {
+                              widget.viewModel.state.routineIconNames.map((
+                                icon,
+                              ) {
                                 final isSelected =
-                                    viewModel.state.routineIconName == icon;
+                                    widget.viewModel.state.routineIconName ==
+                                    icon;
                                 return GestureDetector(
                                   onTap:
-                                      () => viewModel.updateRoutineIcon(icon),
+                                      () => widget.viewModel.updateRoutineIcon(
+                                        icon,
+                                      ),
                                   child: AnimatedContainer(
                                     duration: const Duration(milliseconds: 200),
                                     margin: const EdgeInsets.symmetric(
@@ -172,7 +178,7 @@ class RoutineAddScreen extends StatelessWidget {
                                             isSelected
                                                 ? Colors.blue
                                                 : Colors.grey.shade300,
-                                        width: isSelected ? 2 : 1,
+                                        width: 1,
                                       ),
                                       borderRadius: BorderRadius.circular(12),
                                     ),
@@ -193,19 +199,22 @@ class RoutineAddScreen extends StatelessWidget {
 
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       spacing: 10,
                       children: [
                         Text('배지 색상', style: AppTextStyles.caption()),
                         Wrap(
                           runSpacing: 10,
                           children:
-                              viewModel.state.badgeColors.map((hex) {
+                              widget.viewModel.state.badgeColors.map((hex) {
                                 final color = Color(
                                   int.parse('0xFF${hex.substring(1)}'),
                                 );
                                 return GestureDetector(
-                                  onTap: () => viewModel.updateBadgeColor(hex),
+                                  onTap:
+                                      () => widget.viewModel.updateBadgeColor(
+                                        hex,
+                                      ),
                                   child: Container(
                                     margin: const EdgeInsets.symmetric(
                                       horizontal: 4,
@@ -217,7 +226,8 @@ class RoutineAddScreen extends StatelessWidget {
                                       shape: BoxShape.circle,
                                       border: Border.all(
                                         color:
-                                            viewModel.state.badgeColor == hex
+                                            widget.viewModel.state.badgeColor ==
+                                                    hex
                                                 ? Colors.black
                                                 : AppColors.grayLine,
                                         width: 2,
@@ -233,45 +243,73 @@ class RoutineAddScreen extends StatelessWidget {
                     Column(
                       spacing: 10,
                       mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Text('루틴 배경색', style: AppTextStyles.caption()),
                         Wrap(
                           runSpacing: 10,
                           children:
-                              viewModel.state.routineBackgroundColors.map((
-                                hex,
-                              ) {
-                                final color = Color(
-                                  int.parse('0xFF${hex.substring(1)}'),
-                                );
-                                return GestureDetector(
-                                  onTap:
-                                      () => viewModel.updateRoutineColor(hex),
-                                  child: Container(
-                                    margin: const EdgeInsets.symmetric(
-                                      horizontal: 4,
-                                    ),
-                                    width: 32,
-                                    height: 32,
-                                    decoration: BoxDecoration(
-                                      color: color,
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                        color:
-                                            viewModel.state.routineColor == hex
-                                                ? Colors.black
-                                                : AppColors.grayLine,
-                                        width: 2,
+                              widget.viewModel.state.routineBackgroundColors
+                                  .map((hex) {
+                                    final color = Color(
+                                      int.parse('0xFF${hex.substring(1)}'),
+                                    );
+                                    return GestureDetector(
+                                      onTap:
+                                          () => widget.viewModel
+                                              .updateRoutineColor(hex),
+                                      child: Container(
+                                        margin: const EdgeInsets.symmetric(
+                                          horizontal: 4,
+                                        ),
+                                        width: 32,
+                                        height: 32,
+                                        decoration: BoxDecoration(
+                                          color: color,
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color:
+                                                widget
+                                                            .viewModel
+                                                            .state
+                                                            .routineColor ==
+                                                        hex
+                                                    ? Colors.black
+                                                    : AppColors.grayLine,
+                                            width: 2,
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  ),
-                                );
-                              }).toList(),
+                                    );
+                                  })
+                                  .toList(),
                         ),
                       ],
                     ),
-                    if (viewModel.state.steps.isNotEmpty)
+                    SizedBox(height: 20),
+                    GhostButton(
+                      buttonText: '루틴 스탭 추가',
+                      onTap: () {
+                        widget.viewModel.audioStop();
+                        showModalBottomSheet(
+                          context: context,
+                          backgroundColor: AppColors.baseWhite,
+                          isScrollControlled: true,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(24),
+                            ),
+                          ),
+                          builder:
+                              (context) => RoutineStepBottomSheet(
+                                viewModel: widget.viewModel,
+                              ),
+                        );
+                      },
+                    ),
+                    SizedBox(height: 20),
+
+                    if (widget.viewModel.state.steps.isNotEmpty)
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -286,10 +324,10 @@ class RoutineAddScreen extends StatelessWidget {
                           ListView.separated(
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
-                            itemCount: viewModel.state.steps.length,
+                            itemCount: widget.viewModel.state.steps.length,
                             separatorBuilder: (_, __) => SizedBox(height: 8),
                             itemBuilder: (context, index) {
-                              final step = viewModel.state.steps[index];
+                              final step = widget.viewModel.state.steps[index];
                               return Container(
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 12,
@@ -314,7 +352,8 @@ class RoutineAddScreen extends StatelessWidget {
                                     Text('${step['time']}분'),
                                     IconButton(
                                       onPressed:
-                                          () => viewModel.removeStep(index),
+                                          () =>
+                                              widget.viewModel.removeStep(step),
                                       icon: Icon(
                                         Icons.delete_outline,
                                         color: Colors.redAccent,
