@@ -21,6 +21,7 @@ import 'package:remind_me_app/view/routine/routine_action/routine_action_view_mo
 import 'package:remind_me_app/view/routine/routine_add/routine_add_screen.dart';
 import 'package:remind_me_app/view/routine/routine_add/routine_add_view_model.dart';
 import 'package:remind_me_app/view/routine/routine_detail/routine_detail_screen_root.dart';
+import 'package:remind_me_app/view/show_app_out_dialog.dart';
 import 'package:remind_me_app/view/signUp/sign_up_screen.dart';
 import 'package:remind_me_app/view/signUp/sign_up_view_model.dart';
 import 'package:remind_me_app/view/splash/splash_screen.dart';
@@ -100,15 +101,21 @@ final GoRouter router = GoRouter(
     ),
     ShellRoute(
       builder: (context, state, child) {
-        return Scaffold(
-          backgroundColor: AppColors.baseWhite,
-          body: Column(
-            children: [
-              Expanded(child: child),
-              // CustomNavigationBar(
-              //   nowPagePath: GoRouterState.of(context).fullPath.toString(),
-              // ),
-            ],
+        return WillPopScope(
+          onWillPop: () async {
+            final bool result = await showAppOutDialog(context);
+            return result;
+          },
+          child: Scaffold(
+            backgroundColor: AppColors.baseWhite,
+            body: Column(
+              children: [
+                Expanded(child: child),
+                // CustomNavigationBar(
+                //   nowPagePath: GoRouterState.of(context).fullPath.toString(),
+                // ),
+              ],
+            ),
           ),
         );
       },
