@@ -10,6 +10,7 @@ class RoutineModel {
   final bool isFavorite;
   final List<String> tags;
   final DateTime? lastCompletedDate;
+  final String? audioPath; // ✅ 추가된 필드
 
   const RoutineModel({
     required this.id,
@@ -23,6 +24,7 @@ class RoutineModel {
     this.isFavorite = false,
     this.tags = const [],
     this.lastCompletedDate,
+    this.audioPath, // ✅ 생성자에도 추가
   });
 
   RoutineModel copyWith({
@@ -37,9 +39,10 @@ class RoutineModel {
     List<String>? tags,
     DateTime? lastCompletedDate,
     int? id,
+    String? audioPath, // ✅ copyWith에도 추가
   }) {
     return RoutineModel(
-      id: id ?? -1,
+      id: id ?? this.id,
       title: title ?? this.title,
       steps: steps ?? this.steps,
       badgeColor: badgeColor ?? this.badgeColor,
@@ -50,11 +53,12 @@ class RoutineModel {
       isFavorite: isFavorite ?? this.isFavorite,
       tags: tags ?? this.tags,
       lastCompletedDate: lastCompletedDate ?? this.lastCompletedDate,
+      audioPath: audioPath ?? this.audioPath, // ✅ 반영
     );
   }
 
   @override
   String toString() {
-    return 'RoutineModel{id: $id title: $title, steps: $steps, badgeColor: $badgeColor, routineColor: $routineColor, time: $time, routineIconName: $routineIconName, isCompletedToday: $isCompletedToday, isFavorite: $isFavorite, tags: $tags, lastCompletedDate: $lastCompletedDate}';
+    return 'RoutineModel{id: $id, title: $title, steps: $steps, badgeColor: $badgeColor, routineColor: $routineColor, time: $time, routineIconName: $routineIconName, isCompletedToday: $isCompletedToday, isFavorite: $isFavorite, tags: $tags, lastCompletedDate: $lastCompletedDate, audioPath: $audioPath}';
   }
 }

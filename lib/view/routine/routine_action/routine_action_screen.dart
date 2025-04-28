@@ -81,6 +81,7 @@ class RoutineActionScreen extends StatelessWidget {
                     const SizedBox(height: 10),
                     Expanded(
                       child: CircularCountDownTimer(
+
                         duration: duration,
                         textFormat: CountdownTextFormat.MM_SS,
                         isReverse: true,
@@ -100,7 +101,7 @@ class RoutineActionScreen extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                         onComplete: () {
-                          onAction(const RoutineActionEvent.nextStep());
+                          onAction(RoutineActionEvent.timerFinished(audioPath: model.audioPath));
                         },
                       ),
                     ),

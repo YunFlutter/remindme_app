@@ -39,6 +39,7 @@ class _RoutineDetailScreenState extends State<RoutineDetailScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       widget.onAction(RoutineDetailAction.pageInit(model: widget.routineModel));
+      print(widget.routineModel);
     });
   }
 

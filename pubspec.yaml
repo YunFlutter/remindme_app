@@ -45,6 +45,8 @@ dependencies:
   get_it: ^8.0.3
   circular_countdown_timer: ^0.2.4
   flutter_launcher_icons: ^0.14.3
+  permission_handler: ^12.0.0+1
+  just_audio: ^0.10.1
 
 dev_dependencies:
   flutter_test:
@@ -88,6 +90,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
+    - assets/alarm_sound/
     - assets/image/
     - assets/appIcons/
     - assets/appIcons/android/

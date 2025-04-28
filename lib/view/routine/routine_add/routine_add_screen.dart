@@ -15,7 +15,7 @@ class RoutineAddScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async{
+      onWillPop: () async {
         context.go('/home');
         return false;
       },
@@ -92,6 +92,60 @@ class RoutineAddScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
+                        Text('알림 사운드 선택(선택 사항)', style: AppTextStyles.caption()),
+                        Wrap(
+                          runSpacing: 10,
+                          children:
+                              viewModel.state.soundFiles.map((items) {
+                                final isSelected =
+                                    viewModel.state.soundFilePath ==
+                                    items["path"];
+                                return GestureDetector(
+                                  onTap:
+                                      () => viewModel.updateSoundPath(
+                                        items["path"],
+                                      ),
+                                  child: AnimatedContainer(
+                                    duration: const Duration(milliseconds: 200),
+                                    margin: const EdgeInsets.symmetric(
+                                      horizontal: 4,
+                                    ),
+                                    padding: const EdgeInsets.all(8),
+                                    decoration: BoxDecoration(
+                                      color:
+                                          isSelected
+                                              ? Colors.blue[50]
+                                              : Colors.transparent,
+                                      border: Border.all(
+                                        color:
+                                            isSelected
+                                                ? Colors.blue
+                                                : Colors.grey.shade300,
+                                        width: isSelected ? 2 : 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: Text(
+                                      items["title"],
+                                      style: AppTextStyles.caption(
+                                        color:
+                                            isSelected
+                                                ? Colors.black
+                                                : Colors.grey,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }).toList(),
+                        ),
+                      ],
+                    ),
+
+                    Column(
+                      spacing: 10,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
                         Text('아이콘 선택', style: AppTextStyles.caption()),
                         Wrap(
                           runSpacing: 10,
@@ -100,7 +154,8 @@ class RoutineAddScreen extends StatelessWidget {
                                 final isSelected =
                                     viewModel.state.routineIconName == icon;
                                 return GestureDetector(
-                                  onTap: () => viewModel.updateRoutineIcon(icon),
+                                  onTap:
+                                      () => viewModel.updateRoutineIcon(icon),
                                   child: AnimatedContainer(
                                     duration: const Duration(milliseconds: 200),
                                     margin: const EdgeInsets.symmetric(
@@ -184,12 +239,15 @@ class RoutineAddScreen extends StatelessWidget {
                         Wrap(
                           runSpacing: 10,
                           children:
-                              viewModel.state.routineBackgroundColors.map((hex) {
+                              viewModel.state.routineBackgroundColors.map((
+                                hex,
+                              ) {
                                 final color = Color(
                                   int.parse('0xFF${hex.substring(1)}'),
                                 );
                                 return GestureDetector(
-                                  onTap: () => viewModel.updateRoutineColor(hex),
+                                  onTap:
+                                      () => viewModel.updateRoutineColor(hex),
                                   child: Container(
                                     margin: const EdgeInsets.symmetric(
                                       horizontal: 4,
@@ -240,7 +298,9 @@ class RoutineAddScreen extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   color: Colors.grey[100],
                                   borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(color: Colors.grey.shade300),
+                                  border: Border.all(
+                                    color: Colors.grey.shade300,
+                                  ),
                                 ),
                                 child: Row(
                                   children: [

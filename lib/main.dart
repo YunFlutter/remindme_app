@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:remind_me_app/core/hive/hive_init.dart';
+import 'package:remind_me_app/core/service/check_android_permission.dart';
 import 'package:remind_me_app/core/service/di_setup.dart';
 import 'package:remind_me_app/routes/router.dart';
 
@@ -10,6 +11,7 @@ void main() async {
   diSetUp();
   final resetRoutineUseCase = ResetRoutineCompletionUseCase();
   await resetRoutineUseCase.execute();
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(RemindMe());
 }
 

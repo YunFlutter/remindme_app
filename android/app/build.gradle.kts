@@ -69,6 +69,14 @@ android {
             assets.srcDirs("src/main/assets", "build/flutter_assets") // 🔥 추가
         }
     }
+
+
+//    dependencies {
+//        implementation("com.google.android.exoplayer:exoplayer-core:$exoplayerVersion")
+//        implementation("com.google.android.exoplayer:exoplayer-dash:$exoplayerVersion")
+//        implementation("com.google.android.exoplayer:exoplayer-hls:$exoplayerVersion")
+//        implementation("com.google.android.exoplayer:exoplayer-smoothstreaming:$exoplayerVersion")
+//    }
 }
 
 flutter {

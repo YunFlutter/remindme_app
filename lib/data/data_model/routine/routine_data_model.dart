@@ -1,5 +1,3 @@
-
-
 import 'package:hive_ce/hive.dart';
 
 part 'routine_data_model.g.dart';
@@ -33,6 +31,9 @@ class RoutineDataModel {
   @HiveField(8)
   final DateTime? lastCompletedDate; // ⭐ 마지막 완료한 날짜
 
+  @HiveField(9)
+  final String? audioPath; // ✅ 추가된 오디오 경로 필드
+
   RoutineDataModel({
     required this.title,
     required this.time,
@@ -43,6 +44,7 @@ class RoutineDataModel {
     required this.id,
     this.isCompletedToday = false,
     this.lastCompletedDate,
+    this.audioPath, // ✅ 생성자에도 추가
   });
 
   RoutineDataModel copyWith({
@@ -55,6 +57,7 @@ class RoutineDataModel {
     String? id,
     bool? isCompletedToday,
     DateTime? lastCompletedDate,
+    String? audioPath, // ✅ copyWith에도 추가
   }) {
     return RoutineDataModel(
       title: title ?? this.title,
@@ -66,6 +69,7 @@ class RoutineDataModel {
       id: id ?? this.id,
       isCompletedToday: isCompletedToday ?? this.isCompletedToday,
       lastCompletedDate: lastCompletedDate ?? this.lastCompletedDate,
+      audioPath: audioPath ?? this.audioPath, // ✅ 반영
     );
   }
 }

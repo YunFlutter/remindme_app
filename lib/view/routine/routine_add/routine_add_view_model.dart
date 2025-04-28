@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:remind_me_app/core/result/result.dart';
 import 'package:remind_me_app/domain/domain_model/routine/routine_model.dart';
 import 'package:remind_me_app/domain/domain_model/routine/routine_step_model.dart';
@@ -9,7 +10,7 @@ import 'package:remind_me_app/view/routine/routine_add/routine_add_state.dart';
 
 class RoutineAddViewModel with ChangeNotifier {
   final RoutineRepository _routineRepository;
-
+  final AudioPlayer _audioPlayer = AudioPlayer();
   RoutineAddViewModel({required RoutineRepository routineRepository})
     : _routineRepository = routineRepository;
 
@@ -46,6 +47,25 @@ class RoutineAddViewModel with ChangeNotifier {
   void updateRoutineColor(String color) {
     _state = _state.copyWith(routineColor: color);
     notifyListeners();
+  }
+
+  void updateSoundPath(String path) async {
+    // 1. 상태 업데이트
+    _state = _state.copyWith(soundFilePath: path);
+    notifyListeners();
+
+    try {
+      // 2. 현재 재생 중인 음악 멈추기
+      await _audioPlayer.stop();
+
+      // 3. 새 음악 파일 설정
+      await _audioPlayer.setAsset(path);
+
+      // 4. 재생
+      _audioPlayer.play();
+    } catch (e) {
+      print('음악 재생 실패: $e');
+    }
   }
 
   void addStep({
@@ -101,6 +121,7 @@ class RoutineAddViewModel with ChangeNotifier {
       routineColor: state.routineColor,
       time: state.time,
       routineIconName: state.routineIconName,
+      audioPath: state.soundFilePath
     );
 
     final result = await _routineRepository.addRoutine(routine);

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:remind_me_app/domain/domain_model/routine/routine_model.dart';
 import 'routine_action_state.dart';
 import 'routine_action_event.dart';
@@ -7,6 +8,7 @@ import 'routine_action_event.dart';
 class RoutineActionViewModel with ChangeNotifier {
   final RoutineModel model;
   final PageController pageController = PageController();
+  final AudioPlayer _audioPlayer = AudioPlayer();
   final CountDownController timerController = CountDownController();
 
   RoutineActionState _state = const RoutineActionState();
@@ -19,7 +21,27 @@ class RoutineActionViewModel with ChangeNotifier {
 
   List<Map<String, dynamic>> get steps => model.steps;
 
-  void onEvent(RoutineActionEvent event) {
+  Future<void> playSound(String path) async {
+    try {
+      await _audioPlayer.stop(); // ✅ 재생 중이면 정지
+      await _audioPlayer.setAsset(path);
+      await _audioPlayer.play();
+    } catch (e) {
+      print('오디오 재생 오류: $e');
+    }
+  }
+
+  Future<void> stopSound() async {
+    try {
+      await _audioPlayer.stop();
+    } catch (e) {
+      print('오디오 정지 오류: $e');
+    }
+  }
+
+
+
+  void onEvent(RoutineActionEvent event)async {
     switch (event) {
       case StartRoutine():
         _state = _state.copyWith(isStarted: true, currentStepIndex: 0);
@@ -34,11 +56,19 @@ class RoutineActionViewModel with ChangeNotifier {
         timerController.resume();
         break;
       case NextStep():
+        await stopSound();
         _handleNextStep();
         break;
       case PreviousStep():
+        await stopSound();
         _handlePreviousStep();
         break;
+      case TimerFinished():
+        if (event.audioPath != null && event.audioPath!.isNotEmpty) {
+          await playSound(event.audioPath!);
+        }
+      case MoveToNextStep():
+        await stopSound();
     }
     notifyListeners();
   }
@@ -82,5 +112,10 @@ class RoutineActionViewModel with ChangeNotifier {
 
   void consumeEffect() {
     _effect = null;
+  }
+
+  void dispose() {
+    _audioPlayer.dispose(); // ✅ 메모리 누수 방지
+    // (기존 dispose 코드 있으면 같이)
   }
 }
