@@ -56,20 +56,26 @@ class RoutineAddViewModel with ChangeNotifier {
 
   void updateSoundPath(String path) async {
     // 1. 상태 업데이트
-    _state = _state.copyWith(soundFilePath: path);
-    notifyListeners();
+    if (state.soundFilePath != path) {
+      _state = _state.copyWith(soundFilePath: path);
+      notifyListeners();
 
-    try {
-      // 2. 현재 재생 중인 음악 멈추기
+      try {
+        // 2. 현재 재생 중인 음악 멈추기
+        await _audioPlayer.stop();
+
+        // 3. 새 음악 파일 설정
+        await _audioPlayer.setAsset(path);
+
+        // 4. 재생
+        _audioPlayer.play();
+      } catch (e) {
+        print('음악 재생 실패: $e');
+      }
+    }else{
       await _audioPlayer.stop();
-
-      // 3. 새 음악 파일 설정
-      await _audioPlayer.setAsset(path);
-
-      // 4. 재생
-      _audioPlayer.play();
-    } catch (e) {
-      print('음악 재생 실패: $e');
+      _state = _state.copyWith(soundFilePath: '');
+      notifyListeners();
     }
   }
 
