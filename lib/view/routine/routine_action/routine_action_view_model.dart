@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:remind_me_app/domain/domain_model/routine/routine_model.dart';
 import 'routine_action_state.dart';
@@ -10,6 +13,8 @@ class RoutineActionViewModel with ChangeNotifier {
   final PageController pageController = PageController();
   final AudioPlayer _audioPlayer = AudioPlayer();
   final CountDownController timerController = CountDownController();
+
+  Timer? hapticTimer;
 
   RoutineActionState _state = const RoutineActionState();
   RoutineActionState get state => _state;
@@ -39,9 +44,7 @@ class RoutineActionViewModel with ChangeNotifier {
     }
   }
 
-
-
-  void onEvent(RoutineActionEvent event)async {
+  void onEvent(RoutineActionEvent event) async {
     switch (event) {
       case StartRoutine():
         _state = _state.copyWith(isStarted: true, currentStepIndex: 0);
@@ -64,13 +67,39 @@ class RoutineActionViewModel with ChangeNotifier {
         _handlePreviousStep();
         break;
       case TimerFinished():
-        if (event.audioPath != null && event.audioPath!.isNotEmpty) {
-          await playSound(event.audioPath!);
+        if (model.isVibrateMode) {
+          if (await Haptics.canVibrate()) {
+            // 진동 반복 시작
+            hapticTimer = Timer.periodic(Duration(milliseconds: 500), (
+              timer,
+            ) async {
+              await Haptics.vibrate(HapticsType.success);
+            });
+
+            // 3초 후에 자동으로 정지
+            Timer(Duration(seconds: 3), () {
+              hapticTimer?.cancel();
+              hapticTimer = null;
+            });
+          }
+        } else {
+          if (event.audioPath != null && event.audioPath!.isNotEmpty) {
+            await playSound(event.audioPath!);
+          }
         }
       case MoveToNextStep():
-        await stopSound();
+        if (model.isVibrateMode) {
+          stopHaptic();
+        } else {
+          await stopSound();
+        }
     }
     notifyListeners();
+  }
+
+  void stopHaptic() {
+    hapticTimer?.cancel();
+    hapticTimer = null;
   }
 
   Future<void> _handleNextStep() async {
@@ -94,10 +123,7 @@ class RoutineActionViewModel with ChangeNotifier {
       );
       notifyListeners();
     }
-
   }
-
-
 
   void _handlePreviousStep() {
     if (_state.currentStepIndex > 0) {

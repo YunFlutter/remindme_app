@@ -93,6 +93,7 @@ class _RoutineDetailScreenState extends State<RoutineDetailScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Column(
+                  spacing: 5,
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
