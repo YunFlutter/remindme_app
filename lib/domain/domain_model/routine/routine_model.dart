@@ -10,7 +10,8 @@ class RoutineModel {
   final bool isFavorite;
   final List<String> tags;
   final DateTime? lastCompletedDate;
-  final String? audioPath; // ✅ 추가된 필드
+  final String? audioPath;
+  final bool isVibrateMode;
 
   const RoutineModel({
     required this.id,
@@ -24,10 +25,12 @@ class RoutineModel {
     this.isFavorite = false,
     this.tags = const [],
     this.lastCompletedDate,
-    this.audioPath, // ✅ 생성자에도 추가
+    this.audioPath,
+    this.isVibrateMode = false,
   });
 
   RoutineModel copyWith({
+    int? id,
     String? title,
     List<Map<String, dynamic>>? steps,
     String? badgeColor,
@@ -38,8 +41,8 @@ class RoutineModel {
     bool? isFavorite,
     List<String>? tags,
     DateTime? lastCompletedDate,
-    int? id,
-    String? audioPath, // ✅ copyWith에도 추가
+    String? audioPath,
+    bool? isVibrateMode,
   }) {
     return RoutineModel(
       id: id ?? this.id,
@@ -53,12 +56,13 @@ class RoutineModel {
       isFavorite: isFavorite ?? this.isFavorite,
       tags: tags ?? this.tags,
       lastCompletedDate: lastCompletedDate ?? this.lastCompletedDate,
-      audioPath: audioPath ?? this.audioPath, // ✅ 반영
+      audioPath: audioPath ?? this.audioPath,
+      isVibrateMode: isVibrateMode ?? this.isVibrateMode,
     );
   }
 
   @override
   String toString() {
-    return 'RoutineModel{id: $id, title: $title, steps: $steps, badgeColor: $badgeColor, routineColor: $routineColor, time: $time, routineIconName: $routineIconName, isCompletedToday: $isCompletedToday, isFavorite: $isFavorite, tags: $tags, lastCompletedDate: $lastCompletedDate, audioPath: $audioPath}';
+    return 'RoutineModel{id: $id, title: $title, steps: $steps, badgeColor: $badgeColor, routineColor: $routineColor, time: $time, routineIconName: $routineIconName, isCompletedToday: $isCompletedToday, isFavorite: $isFavorite, tags: $tags, lastCompletedDate: $lastCompletedDate, audioPath: $audioPath, isVibrateMode: $isVibrateMode}';
   }
 }

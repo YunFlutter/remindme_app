@@ -81,6 +81,13 @@ class RoutineDetailViewModel with ChangeNotifier {
             break;
         }
         break;
+      case toggleVibrateMode():
+        await _routineRepository.toggleVibrateMode(
+          routineId: action.routineId,
+          isVibrateMode: action.isVibrateMode,
+        );
+        _state = state.copyWith(model: state.model.copyWith(isVibrateMode: action.isVibrateMode));
+        notifyListeners();
     }
   }
 }

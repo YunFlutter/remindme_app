@@ -10,9 +10,10 @@ RoutineDataModel routineToDataModel(RoutineModel model) {
     routineColor: model.routineColor,
     steps: model.steps,
     id: model.id.toString(),
-    isCompletedToday: model.isCompletedToday, // ⭐ 추가
-    lastCompletedDate: model.lastCompletedDate, // ⭐ 추가
-    audioPath: model.audioPath, // ✅ audioPath 추가
+    isCompletedToday: model.isCompletedToday,
+    lastCompletedDate: model.lastCompletedDate,
+    audioPath: model.audioPath,
+    isVibrateMode: model.isVibrateMode,
   );
 }
 
@@ -25,10 +26,11 @@ RoutineModel dataModelToRoutine(RoutineDataModel model) {
     routineColor: model.routineColor,
     time: model.time,
     routineIconName: model.routineIconName,
-    isCompletedToday: model.isCompletedToday, // ⭐ 추가
-    isFavorite: false, // ❗ 여긴 따로 관리하고 있다면 기본값 false
-    tags: [], // ❗ 기본 빈 리스트
-    lastCompletedDate: model.lastCompletedDate, // ⭐ 추가
-    audioPath: model.audioPath, // ✅ audioPath 추가
+    isCompletedToday: model.isCompletedToday,
+    isFavorite: false,
+    tags: [],
+    lastCompletedDate: model.lastCompletedDate,
+    audioPath: model.audioPath,
+    isVibrateMode: model.isVibrateMode,
   );
 }

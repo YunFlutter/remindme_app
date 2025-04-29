@@ -189,4 +189,24 @@ class RoutineRepositoryImpl implements RoutineRepository {
       return Result.error('루틴 스탭 수정 실패: $e');
     }
   }
+
+  @override
+  Future<Result<void, String>> toggleVibrateMode({
+    required int routineId,
+    required bool isVibrateMode,
+  }) async {
+    try {
+      final dataModel = _box.get(routineId);
+      if (dataModel == null) {
+        return Result.error('루틴을 찾을 수 없습니다. (id: $routineId)');
+      }
+
+      final updatedModel = dataModel.copyWith(isVibrateMode: isVibrateMode);
+      await _box.put(routineId, updatedModel);
+
+      return Result.success(null);
+    } catch (e) {
+      return Result.error('진동 모드 변경 실패: $e');
+    }
+  }
 }

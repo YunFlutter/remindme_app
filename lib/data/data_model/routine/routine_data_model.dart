@@ -26,13 +26,16 @@ class RoutineDataModel {
   final String id;
 
   @HiveField(7)
-  final bool isCompletedToday; // ⭐ 오늘 완료 여부
+  final bool isCompletedToday;
 
   @HiveField(8)
-  final DateTime? lastCompletedDate; // ⭐ 마지막 완료한 날짜
+  final DateTime? lastCompletedDate;
 
   @HiveField(9)
-  final String? audioPath; // ✅ 추가된 오디오 경로 필드
+  final String? audioPath;
+
+  @HiveField(10)
+  final bool isVibrateMode;
 
   RoutineDataModel({
     required this.title,
@@ -44,7 +47,8 @@ class RoutineDataModel {
     required this.id,
     this.isCompletedToday = false,
     this.lastCompletedDate,
-    this.audioPath, // ✅ 생성자에도 추가
+    this.audioPath,
+    this.isVibrateMode = false,
   });
 
   RoutineDataModel copyWith({
@@ -57,7 +61,8 @@ class RoutineDataModel {
     String? id,
     bool? isCompletedToday,
     DateTime? lastCompletedDate,
-    String? audioPath, // ✅ copyWith에도 추가
+    String? audioPath,
+    bool? isVibrateMode,
   }) {
     return RoutineDataModel(
       title: title ?? this.title,
@@ -69,7 +74,8 @@ class RoutineDataModel {
       id: id ?? this.id,
       isCompletedToday: isCompletedToday ?? this.isCompletedToday,
       lastCompletedDate: lastCompletedDate ?? this.lastCompletedDate,
-      audioPath: audioPath ?? this.audioPath, // ✅ 반영
+      audioPath: audioPath ?? this.audioPath,
+      isVibrateMode: isVibrateMode ?? this.isVibrateMode,
     );
   }
 }
