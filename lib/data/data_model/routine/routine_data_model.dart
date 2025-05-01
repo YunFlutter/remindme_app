@@ -37,6 +37,9 @@ class RoutineDataModel {
   @HiveField(10)
   final bool isVibrateMode;
 
+  @HiveField(11)
+  final bool isAlarmEnabled;
+
   RoutineDataModel({
     required this.title,
     required this.time,
@@ -49,6 +52,7 @@ class RoutineDataModel {
     this.lastCompletedDate,
     this.audioPath,
     this.isVibrateMode = false,
+    this.isAlarmEnabled = true,
   });
 
   RoutineDataModel copyWith({
@@ -63,6 +67,7 @@ class RoutineDataModel {
     DateTime? lastCompletedDate,
     String? audioPath,
     bool? isVibrateMode,
+    bool? isAlarmEnabled,
   }) {
     return RoutineDataModel(
       title: title ?? this.title,
@@ -76,6 +81,7 @@ class RoutineDataModel {
       lastCompletedDate: lastCompletedDate ?? this.lastCompletedDate,
       audioPath: audioPath ?? this.audioPath,
       isVibrateMode: isVibrateMode ?? this.isVibrateMode,
+      isAlarmEnabled: isAlarmEnabled ?? this.isAlarmEnabled,
     );
   }
 }

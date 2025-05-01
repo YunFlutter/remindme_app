@@ -14,6 +14,7 @@ RoutineDataModel routineToDataModel(RoutineModel model) {
     lastCompletedDate: model.lastCompletedDate,
     audioPath: model.audioPath,
     isVibrateMode: model.isVibrateMode,
+    isAlarmEnabled: model.isAlarmEnabled,
   );
 }
 
@@ -32,5 +33,6 @@ RoutineModel dataModelToRoutine(RoutineDataModel model) {
     lastCompletedDate: model.lastCompletedDate,
     audioPath: model.audioPath,
     isVibrateMode: model.isVibrateMode,
+    isAlarmEnabled: model.isAlarmEnabled,
   );
 }

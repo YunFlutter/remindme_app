@@ -29,7 +29,7 @@ class OnboardingScreen extends StatelessWidget {
                   child: PageView.builder(
                     controller: viewModel.pageController,
                     onPageChanged: viewModel.setPageInt,
-                    itemCount: 3,
+                    itemCount: 2,
                     itemBuilder: (_, index) {
                       return buildPage(context: context, index: index);
                     },

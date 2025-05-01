@@ -45,7 +45,7 @@ class RoutineCard extends StatelessWidget {
                       ),
                       child: LucideIconWidget(
                         icon: cardModel.icons,
-                        color: getContrastingTextColor(cardModel.badgeColor),
+                        color: adjustColorBrightness(cardModel.badgeColor),
                       ),
                     ),
                     Flexible(
@@ -77,20 +77,6 @@ class RoutineCard extends StatelessWidget {
                         ],
                       ),
                     ),
-                    // Flexible(
-                    //   flex: 1,
-                    //   child: PrimaryButton(
-                    //     buttonText: '시작하기',
-                    //     buttonActive: true,
-                    //     buttonColor: cardModel.badgeColor,
-                    //     textColor: getContrastingTextColor(cardModel.badgeColor),
-                    //     borderRadius: 80,
-                    //     onTap: (){
-                    //       // context.push('/routine-active', extra: cardModel);
-                    //       print(cardModel);
-                    //     },
-                    //   ),
-                    // ),
                   ],
                 ),
               ),
