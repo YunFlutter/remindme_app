@@ -34,8 +34,13 @@ Future<void> initializeNotification() async {
       );
       switch (result) {
         case Success<RoutineModel, String>():
-          GoRouter.of(navigatorKey.currentContext!).go('/home');
-          GoRouter.of(navigatorKey.currentContext!).push('/routine-detail', extra: result.data);
+          if(navigatorKey.currentContext!.canPop()) {
+            GoRouter.of(navigatorKey.currentContext!).push('/routine-detail', extra: result.data);
+          }else{
+            GoRouter.of(navigatorKey.currentContext!).go('/home');
+            GoRouter.of(navigatorKey.currentContext!).push('/routine-detail', extra: result.data);
+          }
+
         case Error<RoutineModel, String>():
           print("Error ${result.error}");
       }
