@@ -39,6 +39,7 @@ class HomeViewModel with ChangeNotifier {
 
     switch (routineListResult) {
       case Success(:final data): // Success(data)
+        data.sort((a,b) => a.id.compareTo(b.id));
         _state = state.copyWith(routineList: data);
         notifyListeners();
         break;

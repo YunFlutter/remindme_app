@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:remind_me_app/core/result/result.dart';
+import 'package:remind_me_app/core/service/notifications/notifications_service.dart';
 import 'package:remind_me_app/domain/domain_model/routine/routine_model.dart';
 import 'package:remind_me_app/domain/domain_model/routine/routine_step_model.dart';
 import 'package:remind_me_app/domain/repository/routine/routine_repository.dart';
@@ -72,7 +73,7 @@ class RoutineAddViewModel with ChangeNotifier {
       } catch (e) {
         print('음악 재생 실패: $e');
       }
-    }else{
+    } else {
       await _audioPlayer.stop();
       _state = _state.copyWith(soundFilePath: '');
       notifyListeners();

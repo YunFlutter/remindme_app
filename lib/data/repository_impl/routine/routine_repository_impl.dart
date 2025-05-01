@@ -1,5 +1,6 @@
 import 'package:hive_ce/hive.dart';
 import 'package:remind_me_app/core/result/result.dart';
+import 'package:remind_me_app/core/service/notifications/notifications_service.dart';
 import 'package:remind_me_app/data/data_model/routine/routine_data_model.dart';
 import 'package:remind_me_app/data/mapper/routine/routine_mapper.dart';
 import 'package:remind_me_app/domain/domain_model/routine/routine_model.dart';
@@ -27,6 +28,17 @@ class RoutineRepositoryImpl implements RoutineRepository {
       final dataModel = routineToDataModel(model.copyWith(id: id));
 
       await _box.put(id, dataModel);
+      if (dataModel.isAlarmEnabled) {
+        await scheduleRoutineNotification(
+          notificationId: dataModel.id.hashCode,
+          title: '🕒 ${dataModel.title}루틴 시간이에요!',
+          body: '루틴을 시작할 시간이에요.',
+          hour: int.parse(dataModel.time.split(':')[0]),
+          minute: int.parse(dataModel.time.split(':')[1]),
+          routineId: dataModel.id.toString(),
+        );
+        await printAllScheduledNotifications();
+      }
       return Result.success(null);
     } catch (e) {
       return Result.error('루틴 저장 실패: $e');
@@ -85,10 +97,9 @@ class RoutineRepositoryImpl implements RoutineRepository {
   @override
   Future<Result<RoutineModel, String>> getRoutineById(String id) async {
     try {
-      final dataModel = _box.get(id);
-      if (dataModel == null) {
-        return Result.error('루틴을 찾을 수 없습니다.');
-      }
+      final list = _box.values.toList();
+      final RoutineDataModel dataModel = list.firstWhere((items) => items.id == id);
+
       return Result.success(dataModelToRoutine(dataModel));
     } catch (e) {
       return Result.error('루틴 조회 실패: $e');

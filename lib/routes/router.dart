@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hive_ce/hive.dart';
 import 'package:remind_me_app/core/hive/hive_box.dart';
 import 'package:remind_me_app/core/service/di_setup.dart';
+import 'package:remind_me_app/core/service/notifications/initialize_constants.dart';
 import 'package:remind_me_app/core/themes/app_colors.dart';
 import 'package:remind_me_app/core/widgets/custom_navigation_bar.dart';
 import 'package:remind_me_app/data/data_model/user/user_data_model.dart';
@@ -29,6 +30,7 @@ import 'package:remind_me_app/view/splash/splash_view_model.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: Routes.splash,
+  navigatorKey: navigatorKey,
   routes: [
     GoRoute(
       path: Routes.splash,
