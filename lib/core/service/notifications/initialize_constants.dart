@@ -37,11 +37,21 @@ final DarwinInitializationSettings initializationSettingsDarwin =
     );
 
 const AndroidInitializationSettings initializationSettingsAndroid =
-AndroidInitializationSettings('app_icon'); // 확장자 없이 이름만!
+    AndroidInitializationSettings('@mipmap/ic_launcher');
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
+final androidDetails = AndroidNotificationDetails(
+  'routine_channel_id', // 채널 ID (필수)
+  '루틴 알림', // 채널 이름 (필수)
+  channelDescription: '루틴 알림 설명',
+  importance: Importance.max, // ✅ null이면 crash
+  priority: Priority.high, // ✅ null이면 crash
+  playSound: false,
+  enableVibration: true,
+);
+
 final InitializationSettings settings = InitializationSettings(
   iOS: initializationSettingsDarwin,
-  android: initializationSettingsAndroid
+  android: initializationSettingsAndroid,
 );

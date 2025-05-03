@@ -19,6 +19,8 @@ class RoutineAddState with _$RoutineAddState {
   @override
   final bool isSubmitting;
   @override
+  final bool isAlarmSetting;
+  @override
   final List<Map<String, dynamic>> steps;
   @override
   final bool isSuccess;
@@ -47,6 +49,7 @@ class RoutineAddState with _$RoutineAddState {
     this.badgeColor = '#91B8F7',
     this.routineColor = '#A0C4FF',
     this.isAnimatedVisible = true,
+    this.isAlarmSetting = true,
     this.isSubmitting = false,
     this.isSuccess = false,
     this.steps = const [],

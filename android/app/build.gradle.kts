@@ -13,6 +13,7 @@ plugins {
     id("kotlin-android")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
+//    id("com.android.application") version "8.6.0" apply false
 }
 
 
@@ -21,8 +22,10 @@ android {
     namespace = "com.yunseo.remindmeApp"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = "27.0.12077973"
+    compileSdk = 35
 
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
@@ -68,6 +71,9 @@ android {
         getByName("main") {
             assets.srcDirs("src/main/assets", "build/flutter_assets") // 🔥 추가
         }
+    }
+    dependencies {
+        coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
     }
 
 

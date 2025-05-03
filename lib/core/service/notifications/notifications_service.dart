@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:go_router/go_router.dart';
@@ -24,21 +25,35 @@ Future<void> setupTimezone() async {
 }
 
 Future<void> initializeNotification() async {
+  if (Platform.isAndroid) {
+    flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >()
+        ?.requestNotificationsPermission();
+  }
+
   await flutterLocalNotificationsPlugin.initialize(
     settings,
     onDidReceiveNotificationResponse: (response) async {
       print(response.payload);
-      final RoutineRepository test = RoutineRepositoryImpl(box: HiveBox().routineBox);
+      final RoutineRepository test = RoutineRepositoryImpl(
+        box: HiveBox().routineBox,
+      );
       final Result<RoutineModel, String> result = await test.getRoutineById(
         response.payload.toString(),
       );
       switch (result) {
         case Success<RoutineModel, String>():
-          if(navigatorKey.currentContext!.canPop()) {
-            GoRouter.of(navigatorKey.currentContext!).push('/routine-detail', extra: result.data);
-          }else{
+          if (navigatorKey.currentContext!.canPop()) {
+            GoRouter.of(
+              navigatorKey.currentContext!,
+            ).push('/routine-detail', extra: result.data);
+          } else {
             GoRouter.of(navigatorKey.currentContext!).go('/home');
-            GoRouter.of(navigatorKey.currentContext!).push('/routine-detail', extra: result.data);
+            GoRouter.of(
+              navigatorKey.currentContext!,
+            ).push('/routine-detail', extra: result.data);
           }
 
         case Error<RoutineModel, String>():
@@ -96,6 +111,7 @@ Future<void> scheduleRoutineNotification({
     scheduled,
     NotificationDetails(
       iOS: DarwinNotificationDetails(categoryIdentifier: 'routineCategory'),
+      android: androidDetails,
     ),
     payload: routineId,
     androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,

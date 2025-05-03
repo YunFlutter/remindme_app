@@ -7,6 +7,7 @@ class CustomTextField extends StatefulWidget {
   CustomTextField({
     super.key,
     this.focusNode,
+    this.enabled,
     this.textEditingController,
     this.suffixIconDisplay = false,
     this.onSubmitEvent,
@@ -16,6 +17,7 @@ class CustomTextField extends StatefulWidget {
   });
 
   final FocusNode? focusNode;
+  final bool? enabled;
   final TextEditingController? textEditingController;
   final void Function(String text)? onSubmitEvent;
   final void Function(String text)? onChangeEvent;
@@ -33,6 +35,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      enabled: widget.enabled,
       onChanged: widget.onChangeEvent ?? (text) {},
       obscureText: widget.suffixIconDisplay == false ? false : obscureText,
       focusNode: widget.focusNode,

@@ -27,7 +27,17 @@ class RoutineRepositoryImpl implements RoutineRepository {
 
       final dataModel = routineToDataModel(model.copyWith(id: id));
 
-      await _box.put(id, dataModel);
+      print("dataModel $dataModel");
+
+      final putData = await _box.put(id, dataModel);
+      if (int.parse(dataModel.time.split(':')[0]) == null || int.parse(dataModel.time.split(':')[1]) == null) {
+        return Result.error('시간 값이 잘못되었습니다');
+      }
+      if (dataModel.id.hashCode == null || dataModel.id == null || dataModel.title == null) {
+        return Result.error('알림 등록에 필요한 값이 누락됨');
+      }
+
+
       if (dataModel.isAlarmEnabled) {
         await scheduleRoutineNotification(
           notificationId: dataModel.id.hashCode,
@@ -98,7 +108,9 @@ class RoutineRepositoryImpl implements RoutineRepository {
   Future<Result<RoutineModel, String>> getRoutineById(String id) async {
     try {
       final list = _box.values.toList();
-      final RoutineDataModel dataModel = list.firstWhere((items) => items.id == id);
+      final RoutineDataModel dataModel = list.firstWhere(
+        (items) => items.id == id,
+      );
 
       return Result.success(dataModelToRoutine(dataModel));
     } catch (e) {

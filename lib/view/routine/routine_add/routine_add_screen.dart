@@ -1,3 +1,4 @@
+import 'package:bottom_picker/bottom_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
@@ -79,8 +80,74 @@ class _RoutineAddScreenState extends State<RoutineAddScreen> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Text('시작 시간(ex:17:00)', style: AppTextStyles.caption()),
-                        CustomTextField(
-                          onChangeEvent: widget.viewModel.updateTime,
+                        GestureDetector(
+                          onTap: () {
+                            BottomPicker.time(
+                              pickerTitle: Text(
+                                "시작 시간을 선택해주세요",
+                                textAlign: TextAlign.center,
+                              ),
+                              use24hFormat: true,
+                              initialTime: Time(
+                                minutes: DateTime.now().minute,
+                                hours: DateTime.now().hour,
+                              ),
+                              maxTime: Time(hours: 17),
+
+                              buttonContent: Text(
+                                '선택',
+                                style: TextStyle(color: AppColors.baseWhite),
+                                textAlign: TextAlign.center,
+                              ),
+                              onSubmit: (value) {
+                                final selectDate =  DateTime.parse(value.toString());
+                                widget.viewModel.updateTime("${selectDate.hour}:${selectDate.minute < 10 ? '0${selectDate.minute}' : selectDate.minute}");
+                              },
+                            ).show(context);
+                          },
+                          child: Container(
+                            height: 56,
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 16,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(color: AppColors.grayText),
+                            ),
+                            child: Text(widget.viewModel.state.time),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Column(
+                          spacing: 5,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('알림 설정', style: AppTextStyles.headingL()),
+                            Text(
+                              '설정한 시간에 앱 알림을 보내드립니다',
+                              style: AppTextStyles.caption(),
+                            ),
+                          ],
+                        ),
+                        Switch(
+                          value: widget.viewModel.state.isAlarmSetting,
+                          activeColor: AppColors.primaryBlue,
+                          trackOutlineColor: WidgetStateProperty.resolveWith<
+                            Color?
+                          >((Set<WidgetState> states) {
+                            return Colors.transparent; // Use the default color.
+                          }),
+                          onChanged: (value) {
+                            widget.viewModel.toggleAlarmSetting();
+                          },
                         ),
                       ],
                     ),

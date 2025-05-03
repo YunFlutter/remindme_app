@@ -36,6 +36,11 @@ class RoutineAddViewModel with ChangeNotifier {
     notifyListeners();
   }
 
+  void toggleAlarmSetting() {
+    _state = _state.copyWith(isAlarmSetting: !_state.isAlarmSetting);
+    notifyListeners();
+  }
+
   void updateRoutineIcon(String iconName) {
     _state = _state.copyWith(routineIconName: iconName);
     notifyListeners();
@@ -138,6 +143,7 @@ class RoutineAddViewModel with ChangeNotifier {
       time: state.time,
       routineIconName: state.routineIconName,
       audioPath: state.soundFilePath,
+      isAlarmEnabled: state.isAlarmSetting
     );
 
     final result = await _routineRepository.addRoutine(routine);

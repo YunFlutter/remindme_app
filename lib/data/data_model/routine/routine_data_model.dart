@@ -84,4 +84,9 @@ class RoutineDataModel {
       isAlarmEnabled: isAlarmEnabled ?? this.isAlarmEnabled,
     );
   }
+
+  @override
+  String toString() {
+    return 'RoutineDataModel{title: $title, time: $time, routineIconName: $routineIconName, badgeColor: $badgeColor, routineColor: $routineColor, steps: $steps, id: $id, isCompletedToday: $isCompletedToday, lastCompletedDate: $lastCompletedDate, audioPath: $audioPath, isVibrateMode: $isVibrateMode, isAlarmEnabled: $isAlarmEnabled}';
+  }
 }
