@@ -25,4 +25,9 @@ sealed class RoutineDetailAction with _$RoutineDetailAction {
     required int routineId,
     required bool isVibrateMode,
   }) = toggleVibrateMode;
+
+  const factory RoutineDetailAction.toggleAlarm({
+    required int routineId,
+    required bool isAlarm,
+  }) = toggleAlarm;
 }

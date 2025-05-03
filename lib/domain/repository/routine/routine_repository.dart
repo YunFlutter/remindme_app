@@ -25,4 +25,8 @@ abstract interface class RoutineRepository {
     required int routineId,
     required bool isVibrateMode,
   });
+  Future<Result<void, String>> toggleAlarmMode({
+    required int routineId,
+    required bool isAlarm,
+  });
 }

@@ -124,6 +124,43 @@ class _RoutineDetailScreenState extends State<RoutineDetailScreen> {
               ],
             ),
             const SizedBox(height: 20),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Column(
+                  spacing: 5,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('알림 설정', style: AppTextStyles.headingL()),
+                    Text(
+                      '설정한 시간에 앱 알림을 보내드립니다',
+                      style: AppTextStyles.caption(),
+                    ),
+                  ],
+                ),
+                Switch(
+                  value: widget.state.model.isAlarmEnabled,
+                  activeColor: AppColors.primaryBlue,
+                  trackOutlineColor: WidgetStateProperty.resolveWith<Color?>((
+                    Set<WidgetState> states,
+                  ) {
+                    return Colors.transparent; // Use the default color.
+                  }),
+                  onChanged: (value) {
+                    widget.onAction(
+                      RoutineDetailAction.toggleAlarm(
+                        routineId: widget.state.model.id,
+                        isAlarm: value,
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
             // 스탭 리스트 제목
             Text('루틴 스탭', style: AppTextStyles.headingL()),
 

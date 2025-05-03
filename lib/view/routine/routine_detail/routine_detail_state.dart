@@ -18,6 +18,7 @@ class RoutineDetailState with _$RoutineDetailState {
       routineColor: '#ffffff',
       time: 'time',
       routineIconName: 'routineIconName',
+      isAlarmEnabled: true
     ),
   });
 }

@@ -1,5 +1,6 @@
 import 'package:hive_ce/hive.dart';
 import 'package:remind_me_app/core/result/result.dart';
+import 'package:remind_me_app/core/service/notifications/initialize_constants.dart';
 import 'package:remind_me_app/core/service/notifications/notifications_service.dart';
 import 'package:remind_me_app/data/data_model/routine/routine_data_model.dart';
 import 'package:remind_me_app/data/mapper/routine/routine_mapper.dart';
@@ -30,13 +31,15 @@ class RoutineRepositoryImpl implements RoutineRepository {
       print("dataModel $dataModel");
 
       final putData = await _box.put(id, dataModel);
-      if (int.parse(dataModel.time.split(':')[0]) == null || int.parse(dataModel.time.split(':')[1]) == null) {
+      if (int.parse(dataModel.time.split(':')[0]) == null ||
+          int.parse(dataModel.time.split(':')[1]) == null) {
         return Result.error('시간 값이 잘못되었습니다');
       }
-      if (dataModel.id.hashCode == null || dataModel.id == null || dataModel.title == null) {
+      if (dataModel.id.hashCode == null ||
+          dataModel.id == null ||
+          dataModel.title == null) {
         return Result.error('알림 등록에 필요한 값이 누락됨');
       }
-
 
       if (dataModel.isAlarmEnabled) {
         await scheduleRoutineNotification(
@@ -92,11 +95,19 @@ class RoutineRepositoryImpl implements RoutineRepository {
   @override
   Future<Result<void, String>> deleteRoutine(int index) async {
     try {
+      final dataModel = _box.get(index);
+      if (dataModel == null) {
+        return Result.error('루틴을 찾을 수 없습니다. (id: $index)');
+      }
+
+       await flutterLocalNotificationsPlugin.cancel(dataModel.id.hashCode);
+
       if (!_box.containsKey(index)) {
         return Result.error('삭제할 루틴이 존재하지 않습니다. (index: $index)');
       }
 
       await _box.delete(index);
+
       return Result.success(null);
     } catch (e) {
       return Result.error('루틴 삭제 실패: $e');
@@ -225,6 +236,42 @@ class RoutineRepositoryImpl implements RoutineRepository {
       }
 
       final updatedModel = dataModel.copyWith(isVibrateMode: isVibrateMode);
+      await _box.put(routineId, updatedModel);
+
+      return Result.success(null);
+    } catch (e) {
+      return Result.error('진동 모드 변경 실패: $e');
+    }
+  }
+
+  @override
+  Future<Result<void, String>> toggleAlarmMode({
+    required int routineId,
+    required bool isAlarm,
+  }) async {
+    try {
+      final dataModel = _box.get(routineId);
+      if (dataModel == null) {
+        return Result.error('루틴을 찾을 수 없습니다. (id: $routineId)');
+      }
+
+      final updatedModel = dataModel.copyWith(isVibrateMode: isAlarm);
+
+      if (isAlarm == false) {
+        await flutterLocalNotificationsPlugin.cancel(updatedModel.id.hashCode);
+      } else {
+        await scheduleRoutineNotification(
+          notificationId: dataModel.id.hashCode,
+          title: '🕒 ${dataModel.title}루틴 시간이에요!',
+          body: '루틴을 시작할 시간이에요.',
+          hour: int.parse(dataModel.time.split(':')[0]),
+          minute: int.parse(dataModel.time.split(':')[1]),
+          routineId: dataModel.id.toString(),
+        );
+      }
+
+      await printAllScheduledNotifications();
+
       await _box.put(routineId, updatedModel);
 
       return Result.success(null);
