@@ -100,8 +100,12 @@ class _RoutineAddScreenState extends State<RoutineAddScreen> {
                                 textAlign: TextAlign.center,
                               ),
                               onSubmit: (value) {
-                                final selectDate =  DateTime.parse(value.toString());
-                                widget.viewModel.updateTime("${selectDate.hour}:${selectDate.minute < 10 ? '0${selectDate.minute}' : selectDate.minute}");
+                                final selectDate = DateTime.parse(
+                                  value.toString(),
+                                );
+                                widget.viewModel.updateTime(
+                                  "${selectDate.hour < 10 ? '0${selectDate.hour}' : selectDate.hour}:${selectDate.minute < 10 ? '0${selectDate.minute}' : selectDate.minute}",
+                                );
                               },
                             ).show(context);
                           },

@@ -24,4 +24,6 @@ sealed class RoutineActionEvent with _$RoutineActionEvent {
   const factory RoutineActionEvent.timerFinished({required String? audioPath}) =
       TimerFinished;
   const factory RoutineActionEvent.moveToNextStep() = MoveToNextStep;
+
+  const factory RoutineActionEvent.musicStop() = musicStop;
 }

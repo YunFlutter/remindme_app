@@ -60,7 +60,7 @@ class RoutineActionScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 final step = steps[index];
                 final title = step['title'] ?? '제목 없음';
-                final duration = int.parse(step['time']) * 60;
+                final duration = int.parse(step['time'].toString()) * 60;
 
                 return Column(
                   spacing: 20,
@@ -162,6 +162,7 @@ class RoutineActionScreen extends StatelessWidget {
                     buttonText: '루틴 종료',
                     buttonActive: state.currentStepIndex == steps.length - 1,
                     onTap: () {
+                      onAction(const RoutineActionEvent.musicStop());
                       showRoutineCompleteDialog(
                         context,
                         routineId: model.id.toString(),

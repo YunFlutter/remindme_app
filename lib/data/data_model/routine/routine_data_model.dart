@@ -89,4 +89,23 @@ class RoutineDataModel {
   String toString() {
     return 'RoutineDataModel{title: $title, time: $time, routineIconName: $routineIconName, badgeColor: $badgeColor, routineColor: $routineColor, steps: $steps, id: $id, isCompletedToday: $isCompletedToday, lastCompletedDate: $lastCompletedDate, audioPath: $audioPath, isVibrateMode: $isVibrateMode, isAlarmEnabled: $isAlarmEnabled}';
   }
+
+  factory RoutineDataModel.fromJson(Map<String, dynamic> json) {
+    return RoutineDataModel(
+      title: json["title"],
+      time: json["time"],
+      routineIconName: json["routineIconName"],
+      badgeColor: json["badgeColor"],
+      routineColor: json["routineColor"],
+      steps: List<Map<String, dynamic>>.from(
+        (json['steps'] as List).map((e) => Map<String, dynamic>.from(e)),
+      ),
+      id: json["id"],
+      isCompletedToday: json["isCompletedToday"].toLowerCase() == 'true',
+      lastCompletedDate: DateTime.parse(json["lastCompletedDate"]),
+      audioPath: json["audioPath"] ??  json["audioPath"],
+      isVibrateMode: json["isVibrateMode"] != null ? json["isVibrateMode"].toLowerCase() == 'true' : true,
+      isAlarmEnabled: json["isAlarmEnabled"] != null ? json["isAlarmEnabled"].toLowerCase() == 'true' : true,
+    );
+  }
 }

@@ -49,22 +49,27 @@ class RoutineActionViewModel with ChangeNotifier {
       case StartRoutine():
         _state = _state.copyWith(isStarted: true, currentStepIndex: 0);
         timerController.start();
+        notifyListeners();
         break;
       case PauseRoutine():
         _state = _state.copyWith(isPaused: true);
         timerController.pause();
+        notifyListeners();
         break;
       case ResumeRoutine():
         _state = _state.copyWith(isPaused: false);
         timerController.resume();
+        notifyListeners();
         break;
       case NextStep():
         await stopSound();
         _handleNextStep();
+        notifyListeners();
         break;
       case PreviousStep():
         await stopSound();
         _handlePreviousStep();
+        notifyListeners();
         break;
       case TimerFinished():
         if (model.isVibrateMode) {
@@ -93,8 +98,11 @@ class RoutineActionViewModel with ChangeNotifier {
         } else {
           await stopSound();
         }
+        notifyListeners();
+      case musicStop():
+        await _audioPlayer.stop();
     }
-    notifyListeners();
+    // notifyListeners();
   }
 
   void stopHaptic() {
