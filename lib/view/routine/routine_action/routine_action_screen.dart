@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:remind_me_app/core/constants/adjust_color_brightness.dart';
 import 'package:remind_me_app/core/service/hex_to_color.dart';
@@ -57,7 +60,7 @@ class RoutineActionScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 final step = steps[index];
                 final title = step['title'] ?? '제목 없음';
-                final duration = int.parse(step['time']) * 60;
+                final duration = int.parse(step['time'].toString()) * 60;
 
                 return Column(
                   spacing: 20,
@@ -74,10 +77,7 @@ class RoutineActionScreen extends StatelessWidget {
                         size: 48,
                       ),
                     ),
-                    Text(
-                      title,
-                      style: AppTextStyles.headingXl(),
-                    ),
+                    Text(title, style: AppTextStyles.headingXl()),
                     const SizedBox(height: 10),
                     Expanded(
                       child: CircularCountDownTimer(
@@ -90,7 +90,9 @@ class RoutineActionScreen extends StatelessWidget {
                         width: MediaQuery.of(context).size.width / 1.5,
                         height: MediaQuery.of(context).size.height / 1.5,
                         ringColor: hexToColor(model.badgeColor),
-                        fillColor: adjustColorBrightness(hexToColor(model.routineColor)),
+                        fillColor: adjustColorBrightness(
+                          hexToColor(model.routineColor),
+                        ),
                         backgroundColor: Colors.white,
                         strokeWidth: 12.0,
                         strokeCap: StrokeCap.round,
@@ -99,9 +101,20 @@ class RoutineActionScreen extends StatelessWidget {
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
                         ),
-                        onComplete: () {
-                          onAction(const RoutineActionEvent.nextStep());
+
+                        onChange: (value) async {
+                          if (value == "00:00") {
+                            onAction(
+                              RoutineActionEvent.timerFinished(
+                                audioPath: model.audioPath,
+                              ),
+                            );
+                          }
                         },
+
+                        // onComplete: () {
+                        //   onAction(RoutineActionEvent.timerFinished(audioPath: model.audioPath));
+                        // },
                       ),
                     ),
                   ],
@@ -135,21 +148,25 @@ class RoutineActionScreen extends StatelessWidget {
                       }
                     },
                   ),
-                if (state.isStarted && state.currentStepIndex < steps.length - 1)
+                if (state.isStarted &&
+                    state.currentStepIndex < steps.length - 1)
                   PrimaryButton(
                     buttonText: '다음 스탭으로',
                     buttonActive: state.isStarted,
                     onTap: () {
                       onAction(const RoutineActionEvent.nextStep());
-
                     },
                   ),
-                if (state.currentStepIndex == steps.length -1)
+                if (state.currentStepIndex == steps.length - 1)
                   PrimaryButton(
                     buttonText: '루틴 종료',
-                    buttonActive: state.currentStepIndex == steps.length -1,
+                    buttonActive: state.currentStepIndex == steps.length - 1,
                     onTap: () {
-                      showRoutineCompleteDialog(context,routineId: model.id.toString());
+                      onAction(const RoutineActionEvent.musicStop());
+                      showRoutineCompleteDialog(
+                        context,
+                        routineId: model.id.toString(),
+                      );
                     },
                   ),
                 const SizedBox(height: 20),

@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:haptic_feedback/haptic_feedback.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:remind_me_app/domain/domain_model/routine/routine_model.dart';
 import 'routine_action_state.dart';
 import 'routine_action_event.dart';
@@ -7,7 +11,10 @@ import 'routine_action_event.dart';
 class RoutineActionViewModel with ChangeNotifier {
   final RoutineModel model;
   final PageController pageController = PageController();
+  final AudioPlayer _audioPlayer = AudioPlayer();
   final CountDownController timerController = CountDownController();
+
+  Timer? hapticTimer;
 
   RoutineActionState _state = const RoutineActionState();
   RoutineActionState get state => _state;
@@ -19,28 +26,88 @@ class RoutineActionViewModel with ChangeNotifier {
 
   List<Map<String, dynamic>> get steps => model.steps;
 
-  void onEvent(RoutineActionEvent event) {
+  Future<void> playSound(String path) async {
+    try {
+      await _audioPlayer.stop(); // ✅ 재생 중이면 정지
+      await _audioPlayer.setAsset(path);
+      await _audioPlayer.play();
+    } catch (e) {
+      print('오디오 재생 오류: $e');
+    }
+  }
+
+  Future<void> stopSound() async {
+    try {
+      await _audioPlayer.stop();
+    } catch (e) {
+      print('오디오 정지 오류: $e');
+    }
+  }
+
+  void onEvent(RoutineActionEvent event) async {
     switch (event) {
       case StartRoutine():
         _state = _state.copyWith(isStarted: true, currentStepIndex: 0);
         timerController.start();
+        notifyListeners();
         break;
       case PauseRoutine():
         _state = _state.copyWith(isPaused: true);
         timerController.pause();
+        notifyListeners();
         break;
       case ResumeRoutine():
         _state = _state.copyWith(isPaused: false);
         timerController.resume();
+        notifyListeners();
         break;
       case NextStep():
+        await stopSound();
         _handleNextStep();
+        notifyListeners();
         break;
       case PreviousStep():
+        await stopSound();
         _handlePreviousStep();
+        notifyListeners();
         break;
+      case TimerFinished():
+        if (model.isVibrateMode) {
+          if (await Haptics.canVibrate()) {
+            // 진동 반복 시작
+            hapticTimer = Timer.periodic(Duration(milliseconds: 500), (
+              timer,
+            ) async {
+              await Haptics.vibrate(HapticsType.success);
+            });
+
+            // 3초 후에 자동으로 정지
+            Timer(Duration(seconds: 3), () {
+              hapticTimer?.cancel();
+              hapticTimer = null;
+            });
+          }
+        } else {
+          if (event.audioPath != null && event.audioPath!.isNotEmpty) {
+            await playSound(event.audioPath!);
+          }
+        }
+      case MoveToNextStep():
+        if (model.isVibrateMode) {
+          stopHaptic();
+        } else {
+          await stopSound();
+        }
+        notifyListeners();
+      case musicStop():
+        await _audioPlayer.stop();
     }
-    notifyListeners();
+    // notifyListeners();
+  }
+
+  void stopHaptic() {
+    hapticTimer?.cancel();
+    hapticTimer = null;
   }
 
   Future<void> _handleNextStep() async {
@@ -64,10 +131,7 @@ class RoutineActionViewModel with ChangeNotifier {
       );
       notifyListeners();
     }
-
   }
-
-
 
   void _handlePreviousStep() {
     if (_state.currentStepIndex > 0) {
@@ -82,5 +146,10 @@ class RoutineActionViewModel with ChangeNotifier {
 
   void consumeEffect() {
     _effect = null;
+  }
+
+  void dispose() {
+    _audioPlayer.dispose(); // ✅ 메모리 누수 방지
+    // (기존 dispose 코드 있으면 같이)
   }
 }

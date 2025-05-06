@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hive_ce/hive.dart';
 import 'package:remind_me_app/core/hive/hive_box.dart';
 import 'package:remind_me_app/core/service/di_setup.dart';
+import 'package:remind_me_app/core/service/notifications/initialize_constants.dart';
 import 'package:remind_me_app/core/themes/app_colors.dart';
 import 'package:remind_me_app/core/widgets/custom_navigation_bar.dart';
 import 'package:remind_me_app/data/data_model/user/user_data_model.dart';
@@ -21,6 +22,7 @@ import 'package:remind_me_app/view/routine/routine_action/routine_action_view_mo
 import 'package:remind_me_app/view/routine/routine_add/routine_add_screen.dart';
 import 'package:remind_me_app/view/routine/routine_add/routine_add_view_model.dart';
 import 'package:remind_me_app/view/routine/routine_detail/routine_detail_screen_root.dart';
+import 'package:remind_me_app/view/show_app_out_dialog.dart';
 import 'package:remind_me_app/view/signUp/sign_up_screen.dart';
 import 'package:remind_me_app/view/signUp/sign_up_view_model.dart';
 import 'package:remind_me_app/view/splash/splash_screen.dart';
@@ -28,6 +30,7 @@ import 'package:remind_me_app/view/splash/splash_view_model.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: Routes.splash,
+  navigatorKey: navigatorKey,
   routes: [
     GoRoute(
       path: Routes.splash,
@@ -100,15 +103,21 @@ final GoRouter router = GoRouter(
     ),
     ShellRoute(
       builder: (context, state, child) {
-        return Scaffold(
-          backgroundColor: AppColors.baseWhite,
-          body: Column(
-            children: [
-              Expanded(child: child),
-              // CustomNavigationBar(
-              //   nowPagePath: GoRouterState.of(context).fullPath.toString(),
-              // ),
-            ],
+        return WillPopScope(
+          onWillPop: () async {
+            final bool result = await showAppOutDialog(context);
+            return result;
+          },
+          child: Scaffold(
+            backgroundColor: AppColors.baseWhite,
+            body: Column(
+              children: [
+                Expanded(child: child),
+                // CustomNavigationBar(
+                //   nowPagePath: GoRouterState.of(context).fullPath.toString(),
+                // ),
+              ],
+            ),
           ),
         );
       },

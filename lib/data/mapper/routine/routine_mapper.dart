@@ -10,21 +10,29 @@ RoutineDataModel routineToDataModel(RoutineModel model) {
     routineColor: model.routineColor,
     steps: model.steps,
     id: model.id.toString(),
-    isCompletedToday: model.isCompletedToday, // ⭐ 추가
-    lastCompletedDate: model.lastCompletedDate, // ⭐ 추가
+    isCompletedToday: model.isCompletedToday,
+    lastCompletedDate: model.lastCompletedDate,
+    audioPath: model.audioPath,
+    isVibrateMode: model.isVibrateMode,
+    isAlarmEnabled: model.isAlarmEnabled,
   );
 }
 
 RoutineModel dataModelToRoutine(RoutineDataModel model) {
   return RoutineModel(
+    id: int.parse(model.id),
     title: model.title,
-    time: model.time,
-    routineIconName: model.routineIconName,
+    steps: model.steps,
     badgeColor: model.badgeColor,
     routineColor: model.routineColor,
-    steps: model.steps,
-    id: int.parse(model.id),
-    isCompletedToday: model.isCompletedToday, // ⭐ 추가
-    lastCompletedDate: model.lastCompletedDate, // ⭐ 추가
+    time: model.time,
+    routineIconName: model.routineIconName,
+    isCompletedToday: model.isCompletedToday,
+    isFavorite: false,
+    tags: [],
+    lastCompletedDate: model.lastCompletedDate,
+    audioPath: model.audioPath,
+    isVibrateMode: model.isVibrateMode,
+    isAlarmEnabled: model.isAlarmEnabled,
   );
 }

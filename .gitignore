@@ -46,3 +46,6 @@ app.*.map.json
 
 *.g.dart
 *.freezed.dart
+
+key.properties
+my-release-key.keystore

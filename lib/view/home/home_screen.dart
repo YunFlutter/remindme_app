@@ -8,6 +8,7 @@ import 'package:remind_me_app/core/widgets/routine_card/routine_card.dart';
 import 'package:remind_me_app/core/widgets/routine_card/routine_card_model.dart';
 import 'package:remind_me_app/routes/routes.dart';
 import 'package:remind_me_app/view/home/home_view_model.dart';
+import 'package:remind_me_app/view/show_app_out_dialog.dart';
 
 class HomeScreen extends StatelessWidget {
   final HomeViewModel viewModel;
@@ -58,7 +59,6 @@ class HomeScreen extends StatelessWidget {
                                             ),
                                             child: RoutineCard(
                                               cardModel: RoutineCardModel(
-
                                                 index: viewModel
                                                     .state
                                                     .routineList
@@ -69,13 +69,16 @@ class HomeScreen extends StatelessWidget {
                                                     extra: items,
                                                   );
                                                 },
-                                                icons: getLucideIconData( items.routineIconName),
+                                                icons: getLucideIconData(
+                                                  items.routineIconName,
+                                                ),
                                                 badgeColor: items.badgeColor,
                                                 badgeBackGroundColor:
                                                     items.routineColor,
                                                 routineTitle: items.title,
                                                 routineTime: items.time,
-                                                isCompletedToday: items.isCompletedToday,
+                                                isCompletedToday:
+                                                    items.isCompletedToday,
                                               ),
                                             ),
                                           ),
@@ -154,18 +157,22 @@ class HomeScreen extends StatelessWidget {
                 ),
                 Align(
                   alignment: Alignment.bottomRight,
-                  child: FloatingActionButton(
-                    backgroundColor: AppColors.primaryBlue,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                    elevation: 2,
-                    onPressed: () {
-                      context.push("/routine-add");
-                    },
-                    child: LucideIconWidget(
-                      icon: LucideIcons.plus,
-                      color: AppColors.baseWhite,
+                  child: Container(
+                    margin: EdgeInsets.only(bottom: 15, right: 15),
+                    child: FloatingActionButton(
+
+                      backgroundColor: AppColors.primaryBlue,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      elevation: 2,
+                      onPressed: () {
+                        context.push("/routine-add");
+                      },
+                      child: LucideIconWidget(
+                        icon: LucideIcons.plus,
+                        color: AppColors.baseWhite,
+                      ),
                     ),
                   ),
                 ),

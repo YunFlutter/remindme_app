@@ -19,6 +19,8 @@ class RoutineAddState with _$RoutineAddState {
   @override
   final bool isSubmitting;
   @override
+  final bool isAlarmSetting;
+  @override
   final List<Map<String, dynamic>> steps;
   @override
   final bool isSuccess;
@@ -34,17 +36,50 @@ class RoutineAddState with _$RoutineAddState {
   TextEditingController titleTextEditingController = TextEditingController();
   @override
   FocusNode titleFocusNode = FocusNode();
+  @override
+  final List<Map<String,dynamic>> soundFiles;
+  @override
+  final String soundFilePath;
 
   RoutineAddState({
     this.title = '',
     this.time = '',
+    this.soundFilePath = '',
     this.routineIconName = 'setting',
     this.badgeColor = '#91B8F7',
     this.routineColor = '#A0C4FF',
     this.isAnimatedVisible = true,
+    this.isAlarmSetting = true,
     this.isSubmitting = false,
     this.isSuccess = false,
     this.steps = const [],
+    this.soundFiles = const [
+      {'path': 'assets/alarm_sound/1-Arpeggio.m4a', 'title': 'Arpeggio'},
+      {'path': 'assets/alarm_sound/2-Breaking.m4a', 'title': 'Breaking'},
+      {'path': 'assets/alarm_sound/3-Canopy.m4a', 'title': 'Canopy'},
+      {'path': 'assets/alarm_sound/4-Chalet.m4a', 'title': 'Chalet'},
+      {'path': 'assets/alarm_sound/5-Chirp.m4a', 'title': 'Chirp'},
+      {'path': 'assets/alarm_sound/6-Daybreak.m4a', 'title': 'Daybreak'},
+      {'path': 'assets/alarm_sound/7-Departure.m4a', 'title': 'Departure'},
+      {'path': 'assets/alarm_sound/8-Dollop.m4a', 'title': 'Dollop'},
+      {'path': 'assets/alarm_sound/9-Journey.m4a', 'title': 'Journey'},
+      {'path': 'assets/alarm_sound/10-Kettle.m4a', 'title': 'Kettle'},
+      {'path': 'assets/alarm_sound/11-Mercury.m4a', 'title': 'Mercury'},
+      {'path': 'assets/alarm_sound/12-Milky Way.m4a', 'title': 'Milky Way'},
+      {'path': 'assets/alarm_sound/13-Quad.m4a', 'title': 'Quad'},
+      {'path': 'assets/alarm_sound/14-Radial.m4a', 'title': 'Radial'},
+      {'path': 'assets/alarm_sound/15-Reflection.m4a', 'title': 'Reflection'},
+      {'path': 'assets/alarm_sound/16-Scavenger.m4a', 'title': 'Scavenger'},
+      {'path': 'assets/alarm_sound/17-Seedling.m4a', 'title': 'Seedling'},
+      {'path': 'assets/alarm_sound/18-Shelter.m4a', 'title': 'Shelter'},
+      {'path': 'assets/alarm_sound/19-Sprinkles.m4a', 'title': 'Sprinkles'},
+      {'path': 'assets/alarm_sound/20-Steps.m4a', 'title': 'Steps'},
+      {'path': 'assets/alarm_sound/21-Storytime.m4a', 'title': 'Storytime'},
+      {'path': 'assets/alarm_sound/22-Tease.m4a', 'title': 'Tease'},
+      {'path': 'assets/alarm_sound/23-Tilt.m4a', 'title': 'Tilt'},
+      {'path': 'assets/alarm_sound/24-Unfold.m4a', 'title': 'Unfold'},
+      {'path': 'assets/alarm_sound/25-Valley.m4a', 'title': 'Valley'},
+    ],
     this.routineIconNames = const [
       'sun', // 기상, 아침 루틴
       'coffee', // 여유 시간, 휴식 루틴

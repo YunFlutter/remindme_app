@@ -1,5 +1,3 @@
-
-
 import 'package:hive_ce/hive.dart';
 
 part 'routine_data_model.g.dart';
@@ -28,10 +26,19 @@ class RoutineDataModel {
   final String id;
 
   @HiveField(7)
-  final bool isCompletedToday; // ⭐ 오늘 완료 여부
+  final bool isCompletedToday;
 
   @HiveField(8)
-  final DateTime? lastCompletedDate; // ⭐ 마지막 완료한 날짜
+  final DateTime? lastCompletedDate;
+
+  @HiveField(9)
+  final String? audioPath;
+
+  @HiveField(10)
+  final bool isVibrateMode;
+
+  @HiveField(11)
+  final bool isAlarmEnabled;
 
   RoutineDataModel({
     required this.title,
@@ -43,6 +50,9 @@ class RoutineDataModel {
     required this.id,
     this.isCompletedToday = false,
     this.lastCompletedDate,
+    this.audioPath,
+    this.isVibrateMode = false,
+    this.isAlarmEnabled = true,
   });
 
   RoutineDataModel copyWith({
@@ -55,6 +65,9 @@ class RoutineDataModel {
     String? id,
     bool? isCompletedToday,
     DateTime? lastCompletedDate,
+    String? audioPath,
+    bool? isVibrateMode,
+    bool? isAlarmEnabled,
   }) {
     return RoutineDataModel(
       title: title ?? this.title,
@@ -66,6 +79,33 @@ class RoutineDataModel {
       id: id ?? this.id,
       isCompletedToday: isCompletedToday ?? this.isCompletedToday,
       lastCompletedDate: lastCompletedDate ?? this.lastCompletedDate,
+      audioPath: audioPath ?? this.audioPath,
+      isVibrateMode: isVibrateMode ?? this.isVibrateMode,
+      isAlarmEnabled: isAlarmEnabled ?? this.isAlarmEnabled,
+    );
+  }
+
+  @override
+  String toString() {
+    return 'RoutineDataModel{title: $title, time: $time, routineIconName: $routineIconName, badgeColor: $badgeColor, routineColor: $routineColor, steps: $steps, id: $id, isCompletedToday: $isCompletedToday, lastCompletedDate: $lastCompletedDate, audioPath: $audioPath, isVibrateMode: $isVibrateMode, isAlarmEnabled: $isAlarmEnabled}';
+  }
+
+  factory RoutineDataModel.fromJson(Map<String, dynamic> json) {
+    return RoutineDataModel(
+      title: json["title"],
+      time: json["time"],
+      routineIconName: json["routineIconName"],
+      badgeColor: json["badgeColor"],
+      routineColor: json["routineColor"],
+      steps: List<Map<String, dynamic>>.from(
+        (json['steps'] as List).map((e) => Map<String, dynamic>.from(e)),
+      ),
+      id: json["id"],
+      isCompletedToday: json["isCompletedToday"].toLowerCase() == 'true',
+      lastCompletedDate: DateTime.parse(json["lastCompletedDate"]),
+      audioPath: json["audioPath"] ??  json["audioPath"],
+      isVibrateMode: json["isVibrateMode"] != null ? json["isVibrateMode"].toLowerCase() == 'true' : true,
+      isAlarmEnabled: json["isAlarmEnabled"] != null ? json["isAlarmEnabled"].toLowerCase() == 'true' : true,
     );
   }
 }

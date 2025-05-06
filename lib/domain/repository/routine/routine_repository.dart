@@ -21,4 +21,12 @@ abstract interface class RoutineRepository {
     required int stepIndex,
     required RoutineStepModel updatedStep,
   });
+  Future<Result<void, String>> toggleVibrateMode({
+    required int routineId,
+    required bool isVibrateMode,
+  });
+  Future<Result<void, String>> toggleAlarmMode({
+    required int routineId,
+    required bool isAlarm,
+  });
 }

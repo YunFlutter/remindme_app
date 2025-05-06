@@ -5,6 +5,7 @@ import 'package:remind_me_app/core/themes/app_colors.dart';
 import 'package:remind_me_app/core/themes/app_text_styles.dart';
 import 'package:remind_me_app/core/widgets/primary_button.dart';
 import 'package:remind_me_app/view/onboarding/onboarding_view_model.dart';
+import 'package:remind_me_app/view/show_app_out_dialog.dart';
 
 class OnboardingScreen extends StatelessWidget {
   final OnboardingViewModel viewModel;
@@ -12,95 +13,99 @@ class OnboardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListenableBuilder(
-      listenable: viewModel,
-      builder: (context, child) {
-        return Scaffold(
-          backgroundColor: AppColors.baseWhite,
-          body: Stack(
-            children: [
-              Positioned.fill(
-                child: PageView.builder(
-                  controller: viewModel.pageController,
-                  onPageChanged: viewModel.setPageInt,
-                  itemCount: 3,
-                  itemBuilder: (_, index) {
-                    return buildPage(context: context, index: index);
-                  },
-                ),
-              ),
-              if (viewModel.state.pageInt != 0)
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: IconButton(
-                    onPressed: () {
-                      viewModel.pageIntMinus();
+    return WillPopScope(
+      onWillPop: () async {
+        final bool result = await showAppOutDialog(context);
+        return result;
+      },
+      child: ListenableBuilder(
+        listenable: viewModel,
+        builder: (context, child) {
+          return Scaffold(
+            backgroundColor: AppColors.baseWhite,
+            body: Stack(
+              children: [
+                Positioned.fill(
+                  child: PageView.builder(
+                    controller: viewModel.pageController,
+                    onPageChanged: viewModel.setPageInt,
+                    itemCount: 2,
+                    itemBuilder: (_, index) {
+                      return buildPage(context: context, index: index);
                     },
-                    icon: LucideIconWidget(icon: LucideIcons.chevronsLeft),
                   ),
                 ),
-              if (viewModel.state.pageInt != 2)
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: IconButton(
-                    onPressed: () {
-                      viewModel.pageIntPlus();
-                    },
-                    icon: LucideIconWidget(icon: LucideIcons.chevronsRight),
-                  ),
-                ),
-
-              if (viewModel.state.pageInt == 2)
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    width: MediaQuery.of(context).size.width / 2,
-                    padding: EdgeInsets.only(bottom: 70),
-                    child: PrimaryButton(
-                      onTap: () {
-                        context.go("/sign-up");
-                      },
-                      buttonText: '시작하기',
-                      buttonActive: true,
-                    ),
-                  ),
-                ),
-
-              Align(alignment: Alignment.bottomCenter, child: indicator()),
-
-              if (viewModel.state.pageInt != 2)
-                Align(
-                  alignment: Alignment.topRight,
-                  child: Container(
-                    padding: EdgeInsets.only(
-                      right: 10,
-                      top: MediaQuery.of(context).padding.top,
-                    ),
-                    child: TextButton(
+                if (viewModel.state.pageInt != 0)
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: IconButton(
                       onPressed: () {
-                        context.go("/sign-up");
+                        viewModel.pageIntMinus();
                       },
-                      child: Text(
-                        '건너뛰기',
-                        style: AppTextStyles.caption(color: AppColors.grayText),
+                      icon: LucideIconWidget(icon: LucideIcons.chevronsLeft),
+                    ),
+                  ),
+                if (viewModel.state.pageInt == 0)
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: IconButton(
+                      onPressed: () {
+                        viewModel.pageIntPlus();
+                      },
+                      icon: LucideIconWidget(icon: LucideIcons.chevronsRight),
+                    ),
+                  ),
+
+                if (viewModel.state.pageInt == 1)
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width / 2,
+                      padding: EdgeInsets.only(bottom: 70),
+                      child: PrimaryButton(
+                        onTap: () {
+                          context.go("/sign-up");
+                        },
+                        buttonText: '시작하기',
+                        buttonActive: true,
                       ),
                     ),
                   ),
-                ),
-            ],
-          ),
-        );
-      },
+
+                Align(alignment: Alignment.bottomCenter, child: indicator()),
+
+                if (viewModel.state.pageInt != 1)
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: Container(
+                      padding: EdgeInsets.only(
+                        right: 10,
+                        top: MediaQuery.of(context).padding.top,
+                      ),
+                      child: TextButton(
+                        onPressed: () {
+                          context.go("/sign-up");
+                        },
+                        child: Text(
+                          '건너뛰기',
+                          style: AppTextStyles.caption(color: AppColors.grayText),
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 
   Widget buildPage({required BuildContext context, required int index}) {
     switch (index) {
       case 0:
-        return onboardingFirst(valueKey: const ValueKey(0), context: context);
-      case 1:
         return onboardingSecond(valueKey: const ValueKey(1), context: context);
-      case 2:
+      case 1:
         return onboardingThird(valueKey: const ValueKey(2), context: context);
       default:
         return Container(
@@ -182,7 +187,7 @@ class OnboardingScreen extends StatelessWidget {
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: List.generate(3, (index) {
+          children: List.generate(2, (index) {
             final isSelected = index == viewModel.state.pageInt;
             return AnimatedContainer(
               duration: const Duration(milliseconds: 300),

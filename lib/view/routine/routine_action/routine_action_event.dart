@@ -21,4 +21,9 @@ sealed class RoutineActionEvent with _$RoutineActionEvent {
   /// 이전 스텝으로 이동
   const factory RoutineActionEvent.previousStep() = PreviousStep;
 
+  const factory RoutineActionEvent.timerFinished({required String? audioPath}) =
+      TimerFinished;
+  const factory RoutineActionEvent.moveToNextStep() = MoveToNextStep;
+
+  const factory RoutineActionEvent.musicStop() = musicStop;
 }
