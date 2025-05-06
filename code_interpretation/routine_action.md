@@ -12,7 +12,7 @@
 flowchart TD
 A[루틴 선택] --> B[RoutineActionScreenRoot 진입]
 B --> C[RoutineActionScreen 실행]
-C --> D[루틴 상태(state) 초기화]
+C --> D[루틴 상태 초기화]
 D --> E[첫 번째 루틴 단계 보여줌]
 E --> F[사용자 체크 → 이벤트 발생]
 F --> G[ViewModel 상태 갱신]
