@@ -104,7 +104,7 @@ graph TD
 `PRIVACY_POLICY.md` 참조
 
 ## 🔍 코드 해석 문서
-🧩 RoutineAddViewModel 코드 해석 ()
-🗂️ RoutineAddState 코드 해석 ()
-🎬 RoutineActionViewModel 코드 해석 ()
-🔄 RoutineActionState / Event 코드 해석 ()
+🧩 RoutineAddViewModel 코드 해석 (https://github.com/YunFlutter/remindme_app/blob/work_space/code_interpretation/README_routine_add_view_model.md)
+🗂️ RoutineAddState 코드 해석 (https://github.com/YunFlutter/remindme_app/blob/work_space/code_interpretation/README_routine_add_state.md)
+🎬 RoutineActionViewModel 코드 해석 (https://github.com/YunFlutter/remindme_app/blob/work_space/code_interpretation/README_routine_action_view_model.md)
+🔄 RoutineActionState / Event 코드 해석 (https://github.com/YunFlutter/remindme_app/blob/work_space/code_interpretation/README_routine_action_state_event.md)
